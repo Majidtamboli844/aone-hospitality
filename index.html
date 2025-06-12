@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aone Hospitality Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+   .whatsapp_float{
+            position:fixed;
+            bottom:40px;
+            right:20px;
+        }
+        .call_float{
+            position:fixed;
+            bottom:40px;          
+            left:20px;
+        </style>
+    <div class="whatsapp_float">
+        <a href="https://wa.me/919867531298" target="_blank"><img src='wp.png' width="60px"
+                                                                 class="whatsapp_float_btn"/></a>
+    </div>
+     <div class="call_float">
+        <a href="tel:+917387869062" target="_blank"><img src='call.png' width="60px"
+                                                                 class="call_float_btn"/></a>
+    </div>   
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Navigation -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600">Aone Hospitality Service</h1>
+      <nav class="space-x-4 text-gray-700 font-medium">
+        <a href="#about" class="hover:text-blue-500">About</a>
+        <a href="#products" class="hover:text-blue-500">Products</a>
+        <a href="#testimonials" class="hover:text-blue-500">Testimonials</a>
+        <a href="#contact" class="hover:text-blue-500">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-blue-100 via-white to-pink-100 py-20 text-center px-6">
+    <h2 class="text-5xl font-bold mb-4">Excellence in Hospitality, Cleanliness & Stationery</h2>
+    <p class="text-xl max-w-xl mx-auto mb-6">
+      Your trusted partner for premium business essentials, delivered with care and professionalism.
+    </p>
+    <a href="#products" class="bg-blue-600 text-white px-8 py-3 rounded text-lg hover:bg-blue-700 transition">
+      Explore Products
+    </a>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 px-6 max-w-5xl mx-auto text-center">
+    <h3 class="text-3xl font-semibold mb-4">Who We Are</h3>
+    <p class="text-gray-600 text-lg">
+      ProSupply Solutions provides high-quality products for the hospitality industry, cleaning services, and office supplies. With a focus on customer satisfaction and sustainable sourcing, we help your business run smoother, cleaner, and smarter.
+    </p>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="py-16 bg-gray-50 px-6">
+    <h3 class="text-3xl font-semibold text-center mb-12">Our Product Categories</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="bg-white p-6 shadow rounded text-center">
+        <div class="text-4xl mb-4">🏨</div>
+        <h4 class="text-xl font-semibold mb-2">Hospitality Essentials</h4>
+        <p class="text-gray-600">Linens, amenities, uniforms and comfort products tailored for hotels and resorts.</p>
+      </div>
+      <div class="bg-white p-6 shadow rounded text-center">
+        <div class="text-4xl mb-4">🧼</div>
+        <h4 class="text-xl font-semibold mb-2">Cleaning Supplies</h4>
+        <p class="text-gray-600">Eco-friendly and industrial-strength solutions for spotless spaces.</p>
+      </div>
+      <div class="bg-white p-6 shadow rounded text-center">
+        <div class="text-4xl mb-4">✏️</div>
+        <h4 class="text-xl font-semibold mb-2">Stationery Products</h4>
+        <p class="text-gray-600">Full suite of stationery for offices, schools, and creative professionals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-16 px-6 bg-white">
+    <h3 class="text-3xl font-semibold text-center mb-10">What Our Clients Say</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      <div class="bg-blue-50 p-6 rounded shadow">
+        <p class="italic text-lg">“Their hospitality supplies transformed our guest experience. Truly top-tier quality.”</p>
+        <p class="mt-4 font-semibold">– Amanda R., Resort Manager</p>
+      </div>
+      <div class="bg-green-50 p-6 rounded shadow">
+        <p class="italic text-lg">“We rely on their cleaning products for all our properties. Never been let down.”</p>
+        <p class="mt-4 font-semibold">– David K., Facility Supervisor</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 px-6 bg-gray-100 text-center">
+    <h3 class="text-3xl font-semibold mb-6">Get in Touch</h3>
+    <p class="text-gray-700 mb-4">Email us at <a href="mailto:support@prosupply.com" class="text-blue-600">support@prosupply.com</a> or call +1 800 123 4567</p>
+    <form class="max-w-xl mx-auto mt-6 space-y-4">
+      <input type="text" placeholder="Your Name" class="w-full border p-3 rounded" required>
+      <input type="email" placeholder="Your Email" class="w-full border p-3 rounded" required>
+      <textarea placeholder="Your Message" rows="5" class="w-full border p-3 rounded" required></textarea>
+      <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition">
+        Send Message
+      </button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-6 mt-10">
+    <p>&copy; 2025 ProSupply Solutions. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
