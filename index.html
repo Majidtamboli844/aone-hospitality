@@ -50,6 +50,55 @@
       Explore Products
     </a>
   </section>
+  <section>
+          <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/slider.css">
+    <style>
+        /* Optional: Add some space between sliders for better visual separation */
+        .slider-wrapper {
+            margin-bottom: 50px; /* Space between each slider */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="page-header">
+        
+    </header>
+
+    <main class="main-content">
+
+        <section class="slider-section">
+            <div id="natureSlider" class="slider-wrapper" aria-roledescription="carousel" aria-label="Nature Image Gallery">
+                <div class="slider-track">
+                    <img src="go1.jpg" alt="A breathtaking mountain landscape." class="slider-image">
+                    <img src="go4.jpeg" alt="A calm forest lake reflecting trees." class="slider-image">
+                    <img src="go3.jpeg" alt="Golden sunset over a field of flowers." class="slider-image">
+                    <img src="go2.jpg" alt="A majestic waterfall cascading down rocks." class="slider-image">
+                </div>
+
+                <div class="slider-controls">
+                    <button class="slider-btn prev-btn" aria-label="Previous image">&lt;</button>
+                    <button class="slider-btn next-btn" aria-label="Next image">&gt;</button>
+                </div>
+
+                <div class="slider-pagination">
+                    </div>
+
+                <div class="slider-timer">
+                    <div class="slider-progress-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        
+    </main>
+
+    <script src="scripts/slider.js"></script>
+</body>
+        </section>
   <!-- Products Section -->
   <section id="products" class="py-16 bg-gray-50 px-6">
     <h3 class="text-3xl font-semibold text-center mb-12">Our Product Categories</h3>
