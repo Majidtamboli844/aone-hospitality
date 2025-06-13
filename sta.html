@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aone Hospitality Services - Your Stationery & Office Supply Partner</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Tailwind Configuration for Gold color */
+        :root {
+            --color-gold: #D4AF37; /* A common gold shade */
+        }
+        .text-gold { color: var(--color-gold); }
+        .bg-gold { background-color: var(--color-gold); }
+        .border-gold { border-color: var(--color-gold); }
+
+        /* Inter Font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF; /* White background for the entire page */
+            color: #1A1A1A; /* Dark text for readability */
+        }
+
+        /* Ensure smooth scrolling behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom styles for professional appearance */
+        .header-gradient {
+            background: linear-gradient(to right, #FFFFFF, #F8F8F8);
+        }
+
+        .item-card {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp-button {
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #B89C2F; /* Slightly darker gold on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Responsive grid for items - Adjusted for 6 in a row on very large screens */
+        .products-grid {
+            display: grid;
+            gap: 1.5rem; /* Gap between cards */
+            grid-template-columns: repeat(1, 1fr); /* Default: 1 column for very small screens */
+        }
+
+        @media (min-width: 500px) { /* Custom breakpoint for slightly wider mobiles/small tablets */
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns */
+            }
+        }
+
+        @media (min-width: 768px) { /* md breakpoint: Tablets */
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            }
+        }
+
+        @media (min-width: 1024px) { /* lg breakpoint: Laptops */
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            }
+        }
+
+        @media (min-width: 1280px) { /* xl breakpoint: Desktops */
+            .products-grid {
+                grid-template-columns: repeat(5, 1fr); /* 5 columns */
+            }
+        }
+
+        @media (min-width: 1536px) { /* 2xl breakpoint: Larger Desktops */
+            .products-grid {
+                grid-template-columns: repeat(6, 1fr); /* 6 columns */
+            }
+        }
+
+        /* Placeholder image styling */
+        .item-image-placeholder {
+            background-color: #E5E7EB; /* Light grey */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280;
+            font-size: 0.85rem; /* Slightly smaller font for narrower cards */
+            height: 160px; /* Adjusted height for consistency with more columns */
+            object-fit: cover;
+            width: 100%;
+        }
+    </style>
+    <script>
+        // Dynamically add a custom gold color to Tailwind's config
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: 'var(--color-gold)',
+                    },
+                }
+            }
+        }
+
+        // Function to open WhatsApp chat with pre-filled message
+        function inquireOnWhatsApp(itemName, itemSpec) {
+            const phoneNumber = '919867531298'; // WhatsApp number with country code
+            const message = Hello Aone Hospitality Services, I am interested in '${itemName} - ${itemSpec}'. Please provide more details.;
+            const whatsappUrl = https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)};
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // All 181 items from the PDF
+        const items = [
+            { id: 1, name: "Paper A4 Size", spec: "JK Copier, 75GSM" },
+            { id: 2, name: "Paper Legal Size", spec: "JK Copier, 75GSM" },
+            { id: 3, name: "Bond Paper", spec: "(500 sheet) A4 size, 90-100 GSM" },
+            { id: 4, name: "Spiral Binding Cover", spec: "(White and Blue) A4 Size" },
+            { id: 5, name: "File cover with Board", spec: "Brown, Cobra file with clip in the middle" },
+            { id: 6, name: "File cover with Board", spec: "Any color, 2 inch folded at right side" },
+            { id: 7, name: "Jel Pen", spec: "Reynolds Trimax" },
+            { id: 8, name: "Jel Pen Refill", spec: "Reynolds Trimax" },
+            { id: 9, name: "Pen", spec: "Maxritter" },
+            { id: 10, name: "Pen Refill (Maxritter)", spec: "Maxritter" },
+            { id: 11, name: "Double Sided Pen", spec: "GD quality- Red & Blue" },
+            { id: 12, name: "Refill", spec: "(Double Sided) Red & Blue" },
+            { id: 13, name: "Stapler", spec: "Small NO. 10 Gd Quality, Kangaroo" },
+            { id: 14, name: "Stapler", spec: "Medium No. HP 45 (X shape)" },
+            { id: 15, name: "Stapler Pin", spec: "No. 10 Kangaroo" },
+            { id: 16, name: "Stapler Pin", spec: "No. 24/6 Kangaroo" },
+            { id: 17, name: "Paper Punch Machine", spec: "1 hole. Kangaroo" },
+            { id: 18, name: "Paper Punch Machine", spec: "2 hole. Kangaroo 500 DP 540" },
+            { id: 19, name: "File Lace (Nylon/cotton)", spec: "White, multi-purpose cotton file thread 10 inch for Tag file, exam paper, folder file, document tagging (100 nos)" },
+            { id: 20, name: "Pencil", spec: "Natraj / Apsara / DOMS - pack of 10" },
+            { id: 21, name: "Eraser", spec: "Natraj / Apsara / DOMS - pack of 10" },
+            { id: 22, name: "Sharpner", spec: "Natraj / Apsara / DOMS - pack of 10" },
+            { id: 23, name: "Paper cutter", spec: "18mm Stanley or equivalent" },
+            { id: 24, name: "Paper Cutter Blade", spec: "18mm stanley or equivalent" },
+            { id: 25, name: "Ruled Register No. 4", spec: "Good Quality- single line, hard cover 70-75 gsm" },
+            { id: 26, name: "Ruled Register No. 6", spec: "Good Quality- single line, hard cover 70-75 gsm" },
+            { id: 27, name: "Ruled Register No. 8", spec: "Good Quality- single line, hard cover 70-75 gsm" },
+            { id: 28, name: "Ruled Register No. 10", spec: "Good Quality- single line, hard cover 70-75 gsm" },
+            { id: 29, name: "Ruled Register No. 12", spec: "Good Quality- single line, hard cover 70-75 gsm" },
+            { id: 30, name: "Ruled Register No. 14", spec: "Good Quality- single line, hard cover 70-75 gsm" },
+            { id: 31, name: "Ruled Register No. 16", spec: "Good Quality- single line, hard cover 70-75 gsm" },
+            { id: 32, name: "Ruled Register No. 18", spec: "Good Quality- single line, hard cover 70-75 gsm" },
+            { id: 33, name: "Ruled Register No. 20", spec: "Good Quality- single line, hard cover 70-75 gsm" },
+            { id: 34, name: "Vehicle Log Book", spec: "(100 sheets) 12 columns spreading over 2 sheets (date, name of driver, name of party, journey (from & to) km. mtr (frm & to) km run, hrs (from & to) Purpose of visit, Remarks (8.5x6.5 inches) gd quality" },
+            { id: 35, name: "Peon Book", spec: "80 sheets, 6 columns(Date, Name, Sub, Peon's Name, Time, Receiver's Sign) (8.5x6.5 inches)" },
+            { id: 36, name: "Stock Book Register No. 10", spec: "size: 32X20 cm-gd qly paper (with Date, Item name, qty rate & amt, Remarks)column)" },
+            { id: 37, name: "Stock Register No 16", spec: "- do-- No. 16" },
+            { id: 38, name: "Stock Register No. 20", spec: "do --No. 20" },
+            { id: 39, name: "Dak Receipt Register No. 30", spec: "" },
+            { id: 40, name: "Dak Dispatch Register No. 30", spec: "" },
+            { id: 41, name: "Dak Pad", spec: "file binder with 4 flipper" },
+            { id: 42, name: "Plastic Folder", spec: "Envelope type- button filder" },
+            { id: 43, name: "Cellotape Dispenser (Big)", spec: "1 inch tape dispenser" },
+            { id: 44, name: "Tape Transparent", spec: "1 inch-65 meter long-combo of 6 rolls" },
+            { id: 45, name: "Tape Transparent (1 inch) Gd Quality 100 mtr", spec: "2 inch- 65 meter long-combo of 6 rolls" },
+            { id: 46, name: "Colored Tape", spec: "2 inch- 65 meter long-combo of 6 rolls (Blue/Green)" },
+            { id: 47, name: "Colored Tape", spec: "1 inch- 65 meter long-combo of 6 rolls (Blue/Green)" },
+            { id: 48, name: "Tape - Tan", spec: "2 inch-65 meter long-combo of 6 rolls" },
+            { id: 49, name: "Tape - Tan", spec: "1 inch-65 meter long-combo of 6 rolls" },
+            { id: 50, name: "Envelope Brown", spec: "9.5x 4.5 inches- pack of 50" },
+            { id: 51, name: "Envelope (White)", spec: "9.5x 4.5 inches- pack of 50" },
+            { id: 52, name: "Envelope Yellow", spec: "9.5x 4.5 inches- pack of 50" },
+            { id: 53, name: "Laminated Envelope", spec: "A4 size yellow pack of 50" },
+            { id: 54, name: "Laminated Envelope- Legal Size Yellow", spec: "pack of 50" },
+            { id: 55, name: "Laminated Envelope", spec: "A3 size yellow - pack of 50" },
+            { id: 56, name: "Envelope", spec: "Legal size, cloth lined pack of 50" },
+            { id: 57, name: "Highlighter Pen", spec: "Set of 5" },
+            { id: 58, name: "Paper Flag (Tri Color)", spec: "multi color sticky notes" },
+            { id: 59, name: "Paper Flag (single color)", spec: "3M Post-it Sticky Note Cube, 200 Sheets (4 Colors x 50 Sheets) 3\"x3\" Size | For notes, reminders, study, school and organizing" },
+            { id: 60, name: "Glue Stick Gum", spec: "25 gms Fevistik / Deli or equivalent" },
+            { id: 61, name: "Fevi Gum/Fevicol", spec: "Pidilite 200ml / squeeze (105gm)" },
+            { id: 62, name: "Liquid Gum", spec: "(Camlin)700 ml" },
+            { id: 63, name: "Gem Clip", spec: "Steel paper clip - 25 mm 100 piece pack" },
+            { id: 64, name: "Scissor Big", spec: "8.5\" long- GD quality" },
+            { id: 65, name: "Binder Clip", spec: "15mm pack of 12 pieces" },
+            { id: 66, name: "Binder Clip", spec: "19mm pack of 12 pieces" },
+            { id: 67, name: "Binder Clip", spec: "25mm pack of 12 pieces" },
+            { id: 68, name: "Binder Clip", spec: "32mm pack of 12 pieces" },
+            { id: 69, name: "Binder Clip", spec: "45mm pack of 12 pieces" },
+            { id: 70, name: "Binder Clip", spec: "51mm pack of 12 pieces" },
+            { id: 71, name: "Notesheet (yellow)", spec: "Size: 210 x 335mm, 90 gsm, book of 100 sheet, Margin Line at 1 left side and 1 at top side of the sheet (38-40 mm), file number provision at top one side of the sheet" },
+            { id: 72, name: "ARCH Box File", spec: "Lever Arch Binder Box File best for keeping office documents with PVC 2\" lever arch clip-blue" },
+            { id: 73, name: "Correction pen", spec: "Whitener, pack of 10, gd quality" },
+            { id: 74, name: "Note Pad", spec: "14 x 22 cm 40 sheets, ruled/plain, 70gsm" },
+            { id: 75, name: "Spiral Note Pad", spec: "14 x 22 cm 80 sheets, ruled/plain, 70gsm" },
+            { id: 76, name: "White Board Marker", spec: "Magnetic white board Dry Erase Marker- pack of 10" },
+            { id: 77, name: "White Borad Marker Refill", spec: "Whiteboard Marker Refill Ink 15ml" },
+            { id: 78, name: "Pin Point Marker Pen", spec: "CD/DVD/OHP Marker pen" },
+            { id: 79, name: "Permanent Marker", spec: "Thick tip" },
+            { id: 80, name: "Magnetic White Board Eraser", spec: "Magnetic White Board Eraser" },
+            { id: 81, name: "Black Board Duster (Good Quality)", spec: "Chalk Board Eraser" },
+            { id: 82, name: "Black Board Chalk", spec: "(Non dust) colored -gd quality-pack of 50" },
+            { id: 83, name: "Paper Tray", spec: "Office Document Tray, Plastic" },
+            { id: 84, name: "Paper Tray", spec: "Office Document Tray, Plastic-2 racks" },
+            { id: 85, name: "Paper Tray", spec: "office Document Metal - 3 racks, stackable" },
+            { id: 86, name: "Attendance Register (Good Quality)", spec: "Monthly Attendance Register, 50 sheets, Hard Bound, minimum 30 rows" },
+            { id: 87, name: "Attendance Register (Good Quality)", spec: "Monthly Attendance Register, 100 sheets, Hard Bound, around 15 to 20 rows" },
+            { id: 88, name: "Pencil battery AA", spec: "AA alkaline battery 400% long lasting 1.5 volt, highly durable and leak proof" },
+            { id: 89, name: "Pencil batery Ordinary AA", spec: "AAA alkaline battery 400% long lasting 1.5 volt, highly durable and leak proof" },
+            { id: 90, name: "9 volt Battery", spec: "9v battery alkaline" },
+            { id: 91, name: "Stamp pad", spec: "110x69 mm, blue" },
+            { id: 92, name: "Stamp Pad Ink", spec: "PadInk15 ml, same brand as stamp pad" },
+            { id: 93, name: "Hand Towel (Good Quality)", spec: "Washbasin hanging hand kitchen towel, 44x24 cm, pack of 4" },
+            { id: 94, name: "Hand Towel (Good Quality)", spec: "12x 18 inches- ultrasoft and absorbent" },
+            { id: 95, name: "Towel Big", spec: "Gd quality- 56x28. blue 400 gsm" },
+            { id: 96, name: "Towel Large", spec: "Office Chair Towel- 36x72 inches white 600 gsm" },
+            { id: 97, name: "Dusting Cloth", spec: "Microfiber duster cloth- 40 x 40 cm-400 gsm" },
+            { id: 98, name: "Dusting Cloth", spec: "Cotton cleaning cloth/mop- 16x24 inches- pack of 12" },
+            { id: 99, name: "Dettol Soap", spec: "Dettol original germ protection bathing soap bar- 400 gm" },
+            { id: 100, name: "Dettol Liquid Hand Wash", spec: "HandWash-200 ml" },
+            { id: 101, name: "Dettol Hand Wash Refill pack", spec: "Refillpack 1.5 Ltr" },
+            { id: 102, name: "Odonil", spec: "Odonil Bathroom Air Freshyner Zipper, Floral Bliss/blissful citrus, 10g." },
+            { id: 103, name: "Aier room freshner", spec: "Room Air Freshner Spray- Floral Bliss" },
+            { id: 104, name: "Detergent Powder", spec: "Surf Excel quick wash 1 kg/ 3kg" },
+            { id: 105, name: "Detergent Powder (Normal)", spec: "other than surf excel- 500gm/1000gm" },
+            { id: 106, name: "Broom Soft", spec: "39\" Grass Broom traditional, non-dust, comfortable grip broom stick" },
+            { id: 107, name: "Broom Hard", spec: "Bamboo/coconut hard floor jhadu, 2.5 to 3 ft long" },
+            { id: 108, name: "Dust Pan (Big)", spec: "36x 23.9x 9.5 cm" },
+            { id: 109, name: "Dust Pan with long Handle", spec: "long Handle upright- 54\" long handle" },
+            { id: 110, name: "Bleaching Powder", spec: "for Household purpose, 1 kg" },
+            { id: 111, name: "Phynyl", spec: "White, 5 ltr" },
+            { id: 112, name: "Phynyl", spec: "Black, 5 ltr (extra strong)" },
+            { id: 113, name: "Harpic", spec: "Toilet cleaner 1 ltr/5 ltr" },
+            { id: 114, name: "Glass Cleaner spray", spec: "Smooth Glass cleaner liquid spray, 500 ml" },
+            { id: 115, name: "Lizol (500ml)", spec: "floor surface disinfectant, 1 ltr/5 ltr" },
+            { id: 116, name: "MOP", spec: "Flat Mop Wet and Dry Cleaning- Tshape-360 degree- 18\"" },
+            { id: 117, name: "Wet Mop", spec: "Easy Twist Mop" },
+            { id: 118, name: "MOP (Pocha)", spec: "Spin Mop with big wheels and bucket (Gala or equivalent)" },
+            { id: 119, name: "MOP Refill", spec: "Microfiber refill for spin mop" },
+            { id: 120, name: "Wiper", spec: "Bathroom wiper for floor cleaning" },
+            { id: 121, name: "All insect killer spray", spec: "600 ml, Mortein or equivalent" },
+            { id: 122, name: "Hit spray", spec: "Red-600 or 700 ml" },
+            { id: 123, name: "Plastic Mug", spec: "2 ltr" },
+            { id: 124, name: "Plastic Bucket", spec: "25Ltrs Cello/Milton or equivalent" },
+            { id: 125, name: "Dustbin", spec: "Open Mesh Dustbin- 12-15 ltrs" },
+            { id: 126, name: "Dustbing with Lid", spec: "(34.5x26.2x49.5 cm) 28 ltrs" },
+            { id: 127, name: "Dustbin (Large) with lid", spec: "120 ltrs extra large dustbin with wheels" },
+            { id: 128, name: "Dustbin (Large) with lid", spec: "120 ltrs extra large dustbin with swing lid" },
+            { id: 129, name: "Godrej Lock & Key", spec: "7 Levers Navtal-4 keys Brass finish" },
+            { id: 130, name: "Ordinary Lock & Key", spec: "7 Levers, ordinary, minimum 6 keys" },
+            { id: 131, name: "Extension Board (electric)", spec: "16amp)- 3 pin socket-2 nos, 2 pin socket-1 no." },
+            { id: 132, name: "Three Pin Socket Extension Board (Computer)", spec: "Multi Plug extension board with 6 power sockets, 6 amp- 2m cord length" },
+            { id: 133, name: "Electrical Board (Cube)", spec: "Cube Extension Board with USB Port with Universal Sockets and USB (2.4 A) (QC 3.0) with Overload Protector, Indicator, 1.8 mtr Extension Cord, Safety Shutter-Multi Plug Socket" },
+            { id: 134, name: "Rubber Gloves", spec: "12 Inches Long Reusable Nitrile Chemical Resistant Rubber Hand Gloves For Industrial Purpose, Janitorial, Construction, Gardening Home Kitchen Cleaning Gloves/Dish Washing Gloves." },
+            { id: 135, name: "Toilet Paper Roll-Gd Quality", spec: "Toilet Paper/Tissue Roll, soft and highly absorbent - 12 Rolls pack (160 Pulls Per Roll, 1920 Sheets)" },
+            { id: 136, name: "Toilet Brush-Gd Quality", spec: "Hard brush with Hard handle" },
+            { id: 137, name: "Medimix Soap", spec: "(smallsachet) 10-15 gms (ayurvedic soap with 18 herbs) pack of 30" },
+            { id: 138, name: "Mosquito Repellent machine", spec: "7 x 45 refill plus machine" },
+            { id: 139, name: "Mosquito Repellent Refill", spec: "Refill pack" },
+            { id: 140, name: "Napthalene Balls (Kapur)", spec: "BallsKapur)" },
+            { id: 141, name: "Dustbin bag / Trash Bag", spec: "(big size)-strong gd quality 42 x 48 inches, Jumbo XL, Heavt Duty, HDPE material for maximum strength and tear resistnace, Biodegrable, Black" },
+            { id: 142, name: "Colin", spec: "1 ltr" },
+            { id: 143, name: "Paper A3 Size", spec: "JK Copier, 75GSM" },
+            { id: 144, name: "Photo Paper A4 Size", spec: "Water Proof 180 gsm, (pack of 50 sheet) High gloss- instant drying" },
+            { id: 145, name: "Screw Driver set", spec: "Taparia and equivalent (5 pieces set)" },
+            { id: 146, name: "Sealing Wax", spec: "Wax Seal Sticks, Fire Manuscript Sealing Seal Wax Sticks For Postage Letter Retro Vintage Wax Seal Stamp (Flashing Red Wine), 5 pcs pack" },
+            { id: 147, name: "Thread Roll", spec: "Piping Thread Dori for Sewing Purpose Pack of 4 Rolls (25Mtr Each Roll)" },
+            { id: 148, name: "Counting Sponze", spec: "Finger Wet Sponge, Finger Damper 2.7 Inch Diameter for Cash Counting Multicolor 3in1 Set" },
+            { id: 149, name: "Remote Bell", spec: "Wireless Office Door bell, with led light 50 mtr operating range" },
+            { id: 150, name: "Dista Paper (Plain)", spec: "A4 Rough Paper Bundle (Recycled) for Practice, Calculations, Competitive Exam Preparation (120 Qty, Off White)" },
+            { id: 151, name: "Soap Case", spec: "Plastic Self drainig soap holder -14x9 cm" },
+            { id: 152, name: "Water Glass", spec: "(Borosil) 350 ml (6 nos / box)" },
+            { id: 153, name: "Room Freshner", spec: "GD Quality- spray" },
+            { id: 154, name: "Battery 23A", spec: "23A alkaline battery 12 volt" },
+            { id: 155, name: "Sign Pen", spec: "SignPen" },
+            { id: 156, name: "9 volt Battery", spec: "9 volt battery lithium" },
+            { id: 157, name: "Pin Holder Box", spec: "Pin clip magnetic holder dispenser" },
+            { id: 158, name: "T Alpin (coloured)", spec: "Stainless Steel T shaped pins" },
+            { id: 159, name: "Electro Nickle Plated", spec: "Multi color plastic head push pin for notice board" },
+            { id: 160, name: "Board Pin", spec: "Golden push pin, brass coated 50 pins pack" },
+            { id: 161, name: "Gem Clip", spec: "Steel paper clip 30 mm-120 piece pack" },
+            { id: 162, name: "Paper Weight for office table", spec: "Acrylic" },
+            { id: 163, name: "Desktop Calculator", spec: "14 digits(large display) special keys with keyguard Dual Power - Solar & Battery(AA), Ergonomic Key Design Auto Replay, 99 steps check and correct" },
+            { id: 164, name: "Plastic Rope - Flat Face", spec: "Sutli rope 500 mtrs" },
+            { id: 165, name: "Poker", spec: "paper piercing tool-taparia - 18 cm" },
+            { id: 166, name: "Double sided Tape", spec: "silicon tape, 1 inch 3-5 mtr long" },
+            { id: 167, name: "Stick Folder", spec: "Plastic stick transparent file folder" },
+            { id: 168, name: "Cellotape Dispenser (small)", spec: "1/2 inch tape dispenser" },
+            { id: 169, name: "Scale", spec: "Metal (30 cm)" },
+            { id: 170, name: "Scale", spec: "Plastic, (30 cm)" },
+            { id: 171, name: "Stapler Pin", spec: "No 23/17 Heavy Duty Kangaroo/Kores" },
+            { id: 172, name: "Stapler", spec: "Large HD 23 S 24 (Heavy Duty)" },
+            { id: 173, name: "Color Paper", spec: "(75 gsm)(4 color) A4 Size pack of 100 sheets" },
+            { id: 174, name: "Color Paper", spec: "(100-120 gsm)(4 color) A4 Size pack of 100 sheets" },
+            { id: 175, name: "Chart paper", spec: "Normal-white" },
+            { id: 176, name: "Plastic Spiral Binding ring/loop/coil", spec: "8mm dia" },
+            { id: 177, name: "Plastic Spiral Binding ring/loop/coil (small)", spec: "10mm dia" },
+            { id: 178, name: "Plastic Spiral Binding ring/loop/coil (Medium)", spec: "12mm" },
+            { id: 179, name: "Plastic Spiral Binding ring/loop/coil (Big)", spec: "16mm" },
+            { id: 180, name: "Plastic Spiral Binding ring/loop/coil (Big)", spec: "20mm" },
+            { id: 181, name: "Graph Paper", spec: "(Big size) in cm- 22\"x29\"" }
+        ];
+
+        // Function to render all items into the products container
+        document.addEventListener('DOMContentLoaded', () => {
+            const productsContainer = document.getElementById('products-container');
+            items.forEach(item => {
+                // Sanitize item.spec for use in JavaScript string for onclick
+                const sanitizedSpec = item.spec.replace(/'/g, "\\'");
+                const itemCard = `
+                    <div class="item-card bg-white rounded-xl overflow-hidden shadow-lg p-4 flex flex-col items-center text-center">
+                        <img src="https://placehold.co/160x160/E5E7EB/6B7280?text=Item+Image" alt="${item.name}" class="item-image-placeholder rounded-lg mb-4">
+                        <h3 class="text-base font-semibold mb-2 text-black">${item.name}</h3>
+                        <p class="text-gray-700 text-xs mb-4 flex-grow">${item.spec}</p>
+                        <button onclick="inquireOnWhatsApp('${item.name}', '${sanitizedSpec}')"
+                                class="whatsapp-button bg-gold text-white font-bold py-2 px-6 rounded-full shadow-md hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 ease-in-out text-sm">
+                            Inquire on WhatsApp
+                        </button>
+                    </div>
+                `;
+                productsContainer.innerHTML += itemCard;
+            });
+        });
+    </script>
+</head>
+<body class="bg-white text-gray-900 leading-normal tracking-tight">
+
+    <!-- Header Section -->
+    <header class="header-gradient shadow-md py-4 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center fixed w-full z-10 top-0">
+        <div class="flex flex-col md:flex-row items-center">
+            <!-- Logo Placeholder -->
+            <div class="text-4xl font-extrabold text-black flex items-center mb-2 md:mb-0">
+                <span class="text-gold text-5xl">A</span>ONE
+                <span class="text-gold text-xl ml-2">Estd-2006</span>
+            </div>
+            <div class="md:ml-4 text-center md:text-left">
+                <h1 class="text-xl md:text-2xl font-bold text-black">Aone Hospitality Services</h1>
+                <p class="text-sm md:text-base text-gray-700 italic">Your Satisfaction Our Priority</p>
+            </div>
+        </div>
+        <div class="flex flex-wrap justify-center md:justify-end gap-2 md:gap-4 text-sm mt-2 md:mt-0">
+            <a href="tel:7387869062" class="text-black hover:text-gold transition-colors duration-200">Call: 7387869062</a>
+            <a href="https://wa.me/919867531298" target="_blank" class="text-black hover:text-gold transition-colors duration-200">WhatsApp: 9867531298</a>
+            <a href="mailto:aonehospitalitys@gmail.com" class="text-black hover:text-gold transition-colors duration-200">Email: aonehospitalitys@gmail.com</a>
+        </div>
+    </header>
+
+    <!-- Spacer for fixed header -->
+    <div class="pt-28 md:pt-24 lg:pt-20"></div>
+
+    <!-- Hero/About Section -->
+    <section class="bg-white py-12 px-6 md:px-12 text-center border-b border-gray-100">
+        <h2 class="text-3xl font-bold text-black mb-4">Welcome to Aone Hospitality Services</h2>
+        <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
+            Your trusted supplier for quality stationery and essential office & school supplies. We serve businesses and
+            educational institutions with a focus on your complete satisfaction. Please note, we operate as a supply service, not a retail shop.
+        </p>
+        <p class="text-md text-gray-600 font-medium">
+            Our Location: Mundhwa, Pune 411013
+        </p>
+    </section>
+
+    <!-- Operating Hours Section -->
+    <section class="bg-gray-50 py-8 px-6 md:px-12 text-center border-b border-gray-100">
+        <h3 class="text-2xl font-bold text-black mb-4">Operating Hours</h3>
+        <p class="text-lg text-gray-700">
+            Monday to Saturday: <span class="font-semibold text-gold">9:30 AM - 7:30 PM</span>
+        </p>
+    </section>
+
+    <!-- Product Display Area -->
+    <main class="container mx-auto px-6 py-12">
+        <h2 class="text-4xl font-extrabold text-center text-black mb-10">Our Products</h2>
+        <div id="products-container" class="products-grid">
+            <!-- Product items will be dynamically loaded here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white py-10 px-6 md:px-12">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="mb-6 md:mb-0">
+                <h3 class="text-2xl font-bold mb-2 text-gold">Aone Hospitality Services</h3>
+                <p class="text-sm italic">Your Satisfaction Our Priority</p>
+                <p class="text-sm mt-2">Mundhwa, Pune 411013</p>
+            </div>
+            <div class="mb-6 md:mb-0">
+                <p class="text-md font-semibold mb-2">Contact Us</p>
+                <p class="text-sm">Call: <a href="tel:7387869062" class="hover:text-gold">7387869062</a></p>
+                <p class="text-sm">WhatsApp: <a href="https://wa.me/919867531298" target="_blank" class="hover:text-gold">9867531298</a></p>
+                <p class="text-sm">Email: <a href="mailto:aonehospitalitys@gmail.com" class="hover:text-gold">aonehospitalitys@gmail.com</a></p>
+            </div>
+            <div>
+                <p class="text-md font-semibold mb-2">Operating Hours</p>
+                <p class="text-sm">Mon - Sat: 9:30 AM - 7:30 PM</p>
+                <p class="text-sm mt-4">&copy; 2024 Aone Hospitality Services. Estd-2025.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
