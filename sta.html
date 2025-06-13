@@ -5,102 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aone Hospitality Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom Tailwind Configuration for Gold color */
-        :root {
-            --color-gold: #D4AF37; /* A common gold shade */
-        }
-        .text-gold { color: var(--color-gold); }
-        .bg-gold { background-color: var(--color-gold); }
-        .border-gold { border-color: var(--color-gold); }
+   <style>
+    /* Custom Tailwind Configuration for Gold color */
+    :root {
+        --color-gold: #D4AF37; /* A common gold shade */
+    }
+    .text-gold { color: var(--color-gold); }
+    .bg-gold { background-color: var(--color-gold); }
+    .border-gold { border-color: var(--color-gold); }
 
-        /* Inter Font from Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFFFFF; /* White background for the entire page */
-            color: #1A1A1A; /* Dark text for readability */
-        }
+    /* Inter Font from Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #FFFFFF; /* White background for the entire page */
+        color: #1A1A1A; /* Dark text for readability */
+    }
 
-        /* Ensure smooth scrolling behavior */
-        html {
-            scroll-behavior: smooth;
-        }
+    /* Ensure smooth scrolling behavior */
+    html {
+        scroll-behavior: smooth;
+    }
 
-        /* Custom styles for professional appearance */
-        .header-gradient {
-            background: linear-gradient(to right, #FFFFFF, #F8F8F8);
-        }
+    /* Custom styles for professional appearance */
+    .header-gradient {
+        background: linear-gradient(to right, #FFFFFF, #F8F8F8);
+    }
 
-        .item-card {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
+    .item-card {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
 
-        .item-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
+    .item-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
 
-        .whatsapp-button {
-            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
-        }
+    .whatsapp-button {
+        transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    }
 
-        .whatsapp-button:hover {
-            background-color: #B89C2F; /* Slightly darker gold on hover */
-            transform: translateY(-2px);
-        }
+    .whatsapp-button:hover {
+        background-color: #B89C2F; /* Slightly darker gold on hover */
+        transform: translateY(-2px);
+    }
 
-        /* Responsive grid for items - Adjusted for 6 in a row on very large screens */
+    /* Responsive grid for items - Adjusted for 6 in a row on very large screens */
+    .products-grid {
+        display: grid;
+        gap: 1.5rem; /* Gap between cards */
+        grid-template-columns: repeat(1, 1fr); /* Default: 1 column for very small screens */
+    }
+
+    @media (min-width: 500px) { /* Custom breakpoint for slightly wider mobiles/small tablets */
         .products-grid {
-            display: grid;
-            gap: 1.5rem; /* Gap between cards */
-            grid-template-columns: repeat(1, 1fr); /* Default: 1 column for very small screens */
+            grid-template-columns: repeat(2, 1fr); /* 2 columns */
         }
+    }
 
-        @media (min-width: 500px) { /* Custom breakpoint for slightly wider mobiles/small tablets */
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns */
-            }
+    @media (min-width: 768px) { /* md breakpoint: Tablets */
+        .products-grid {
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
         }
+    }
 
-        @media (min-width: 768px) { /* md breakpoint: Tablets */
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 columns */
-            }
+    @media (min-width: 1024px) { /* lg breakpoint: Laptops */
+        .products-grid {
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
         }
+    }
 
-        @media (min-width: 1024px) { /* lg breakpoint: Laptops */
-            .products-grid {
-                grid-template-columns: repeat(4, 1fr); /* 4 columns */
-            }
+    @media (min-width: 1280px) { /* xl breakpoint: Desktops */
+        .products-grid {
+            grid-template-columns: repeat(5, 1fr); /* 5 columns */
         }
+    }
 
-        @media (min-width: 1280px) { /* xl breakpoint: Desktops */
-            .products-grid {
-                grid-template-columns: repeat(5, 1fr); /* 5 columns */
-            }
+    @media (min-width: 1536px) { /* 2xl breakpoint: Larger Desktops */
+        .products-grid {
+            grid-template-columns: repeat(6, 1fr); /* 6 columns */
         }
+    }
 
-        @media (min-width: 1536px) { /* 2xl breakpoint: Larger Desktops */
-            .products-grid {
-                grid-template-columns: repeat(6, 1fr); /* 6 columns */
-            }
-        }
+    /* Placeholder image styling */
+    .item-image-placeholder {
+        background-color: #E5E7EB; /* Light grey */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6B7280;
+        font-size: 0.85rem; /* Slightly smaller font for narrower cards */
+        height: 160px; /* Adjusted height for consistency with more columns */
+        object-fit: cover;
+        width: 100%;
+    }
 
-        /* Placeholder image styling */
-        .item-image-placeholder {
-            background-color: #E5E7EB; /* Light grey */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6B7280;
-            font-size: 0.85rem; /* Slightly smaller font for narrower cards */
-            height: 160px; /* Adjusted height for consistency with more columns */
-            object-fit: cover;
-            width: 100%;
-        }
-    </style>
+    /* Fixed WhatsApp Button to the left */
+    #main-whatsapp-inquire-button {
+        position: fixed;
+        bottom: 20px; /* Adjust as needed */
+        left: 20px; /* Positions the button 20px from the left */
+        z-index: 1000; /* Ensures it stays on top of other content */
+    }
+</style>
  <script>
         // All 181 items from the PDF
         const items = [
@@ -498,6 +506,7 @@
             background-color: #0f766e; /* Darker Teal */ 
             transform: translateY(-2px); 
         }
+        
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
