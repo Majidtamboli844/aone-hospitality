@@ -117,8 +117,8 @@
         // Function to open WhatsApp chat with pre-filled message
         function inquireOnWhatsApp(itemName, itemSpec) {
             const phoneNumber = '919867531298'; // WhatsApp number with country code
-            const message = Hello Aone Hospitality Services, I am interested in '${itemName} - ${itemSpec}'. Please provide more details.;
-            const whatsappUrl = https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)};
+            const message = `Hello Aone Hospitality Services, I am interested in '${itemName} - ${itemSpec}'. Please provide more details.`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
@@ -406,3 +406,4 @@
 
 </body>
 </html>
+
