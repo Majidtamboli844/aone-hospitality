@@ -510,6 +510,17 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+     <header>
+        <div class="search-bar-container">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Search for products..." aria-label="Search" oninput="handleSearch()">
+                <button type="button" class="search-button" aria-label="Search">
+                    <img src="search-icon.svg" alt="search-icon" />
+                </button>
+            </div>
+            <ul id="searchSuggestions" class="suggestions-list"></ul>
+        </div>
+    </header>
 
     <header class="bg-white shadow-sm py-4 fixed top-0 w-full z-50">
         <nav class="container mx-auto px-4 flex justify-between items-center">
