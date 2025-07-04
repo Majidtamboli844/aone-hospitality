@@ -240,7 +240,7 @@
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
     </button>
 
-    <script>
+<script>
         // All 181 items from the PDF
         const items = [
             { id: 1, name: "Paper A4 Size", spec: "JK Copier, 75GSM" },
@@ -425,59 +425,81 @@
             { id: 180, name: "Plastic Spiral Binding ring/loop/coil (Big)", spec: "20mm" },
             { id: 181, name: "Graph Paper", spec: "(Big size) in cm- 22\"x29\"" }
         ];
-        const resultsList = document.getElementById('resultsList');
 
-        // Initial render
-        function showAllResults() {
-            resultsList.innerHTML = '';
-            items.forEach(item => {
-                const li = document.createElement('li');
-                // Corrected: Access item.name and item.spec
-                li.textContent = `${item.name} - ${item.spec}`;
-                resultsList.appendChild(li);
-            });
-        }
+        const productsContainer = document.getElementById('products-container');
+        const searchInput = document.getElementById('searchInput');
+        let selectedItems = [];
 
-        function filterResults() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            resultsList.innerHTML = '';
-
-            const filtered = items.filter(item =>
-                // Corrected: Access item.name or item.spec for filtering
-                item.name.toLowerCase().includes(query) || item.spec.toLowerCase().includes(query)
-            );
-
-            if (filtered.length === 0) {
-                resultsList.innerHTML = '<li>No results found.</li>';
+        // Function to render products
+        function renderProducts(productsToRender) {
+            productsContainer.innerHTML = ''; // Clear existing products
+            if (productsToRender.length === 0) {
+                productsContainer.innerHTML = '<p class="text-center text-gray-600 col-span-full">No products found matching your search.</p>';
                 return;
             }
 
-            filtered.forEach(item => {
-                const li = document.createElement('li');
-                // Corrected: Access item.name and item.spec
-                li.textContent = `${item.name} - ${item.spec}`;
-                resultsList.appendChild(li);
+            productsToRender.forEach(item => {
+                const sanitizedSpec = item.spec.replace(/'/g, "\\'");
+                const isSelected = selectedItems.some(selected => selected.id === item.id);
+                const buttonText = isSelected ? 'Remove from Inquire' : 'Add to Inquire';
+                const buttonClasses = isSelected ? 'bg-red-500 hover:bg-red-600' : 'bg-gold hover:bg-opacity-90';
+
+                const itemCard = `
+                    <div class="item-card bg-white rounded-xl overflow-hidden shadow-lg p-4 flex flex-col items-center text-center">
+                        <img src="https://placehold.co/160x160/E5E7EB/6B7280?text=Item+Image" alt="${item.name}" class="item-image-placeholder rounded-lg mb-4">
+                        <h3 class="text-base font-semibold mb-2 text-black">${item.name}</h3>
+                        <p class="text-gray-700 text-xs mb-4 flex-grow">${item.spec}</p>
+                        <button onclick="toggleInquiry(${item.id}, '${item.name}', '${sanitizedSpec}', this)"
+                                class="whatsapp-button ${buttonClasses} text-white font-bold py-2 px-6 rounded-full shadow-md transform hover:scale-105 transition-all duration-300 ease-in-out text-sm">
+                            ${buttonText}
+                        </button>
+                    </div>
+                `;
+                productsContainer.innerHTML += itemCard;
             });
+            updateWhatsAppInquiryButton(); // Update button after rendering
         }
 
-        // Run on page load
-        document.addEventListener('DOMContentLoaded', showAllResults);
+        // Filter products based on search input
+        function filterResults() {
+            const query = searchInput.value.toLowerCase();
+            const filtered = items.filter(item =>
+                item.name.toLowerCase().includes(query) || item.spec.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
+        }
 
-        // Array to store selected items for inquiry
-        let selectedItems = [];
+        // Initial render of all products on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(items);
+
+            // Add the main "Inquire on WhatsApp" button if it doesn't exist
+            if (!document.getElementById('main-whatsapp-inquire-button')) {
+                const mainInquiryButtonHtml = `
+                    <div class="w-full text-center mt-8">
+                        <button id="main-whatsapp-inquire-button" onclick="inquireAllOnWhatsApp()"
+                                class="hidden inline-flex items-center justify-center bg-teal-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-teal-700 hover:scale-105 transition duration-300 transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Inquire on WhatsApp (0 items)
+                        </button>
+                    </div>
+                `;
+                productsContainer.insertAdjacentHTML('afterend', mainInquiryButtonHtml);
+            }
+        });
 
         // Function to add/remove item from inquiry list
         function toggleInquiry(itemId, itemName, itemSpec, buttonElement) {
             const existingItemIndex = selectedItems.findIndex(item => item.id === itemId);
 
             if (existingItemIndex > -1) {
-                // Item is already in the list, remove it
                 selectedItems.splice(existingItemIndex, 1);
                 buttonElement.textContent = 'Add to Inquire';
                 buttonElement.classList.remove('bg-red-500', 'hover:bg-red-600');
                 buttonElement.classList.add('bg-gold', 'hover:bg-opacity-90');
             } else {
-                // Item is not in the list, add it
                 selectedItems.push({ id: itemId, name: itemName, spec: itemSpec });
                 buttonElement.textContent = 'Remove from Inquire';
                 buttonElement.classList.remove('bg-gold', 'hover:bg-opacity-90');
@@ -507,59 +529,23 @@
             
             // Optionally clear the selection after sending
             selectedItems = [];
-            document.querySelectorAll('.item-card button').forEach(button => {
-                button.textContent = 'Add to Inquire';
-                button.classList.remove('bg-red-500', 'hover:bg-red-600');
-                button.classList.add('bg-gold', 'hover:bg-opacity-90');
-            });
+            // Re-render all products to update button states
+            renderProducts(items);
             updateWhatsAppInquiryButton();
         }
 
         // Function to update the visibility and text of the main WhatsApp inquiry button
         function updateWhatsAppInquiryButton() {
             const mainWhatsAppButton = document.getElementById('main-whatsapp-inquire-button');
-            if (selectedItems.length > 0) {
-                mainWhatsAppButton.style.display = 'inline-flex';
-                mainWhatsAppButton.textContent = `Inquire on WhatsApp (${selectedItems.length} items)`;
-            } else {
-                mainWhatsAppButton.style.display = 'none';
+            if (mainWhatsAppButton) { // Ensure the button exists before trying to access it
+                if (selectedItems.length > 0) {
+                    mainWhatsAppButton.style.display = 'inline-flex';
+                    mainWhatsAppButton.textContent = `Inquire on WhatsApp (${selectedItems.length} items)`;
+                } else {
+                    mainWhatsAppButton.style.display = 'none';
+                }
             }
         }
-
-        // Function to render all items into the products container
-        document.addEventListener('DOMContentLoaded', () => {
-            const productsContainer = document.getElementById('products-container');
-            items.forEach(item => {
-                // Sanitize item.spec for use in JavaScript string for onclick
-                const sanitizedSpec = item.spec.replace(/'/g, "\\'");
-                const itemCard = `
-                    <div class="item-card bg-white rounded-xl overflow-hidden shadow-lg p-4 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/160x160/E5E7EB/6B7280?text=Item+Image" alt="${item.name}" class="item-image-placeholder rounded-lg mb-4">
-                        <h3 class="text-base font-semibold mb-2 text-black">${item.name}</h3>
-                        <p class="text-gray-700 text-xs mb-4 flex-grow">${item.spec}</p>
-                        <button onclick="toggleInquiry(${item.id}, '${item.name}', '${sanitizedSpec}', this)"
-                                class="whatsapp-button bg-gold text-white font-bold py-2 px-6 rounded-full shadow-md hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 ease-in-out text-sm">
-                            Add to Inquire
-                        </button>
-                    </div>
-                `;
-                productsContainer.innerHTML += itemCard;
-            });
-
-            // Add a main "Inquire on WhatsApp" button at the bottom of the products section
-            const mainInquiryButtonHtml = `
-                <div class="w-full text-center mt-8">
-                    <button id="main-whatsapp-inquire-button" onclick="inquireAllOnWhatsApp()"
-                            class="hidden inline-flex items-center justify-center bg-teal-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-teal-700 hover:scale-105 transition duration-300 transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                        Inquire on WhatsApp (0 items)
-                    </button>
-                </div>
-            `;
-            productsContainer.insertAdjacentHTML('afterend', mainInquiryButtonHtml);
-        });
 
         // Toggle mobile menu visibility
         const mobileMenuButton = document.getElementById('mobile-menu-button');
