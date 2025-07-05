@@ -10,20 +10,55 @@
             position:fixed;
             bottom:40px;
             right:20px;
+            z-index: 100; /* Ensure it's above other elements */
         }
         .call_float{
             position:fixed;
             bottom:40px;          
             left:20px;
-        </style>
-    <div class="whatsapp_float">
-        <a href="https://wa.me/919867531298" target="_blank"><img src='wp.png' width="60px"
-                                                                 class="whatsapp_float_btn"/></a>
-    </div>
-     <div class="call_float">
-        <a href="tel:+917387869062" target="_blank"><img src='call.png' width="60px"
-                                                                 class="call_float_btn"/></a>
-    </div>   
+            z-index: 100; /* Ensure it's above other elements */
+        }
+        /* Styles for the modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
     <style>
         /* Custom font import for Inter */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -111,6 +146,9 @@
              <a href="#contact" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
                 Contact
             </a>
+            <button id="enquireNowButton" class="inline-block bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-500 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-500 mt-6 md:mt-0 md:ml-4">
+                Enquire Now
+            </button>
         </div>
     </section>
     <nav class="category-nav sticky top-0 md:top-20 lg:top-16 bg-white shadow-sm py-3 z-10 border-b border-gray-100 overflow-x-auto category-nav-scroll">
@@ -142,13 +180,21 @@
             <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8","background-color: var(--color-green-600);" /* oklch(62.7% 0.194 149.214) */>
                 </div>
 
-            <div class="fixed bottom-6 right-6 z-20">
+            <div class="fixed bottom-6 right-6 z-20 flex flex-col items-end space-y-2">
                 <button id="main-whatsapp-inquire-button" onclick="inquireAllOnWhatsApp()"
                         class="hidden inline-flex items-center justify-center bg-teal-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-teal-700 hover:scale-105 transition duration-300 transform">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.6-3.822-1.6-5.877C.145 5.23 5.228.145 11.485.145c3.141 0 6.133 1.22 8.381 3.469 2.249 2.248 3.468 5.239 3.468 8.381 0 6.257-5.082 11.34-11.34 11.34-1.954 0-3.899-.488-5.637-1.488l-6.276 1.654zm6.598-5.592l-.547-.323c-.335-.197-.75-.306-1.18-.306h-.002c-.991 0-1.675 1.077-1.675 2.278 0 1.201.7 2.278 1.674 2.278h.001c.429 0 .843-.109 1.178-.306l.547-.323 5.419-2.029c1.07-1.07 1.657-2.493 1.657-3.992 0-3.141-2.55-5.692-5.692-5.692-3.142 0-5.692 2.551-5.692 5.692 0 .999.284 1.944.825 2.768zM17.585 12.01c0-3.08-2.502-5.582-5.583-5.582-3.081 0-5.583 2.502-5.583 5.582 0 3.08 2.502 5.582 5.583 5.582 3.081 0 5.583-2.502 5.583-5.582z"/>
                     </svg>
                     Inquire on WhatsApp (0 items)
+                </button>
+                <button id="main-email-inquire-button" onclick="inquireAllOnEmail()"
+                        class="hidden inline-flex items-center justify-center bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300 transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Inquire on Email (0 items)
                 </button>
             </div>
         </div>
@@ -213,7 +259,7 @@
                     <a href="#" class="text-gray-400 hover:text-white transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
                             <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 0 0 1 16 11.37z"></path>
                             <line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line>
                         </svg>
                     </a>
@@ -228,6 +274,30 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
     </button>
+
+    <div id="enquireModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 class="text-2xl font-bold mb-6 text-gray-900">How would you like to inquire?</h3>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://wa.me/919867531298" target="_blank" onclick="closeModal()"
+                   class="inline-flex items-center justify-center bg-green-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transition duration-300 transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.6-3.822-1.6-5.877C.145 5.23 5.228.145 11.485.145c3.141 0 6.133 1.22 8.381 3.469 2.249 2.248 3.468 5.239 3.468 8.381 0 6.257-5.082 11.34-11.34 11.34-1.954 0-3.899-.488-5.637-1.488l-6.276 1.654zm6.598-5.592l-.547-.323c-.335-.197-.75-.306-1.18-.306h-.002c-.991 0-1.675 1.077-1.675 2.278 0 1.201.7 2.278 1.674 2.278h.001c.429 0 .843-.109 1.178-.306l.547-.323 5.419-2.029c1.07-1.07 1.657-2.493 1.657-3.992 0-3.141-2.55-5.692-5.692-5.692-3.142 0-5.692 2.551-5.692 5.692 0 .999.284 1.944.825 2.768zM17.585 12.01c0-3.08-2.502-5.582-5.583-5.582-3.081 0-5.583 2.502-5.583 5.582 0 3.08 2.502 5.582 5.583 5.582 3.081 0 5.583-2.502 5.583-5.582z"/>
+                    </svg>
+                    WhatsApp
+                </a>
+                <a href="mailto:aonehospitalitys@gmail.com" onclick="closeModal()"
+                   class="inline-flex items-center justify-center bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300 transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Email
+                </a>
+            </div>
+        </div>
+    </div>
 
 <script>
         // All 181 items from the PDF
@@ -312,21 +382,21 @@ const items = [
     { id: 78, name: "Pin Point Marker Pen", spec: "CD/DVD/OHP Marker pen", imageUrl: "images/pin_point_marker.webp" },
     { id: 79, name: "Permanent Marker", spec: "Thick tip", imageUrl: "images/permanent_marker.webp" },
     { id: 80, name: "Magnetic White Board Eraser", spec: "Magnetic White Board Eraser", imageUrl: "images/magnetic_white_board_eraser.webp" },
-    { id: 81, name: "Black Board Duster (Good Quality)", spec: "Chalk Board Eraser", imageUrl: "images/black_board_duster.webp" },
-    { id: 82, name: "Black Board Chalk", spec: "(Non dust) colored -gd quality-pack of 50", imageUrl: "images/black_board_chalk.webp" },
-    { id: 83, name: "Paper Tray", spec: "Office Document Tray, Plastic", imageUrl: "images/paper_tray_plastic.webp" },
-    { id: 84, name: "Paper Tray", spec: "Office Document Tray, Plastic-2 racks", imageUrl: "images/paper_tray_plastic_2_racks.webp" },
-    { id: 85, name: "Paper Tray", spec: "office Document Metal - 3 racks, stackable", imageUrl: "images/paper_tray_metal_3_racks.webp" },
+    { id: 81, name: "Black Board Duster (Good Quality)", "spec": "Chalk Board Eraser", imageUrl: "images/black_board_duster.webp" },
+    { id: 82, name: "Black Board Chalk", "spec": "(Non dust) colored -gd quality-pack of 50", imageUrl: "images/black_board_chalk.webp" },
+    { id: 83, name: "Paper Tray", "spec": "Office Document Tray, Plastic", imageUrl: "images/paper_tray_plastic.webp" },
+    { id: 84, name: "Paper Tray", "spec": "Office Document Tray, Plastic-2 racks", imageUrl: "images/paper_tray_plastic_2_racks.webp" },
+    { id: 85, name: "Paper Tray", "spec": "office Document Metal - 3 racks, stackable", imageUrl: "images/paper_tray_metal_3_racks.webp" },
     { id: 86, "name": "Attendance Register (Good Quality)", "spec": "Monthly Attendance Register, 50 sheets, Hard Bound, minimum 30 rows", "imageUrl": "images/attendance_register_50_sheets.webp" },
     { id: 87, "name": "Attendance Register (Good Quality)", "spec": "Monthly Attendance Register, 100 sheets, Hard Bound, around 15 to 20 rows", "imageUrl": "images/attendance_register_100_sheets.webp" },
     { id: 88, "name": "Pencil battery AA", "spec": "AA alkaline battery 400% long lasting 1.5 volt, highly durable and leak proof", "imageUrl": "images/battery_aa.webp" },
     { id: 89, "name": "Pencil batery Ordinary AA", "spec": "AAA alkaline battery 400% long lasting 1.5 volt, highly durable and leak proof", "imageUrl": "images/battery_aaa.webp" },
     { id: 90, "name": "9 volt Battery", "spec": "9v battery alkaline", "imageUrl": "images/battery_9v_alkaline.webp" },
     { id: 91, "name": "Stamp pad", "spec": "110x69 mm, blue", "imageUrl": "images/stamp_pad.webp" },
-    { id: 92, "name": "Stamp Pad Ink", "spec": "PadInk15 ml, same brand as stamp pad", "imageUrl": "images/stamp_pad_ink.webp" },
-    { id: 93, "name": "Hand Towel (Good Quality)", "spec": "Washbasin hanging hand kitchen towel, 44x24 cm, pack of 4", "imageUrl": "images/hand_towel_small.webp" },
-    { id: 94, "name": "Hand Towel (Good Quality)", "spec": "12x 18 inches- ultrasoft and absorbent", "imageUrl": "images/hand_towel_medium.webp" },
-    { id: 95, "name": "Towel Big", "spec": "Gd quality- 56x28. blue 400 gsm", "imageUrl": "images/towel_big.webp" },
+    { id: 92, "name": "Stamp Pad Ink", "spec": "PadInk15 ml, same brand as stamp pad", imageUrl: "images/stamp_pad_ink.webp" },
+    { id: 93, "name": "Hand Towel (Good Quality)", "spec": "Washbasin hanging hand kitchen towel, 44x24 cm, pack of 4", imageUrl: "images/hand_towel_small.webp" },
+    { id: 94, "name": "Hand Towel (Good Quality)", "spec": "12x 18 inches- ultrasoft and absorbent", imageUrl: "images/hand_towel_medium.webp" },
+    { id: 95, "name": "Towel Big", "spec": "Gd quality- 56x28. blue 400 gsm", imageUrl: "images/towel_big.webp" },
     { id: 96, "name": "Towel Large", "spec": "Office Chair Towel- 36x72 inches white 600 gsm", "imageUrl": "images/towel_large.webp" },
     { id: 97, "name": "Dusting Cloth", "spec": "Microfiber duster cloth- 40 x 40 cm-400 gsm", "imageUrl": "images/dusting_cloth_microfiber.webp" },
     { id: 98, "name": "Dusting Cloth", "spec": "Cotton cleaning cloth/mop- 16x24 inches- pack of 12", "imageUrl": "images/dusting_cloth_cotton.webp" },
@@ -407,12 +477,12 @@ const items = [
     { id: 173, "name": "Color Paper", "spec": "(75 gsm)(4 color) A4 Size pack of 100 sheets", "imageUrl": "images/color_paper_a4_75gsm.webp" },
     { id: 174, "name": "Color Paper", "spec": "(100-120 gsm)(4 color) A4 Size pack of 100 sheets", "imageUrl": "images/color_paper_a4_100_120gsm.webp" },
     { id: 175, "name": "Chart paper", "spec": "Normal-white", "imageUrl": "images/chart_paper_white.webp" },
-    { id: 176, "name": "Plastic Spiral Binding ring/loop/coil", "spec": "8mm dia", "imageUrl": "images/spiral_binding_8mm.webp" },
-    { id: 177, "name": "Plastic Spiral Binding ring/loop/coil (small)", "spec": "10mm dia", "imageUrl": "images/spiral_binding_10mm.webp" },
-    { id: 178, "name": "Plastic Spiral Binding ring/loop/coil (Medium)", "spec": "12mm", "imageUrl": "images/spiral_binding_12mm.webp" },
-    { id: 179, "name": "Plastic Spiral Binding ring/loop/coil (Big)", "spec": "16mm", "imageUrl": "images/spiral_binding_16mm.webp" },
-    { id: 180, "name": "Plastic Spiral Binding ring/loop/coil (Big)", "spec": "20mm", "imageUrl": "images/spiral_binding_20mm.webp" },
-    { id: 181, "name": "Graph Paper", "spec": "(Big size) in cm- 22\"x29\"", "imageUrl": "images/graph_paper.webp" }
+    { id: 176, name: "Plastic Spiral Binding ring/loop/coil", spec: "8mm dia", imageUrl: "images/spiral_binding_8mm.webp" },
+    { id: 177, name: "Plastic Spiral Binding ring/loop/coil (small)", spec: "10mm dia", imageUrl: "images/spiral_binding_10mm.webp" },
+    { id: 178, name: "Plastic Spiral Binding ring/loop/coil (Medium)", spec: "12mm", imageUrl: "images/spiral_binding_12mm.webp" },
+    { id: 179, name: "Plastic Spiral Binding ring/loop/coil (Big)", spec: "16mm", imageUrl: "images/spiral_binding_16mm.webp" },
+    { id: 180, name: "Plastic Spiral Binding ring/loop/coil (Big)", spec: "20mm", imageUrl: "images/spiral_binding_20mm.webp" },
+    { id: 181, name: "Graph Paper", spec: "(Big size) in cm- 22\"x29\"", imageUrl: "images/graph_paper.webp" }
 ];
         const productsContainer = document.getElementById('products-container');
         const searchInput = document.getElementById('searchInput');
@@ -455,7 +525,7 @@ const items = [
                 `;
                 productsContainer.innerHTML += itemCard;
             });
-            updateWhatsAppInquiryButton(); // Update button after rendering
+            updateInquiryButtons(); // Update buttons after rendering
         }
 
         // Filter products based on search input
@@ -471,21 +541,29 @@ const items = [
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts(items);
 
-            // Add the main "Inquire on WhatsApp" button if it doesn't exist
-            if (!document.getElementById('main-whatsapp-inquire-button')) {
-                const mainInquiryButtonHtml = `
-                    <div class="w-full text-center mt-8">
-                        <button id="main-whatsapp-inquire-button" onclick="inquireAllOnWhatsApp()"
-                                class="hidden inline-flex items-center justify-center bg-teal-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-teal-700 hover:scale-105 transition duration-300 transform">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.6-3.822-1.6-5.877C.145 5.23 5.228.145 11.485.145c3.141 0 6.133 1.22 8.381 3.469 2.249 2.248 3.468 5.239 3.468 8.381 0 6.257-5.082 11.34-11.34 11.34-1.954 0-3.899-.488-5.637-1.488l-6.276 1.654zm6.598-5.592l-.547-.323c-.335-.197-.75-.306-1.18-.306h-.002c-.991 0-1.675 1.077-1.675 2.278 0 1.201.7 2.278 1.674 2.278h.001c-.429 0 .843-.109 1.178-.306l.547-.323 5.419-2.029c1.07-1.07 1.657-2.493 1.657-3.992 0-3.141-2.55-5.692-5.692-5.692-3.142 0-5.692 2.551-5.692 5.692 0 .999.284 1.944.825 2.768zM17.585 12.01c0-3.08-2.502-5.582-5.583-5.582-3.081 0-5.583 2.502-5.583 5.582 0 3.08 2.502 5.582 5.583 5.582 3.081 0 5.583-2.502 5.583-5.582z"/>
-                            </svg>
-                            Inquire on WhatsApp (0 items)
-                        </button>
-                    </div>
+            // Add the main "Inquire on WhatsApp" and "Inquire on Email" buttons if they don't exist
+            const fixedButtonsContainer = document.querySelector('.fixed.bottom-6.right-6');
+            if (fixedButtonsContainer && !document.getElementById('main-whatsapp-inquire-button')) {
+                const mainInquiryButtonsHtml = `
+                    <button id="main-whatsapp-inquire-button" onclick="inquireAllOnWhatsApp()"
+                            class="hidden inline-flex items-center justify-center bg-teal-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-teal-700 hover:scale-105 transition duration-300 transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.6-3.822-1.6-5.877C.145 5.23 5.228.145 11.485.145c3.141 0 6.133 1.22 8.381 3.469 2.249 2.248 3.468 5.239 3.468 8.381 0 6.257-5.082 11.34-11.34 11.34-1.954 0-3.899-.488-5.637-1.488l-6.276 1.654zm6.598-5.592l-.547-.323c-.335-.197-.75-.306-1.18-.306h-.002c-.991 0-1.675 1.077-1.675 2.278 0 1.201.7 2.278 1.674 2.278h.001c.429 0 .843-.109 1.178-.306l.547-.323 5.419-2.029c1.07-1.07 1.657-2.493 1.657-3.992 0-3.141-2.55-5.692-5.692-5.692-3.142 0-5.692 2.551-5.692 5.692 0 .999.284 1.944.825 2.768zM17.585 12.01c0-3.08-2.502-5.582-5.583-5.582-3.081 0-5.583 2.502-5.583 5.582 0 3.08 2.502 5.582 5.583 5.582 3.081 0 5.583-2.502 5.583-5.582z"/>
+                        </svg>
+                        Inquire on WhatsApp (0 items)
+                    </button>
+                    <button id="main-email-inquire-button" onclick="inquireAllOnEmail()"
+                            class="hidden inline-flex items-center justify-center bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300 transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Inquire on Email (0 items)
+                    </button>
                 `;
-                productsContainer.insertAdjacentHTML('afterend', mainInquiryButtonHtml);
+                fixedButtonsContainer.innerHTML = mainInquiryButtonsHtml;
             }
+            updateInquiryButtons();
         });
 
         // Function to add/remove item from inquiry list and handle quantity
@@ -504,7 +582,7 @@ const items = [
                 item.name.toLowerCase().includes(searchInput.value.toLowerCase()) || 
                 item.spec.toLowerCase().includes(searchInput.value.toLowerCase())
             ));
-            updateWhatsAppInquiryButton();
+            updateInquiryButtons();
         }
 
         // Function to update quantity of an item
@@ -517,7 +595,7 @@ const items = [
                     document.getElementById(`quantity-${itemId}`).value = 1;
                 }
             }
-            updateWhatsAppInquiryButton(); // Update button text if needed
+            updateInquiryButtons(); // Update button text if needed
         }
 
         // Function to open WhatsApp chat with all selected items
@@ -543,21 +621,82 @@ const items = [
             selectedItems = [];
             // Re-render all products to update button states
             renderProducts(items);
-            updateWhatsAppInquiryButton();
+            updateInquiryButtons();
         }
 
-        // Function to update the visibility and text of the main WhatsApp inquiry button
-        function updateWhatsAppInquiryButton() {
+        // Function to open email client with all selected items
+        function inquireAllOnEmail() {
+            if (selectedItems.length === 0) {
+                alert("Please add items to your inquiry list first.");
+                return;
+            }
+
+            const recipientEmail = 'aonehospitalitys@gmail.com';
+            const subject = encodeURIComponent('Product Inquiry from Website');
+            let body = "Dear Aone Hospitality Services,\n\nI am interested in the following products:\n\n";
+
+            selectedItems.forEach((item, index) => {
+                body += `${index + 1}. ${item.name} - ${item.spec} (Quantity: ${item.quantity || 1})\n`;
+            });
+
+            body += "\nCould you please provide more information, availability, and pricing for these items?\n\nThank you.";
+            
+            const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoUrl;
+
+            // Optionally clear the selection after sending
+            selectedItems = [];
+            // Re-render all products to update button states
+            renderProducts(items);
+            updateInquiryButtons();
+        }
+
+        // Function to update the visibility and text of the main WhatsApp and Email inquiry buttons
+        function updateInquiryButtons() {
             const mainWhatsAppButton = document.getElementById('main-whatsapp-inquire-button');
-            if (mainWhatsAppButton) { // Ensure the button exists before trying to access it
-                if (selectedItems.length > 0) {
+            const mainEmailButton = document.getElementById('main-email-inquire-button');
+
+            if (selectedItems.length > 0) {
+                if (mainWhatsAppButton) {
                     mainWhatsAppButton.style.display = 'inline-flex';
                     mainWhatsAppButton.textContent = `Inquire on WhatsApp (${selectedItems.length} items)`;
-                } else {
+                }
+                if (mainEmailButton) {
+                    mainEmailButton.style.display = 'inline-flex';
+                    mainEmailButton.textContent = `Inquire on Email (${selectedItems.length} items)`;
+                }
+            } else {
+                if (mainWhatsAppButton) {
                     mainWhatsAppButton.style.display = 'none';
+                }
+                if (mainEmailButton) {
+                    mainEmailButton.style.display = 'none';
                 }
             }
         }
+
+
+        // Modal functionality
+        const enquireModal = document.getElementById('enquireModal');
+        const enquireNowButton = document.getElementById('enquireNowButton');
+
+        if (enquireNowButton) {
+            enquireNowButton.addEventListener('click', () => {
+                enquireModal.style.display = 'flex'; // Use flex to center
+            });
+        }
+
+        function closeModal() {
+            enquireModal.style.display = 'none';
+        }
+
+        // Close the modal if clicked outside of the modal-content
+        window.addEventListener('click', (event) => {
+            if (event.target == enquireModal) {
+                closeModal();
+            }
+        });
+
 
         // Toggle mobile menu visibility
         const mobileMenuButton = document.getElementById('mobile-menu-button');
