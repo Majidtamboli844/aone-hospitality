@@ -1455,218 +1455,247 @@
             }
         ];
 
-let cart = []; // Array to store selected items
+        let cart = []; // Array to store selected items with quantity: [{id: 1, quantity: 2}, {id: 3, quantity: 1}]
 
-function renderProducts(productsToRender) {
-    const productsContainer = document.getElementById('products-container');
-    productsContainer.innerHTML = ''; // Clear existing products
+        function renderProducts(productsToRender) {
+            const productsContainer = document.getElementById('products-container');
+            productsContainer.innerHTML = ''; // Clear existing products
 
-    if (productsToRender.length === 0) {
-        productsContainer.innerHTML = '<p class="text-gray-600 text-lg col-span-full">No products found matching your search.</p>';
-        return;
-    }
-
-    productsToRender.forEach(item => {
-        const productCard = document.createElement('div');
-        productCard.className = 'bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col justify-between';
-        productCard.innerHTML = `
-            <img src="${item.imageUrl}" alt="${item.name}" class="w-full h-48 object-cover">
-            <div class="p-6 flex-grow">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">${item.name}</h3>
-                <p class="text-gray-600 text-sm">${item.spec}</p>
-            </div>
-            <div class="p-6 bg-gray-50 border-t border-gray-100 flex justify-center">
-                <button onclick="toggleCart(${item.id})" id="add-to-cart-${item.id}"
-                        class="bg-teal-600 text-white font-bold py-2 px-4 rounded-full hover:bg-teal-700 transition duration-300 text-sm">
-                    Add to Cart
-                </button>
-            </div>
-        `;
-        productsContainer.appendChild(productCard);
-
-        // Update button text if item is already in cart
-        updateCartButton(item.id);
-    });
-}
-
-function updateCartButton(itemId) {
-    const button = document.getElementById(`add-to-cart-${itemId}`);
-    if (button) {
-        if (cart.includes(itemId)) {
-            button.textContent = 'Remove from Cart';
-            button.classList.remove('bg-teal-600');
-            button.classList.add('bg-red-500');
-            button.classList.remove('hover:bg-teal-700');
-            button.classList.add('hover:bg-red-600');
-        } else {
-            button.textContent = 'Add to Cart';
-            button.classList.remove('bg-red-500');
-            button.classList.add('bg-teal-600');
-            button.classList.remove('hover:bg-red-600');
-            button.classList.add('hover:bg-teal-700');
-        }
-    }
-    updateInquiryButtonsVisibility();
-}
-
-function toggleCart(itemId) {
-    const index = cart.indexOf(itemId);
-    if (index > -1) {
-        // Item is in cart, remove it
-        cart.splice(index, 1);
-    } else {
-        // Item is not in cart, add it
-        cart.push(itemId);
-    }
-    updateCartButton(itemId); // Update the specific button
-    updateInquiryButtonCounts(); // Update counts
-}
-
-function updateInquiryButtonCounts() {
-    const whatsappButton = document.getElementById('main-whatsapp-inquire-button');
-    const emailButton = document.getElementById('main-email-inquire-button');
-    whatsappButton.textContent = `Inquire on WhatsApp (${cart.length} items)`;
-    emailButton.textContent = `Inquire on Email (${cart.length} items)`;
-}
-
-function updateInquiryButtonsVisibility() {
-    const whatsappButton = document.getElementById('main-whatsapp-inquire-button');
-    const emailButton = document.getElementById('main-email-inquire-button');
-    if (cart.length > 0) {
-        whatsappButton.classList.remove('hidden');
-        emailButton.classList.remove('hidden');
-    } else {
-        whatsappButton.classList.add('hidden');
-        emailButton.classList.add('hidden');
-    }
-}
-
-
-function filterResults() {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const filteredItems = items.filter(item =>
-        item.name.toLowerCase().includes(searchInput) ||
-        item.spec.toLowerCase().includes(searchInput)
-    );
-    renderProducts(filteredItems);
-}
-
-function inquireAllOnWhatsApp() {
-    if (cart.length === 0) {
-        alert("Your cart is empty. Please add items to inquire.");
-        return;
-    }
-
-    const selectedItems = cart.map(id => items.find(item => item.id === id));
-    let message = "Hello, I would like to inquire about the following products:\n\n";
-    selectedItems.forEach((item, index) => {
-        message += `${index + 1}. ${item.name} - ${item.spec}\n`;
-    });
-    message += "\nThank you!";
-
-    const whatsappUrl = `https://wa.me/919867531298?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-}
-
-function inquireAllOnEmail() {
-    if (cart.length === 0) {
-        alert("Your cart is empty. Please add items to inquire.");
-        return;
-    }
-
-    const selectedItems = cart.map(id => items.find(item => item.id === id));
-    let body = "Hello,\n\nI would like to inquire about the following products:\n\n";
-    selectedItems.forEach((item, index) => {
-        body += `${index + 1}. ${item.name} - ${item.spec}\n`;
-    });
-    body += "\nCould you please provide more details or a quote for these items?\n\nThank you!";
-
-    const subject = "Inquiry about Products from Aone Hospitality Services";
-    const emailUrl = `mailto:aonehospitalitys@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(emailUrl, '_blank');
-}
-
-// Modal functions
-const enquireModal = document.getElementById('enquireModal');
-const enquireNowButton = document.getElementById('enquireNowButton');
-
-function openModal() {
-    enquireModal.style.display = 'flex';
-}
-
-function closeModal() {
-    enquireModal.style.display = 'none';
-}
-
-// Event listener to close modal when clicking outside
-window.addEventListener('click', function(event) {
-    if (event.target === enquireModal) {
-        closeModal();
-    }
-});
-
-// Initial render of products when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    renderProducts(items);
-    updateInquiryButtonCounts(); // Initialize counts
-    updateInquiryButtonsVisibility(); // Set initial visibility
-
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
-
-    // Back-to-top button functionality
-    const backToTopButton = document.getElementById('back-to-top');
-
-    window.onscroll = function() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            backToTopButton.style.display = "block";
-        } else {
-            backToTopButton.style.display = "none";
-        }
-    };
-
-    backToTopButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Smooth scroll for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            // Close mobile menu if open
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
+            if (productsToRender.length === 0) {
+                productsContainer.innerHTML = '<p class="text-gray-600 text-lg col-span-full">No products found matching your search.</p>';
+                return;
             }
 
-            if (targetElement) {
-                // Adjust scroll position to account for fixed header
-                const headerOffset = 64; // Approximate height of the header
-                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - headerOffset;
+            productsToRender.forEach(item => {
+                const productCard = document.createElement('div');
+                productCard.className = 'bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col justify-between';
 
+                const existingCartItem = cart.find(cartItem => cartItem.id === item.id);
+                const currentQuantity = existingCartItem ? existingCartItem.quantity : 1;
+                const buttonText = existingCartItem ? 'Remove from Cart' : 'Add to Cart';
+                const buttonClass = existingCartItem ? 'bg-red-500 hover:bg-red-600' : 'bg-teal-600 hover:bg-teal-700';
+
+                productCard.innerHTML = `
+                    <img src="${item.imageUrl}" alt="${item.name}" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">${item.name}</h3>
+                        <p class="text-gray-600 text-sm">${item.spec}</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 border-t border-gray-100 flex flex-col items-center">
+                        <div class="mb-4">
+                            <label for="quantity-${item.id}" class="sr-only">Quantity</label>
+                            <input type="number" id="quantity-${item.id}" value="${currentQuantity}" min="1" class="w-24 p-2 border border-gray-300 rounded-md text-center">
+                        </div>
+                        <button onclick="toggleCart(${item.id})" id="add-to-cart-${item.id}"
+                                class="text-white font-bold py-2 px-4 rounded-full transition duration-300 text-sm w-full ${buttonClass}">
+                            ${buttonText}
+                        </button>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+            updateInquiryButtonCounts(); // Ensure counts are updated after rendering
+            updateInquiryButtonsVisibility(); // Ensure visibility is updated after rendering
+        }
+
+        function updateCartButton(itemId) {
+            const button = document.getElementById(`add-to-cart-${itemId}`);
+            const quantityInput = document.getElementById(`quantity-${itemId}`);
+            const existingCartItem = cart.find(cartItem => cartItem.id === itemId);
+
+            if (button) {
+                if (existingCartItem) {
+                    button.textContent = 'Remove from Cart';
+                    button.classList.remove('bg-teal-600', 'hover:bg-teal-700');
+                    button.classList.add('bg-red-500', 'hover:bg-red-600');
+                    if (quantityInput) {
+                        quantityInput.value = existingCartItem.quantity;
+                    }
+                } else {
+                    button.textContent = 'Add to Cart';
+                    button.classList.remove('bg-red-500', 'hover:bg-red-600');
+                    button.classList.add('bg-teal-600', 'hover:bg-teal-700');
+                    if (quantityInput) {
+                        quantityInput.value = 1; // Reset quantity when removed from cart
+                    }
+                }
+            }
+        }
+
+        function toggleCart(itemId) {
+            const quantityInput = document.getElementById(`quantity-${itemId}`);
+            let quantity = 1;
+            if (quantityInput) {
+                quantity = parseInt(quantityInput.value);
+                if (isNaN(quantity) || quantity < 1) {
+                    alert("Please enter a valid quantity (minimum 1).");
+                    quantityInput.value = 1;
+                    return;
+                }
+            }
+
+            const existingCartItemIndex = cart.findIndex(cartItem => cartItem.id === itemId);
+
+            if (existingCartItemIndex > -1) {
+                // Item is in cart, remove it
+                cart.splice(existingCartItemIndex, 1);
+            } else {
+                // Item is not in cart, add it with the specified quantity
+                cart.push({ id: itemId, quantity: quantity });
+            }
+            updateCartButton(itemId); // Update the specific button
+            updateInquiryButtonCounts(); // Update counts
+            updateInquiryButtonsVisibility(); // Update visibility
+        }
+
+        function updateInquiryButtonCounts() {
+            const whatsappButton = document.getElementById('main-whatsapp-inquire-button');
+            const emailButton = document.getElementById('main-email-inquire-button');
+            whatsappButton.textContent = `Inquire on WhatsApp (${cart.length} items)`;
+            emailButton.textContent = `Inquire on Email (${cart.length} items)`;
+        }
+
+        function updateInquiryButtonsVisibility() {
+            const whatsappButton = document.getElementById('main-whatsapp-inquire-button');
+            const emailButton = document.getElementById('main-email-inquire-button');
+            if (cart.length > 0) {
+                whatsappButton.classList.remove('hidden');
+                emailButton.classList.remove('hidden');
+            } else {
+                whatsappButton.classList.add('hidden');
+                emailButton.classList.add('hidden');
+            }
+        }
+
+        function filterResults() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const filteredItems = items.filter(item =>
+                item.name.toLowerCase().includes(searchInput) ||
+                item.spec.toLowerCase().includes(searchInput)
+            );
+            renderProducts(filteredItems);
+        }
+
+        function inquireAllOnWhatsApp() {
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items to inquire.");
+                return;
+            }
+
+            let message = "Hello, I would like to inquire about the following products:\n\n";
+            cart.forEach((cartItem, index) => {
+                const itemDetails = items.find(item => item.id === cartItem.id);
+                if (itemDetails) {
+                    message += `${index + 1}. ${itemDetails.name} - ${itemDetails.spec} (Quantity: ${cartItem.quantity})\n`;
+                }
+            });
+            message += "\nThank you!";
+
+            const whatsappUrl = `https://wa.me/919867531298?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function inquireAllOnEmail() {
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items to inquire.");
+                return;
+            }
+
+            let body = "Hello,\n\nI would like to inquire about the following products:\n\n";
+            cart.forEach((cartItem, index) => {
+                const itemDetails = items.find(item => item.id === cartItem.id);
+                if (itemDetails) {
+                    body += `${index + 1}. ${itemDetails.name} - ${itemDetails.spec} (Quantity: ${cartItem.quantity})\n`;
+                }
+            });
+            body += "\nCould you please provide more details or a quote for these items?\n\nThank you!";
+
+            const subject = "Inquiry about Products from Aone Hospitality Services";
+            const emailUrl = `mailto:aonehospitalitys@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(emailUrl, '_blank');
+        }
+
+        // Modal functions
+        const enquireModal = document.getElementById('enquireModal');
+        const enquireNowButton = document.getElementById('enquireNowButton');
+
+        function openModal() {
+            enquireModal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            enquireModal.style.display = 'none';
+        }
+
+        // Event listener to close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === enquireModal) {
+                closeModal();
+            }
+        });
+
+        // Initial render of products when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(items);
+            updateInquiryButtonCounts(); // Initialize counts
+            updateInquiryButtonsVisibility(); // Set initial visibility
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Back-to-top button functionality
+            const backToTopButton = document.getElementById('back-to-top');
+
+            window.onscroll = function() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backToTopButton.style.display = "block";
+                } else {
+                    backToTopButton.style.display = "none";
+                }
+            };
+
+            backToTopButton.addEventListener('click', function() {
                 window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
+                    top: 0,
+                    behavior: 'smooth'
                 });
-            }
-        });
-    });
+            });
 
-    // Event listener for "Enquire Now" button
-    enquireNowButton.addEventListener('click', openModal);
-});
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+
+                    if (targetElement) {
+                        // Adjust scroll position to account for fixed header
+                        const headerOffset = 64; // Approximate height of the header
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                });
+            });
+
+            // Event listener for "Enquire Now" button
+            enquireNowButton.addEventListener('click', openModal);
+        });
     </script>
     
 </body>
