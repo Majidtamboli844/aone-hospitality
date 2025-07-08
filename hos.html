@@ -177,7 +177,7 @@
                 </button>
             </div>
 
-            <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8","background-color: var(--color-green-600);" /* oklch(62.7% 0.194 149.214) */>
+            <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
                 </div>
 
             <div class="fixed bottom-6 right-6 z-20 flex flex-col items-end space-y-2">
@@ -300,460 +300,1373 @@
     </div>
 
 <script>
-        // All 181 items from the PDF
-const items = [
-    { id: 1, name: "Paper A4 Size", spec: "JK Copier, 75GSM", imageUrl: "https://tiimg.tistatic.com/fp/1/008/675/jk-a4-70gms-copier-paper-655.jpg" },
-    { id: 2, name: "Paper Legal Size", spec: "JK Copier, 75GSM", imageUrl: "https://m.media-amazon.com/images/I/91rBfyyGcbL._UF1000,1000_QL80_.jpg" },
-    { id: 3, name: "Bond Paper", spec: "(500 sheet) A4 size, 90-100 GSM", imageUrl: "https://m.media-amazon.com/images/I/41GqYci7M%2BL._AC_SY350_QL15_.jpg" },
-    { id: 4, name: "Spiral Binding Cover", spec: "(White and Blue) A4 Size", imageUrl: "https://m.media-amazon.com/images/I/31NHEsXGRzL._UF1000,1000_QL80_.jpg" },
-    { id: 5, name: "File cover with Board", spec: "Brown, Cobra file with clip in the middle", imageUrl: "https://5.imimg.com/data5/SELLER/Default/2023/2/BZ/JY/UV/2485182/cardboard-spring-cobra-file-cover-500x500.jpeg" },
-    { id: 6, name: "File cover with Board", spec: "Any color, 2 inch folded at right side", imageUrl: "https://m.media-amazon.com/images/I/61ybVRnm5eL._UF1000,1000_QL80_.jpg" },
-    { id: 7, name: "Jel Pen", spec: "Reynolds Trimax", imageUrl: "https://m.media-amazon.com/images/I/51LnFM4KSYL.jpg" },
-    { id: 8, name: "Jel Pen Refill", spec: "Reynolds Trimax", imageUrl: "https://m.media-amazon.com/images/I/61E8w9s8AHL.jpg" },
-    { id: 9, name: "Pen", spec: "Maxritter", imageUrl: "https://m.media-amazon.com/images/I/81VSucE8OwL.jpg" },
-    { id: 10, name: "Pen Refill (Maxritter)", spec: "images/pen_refill_maxritter.webp" },
-    { id: 11, name: "Double Sided Pen", spec: "GD quality- Red & Blue", imageUrl: "images/double_sided_pen.webp" },
-    { id: 12, name: "Refill", spec: "(Double Sided) Red & Blue", imageUrl: "images/double_sided_refill.webp" },
-    { id: 13, name: "Stapler", spec: "Small NO. 10 Gd Quality, Kangaroo", imageUrl: "images/stapler_small.webp" },
-    { id: 14, name: "Stapler", spec: "Medium No. HP 45 (X shape)", imageUrl: "images/stapler_medium.webp" },
-    { id: 15, name: "Stapler Pin", spec: "No. 10 Kangaroo", imageUrl: "images/stapler_pin_10.webp" },
-    { id: 16, name: "Stapler Pin", spec: "No. 24/6 Kangaroo", imageUrl: "images/stapler_pin_24_6.webp" },
-    { id: 17, name: "Paper Punch Machine", spec: "1 hole. Kangaroo", imageUrl: "images/paper_punch_1_hole.webp" },
-    { id: 18, name: "Paper Punch Machine", spec: "2 hole. Kangaroo 500 DP 540", imageUrl: "images/paper_punch_2_hole.webp" },
-    { id: 19, name: "File Lace (Nylon/cotton)", spec: "White, multi-purpose cotton file thread 10 inch for Tag file, exam paper, folder file, document tagging (100 nos)", imageUrl: "images/file_lace.webp" },
-    { id: 20, name: "Pencil", spec: "Natraj / Apsara / DOMS - pack of 10", imageUrl: "images/pencil_pack.webp" },
-    { id: 21, name: "Eraser", spec: "Natraj / Apsara / DOMS - pack of 10", imageUrl: "images/eraser_pack.webp" },
-    { id: 22, name: "Sharpner", spec: "Natraj / Apsara / DOMS - pack of 10", imageUrl: "images/sharpener_pack.webp" },
-    { id: 23, name: "Paper cutter", spec: "18mm Stanley or equivalent", imageUrl: "images/paper_cutter.webp" },
-    { id: 24, name: "Paper Cutter Blade", spec: "18mm stanley or equivalent", imageUrl: "images/paper_cutter_blade.webp" },
-    { id: 25, name: "Ruled Register No. 4", spec: "Good Quality- single line, hard cover 70-75 gsm", imageUrl: "images/ruled_register_4.webp" },
-    { id: 26, name: "Ruled Register No. 6", spec: "Good Quality- single line, hard cover 70-75 gsm", imageUrl: "images/ruled_register_6.webp" },
-    { id: 27, name: "Ruled Register No. 8", spec: "Good Quality- single line, hard cover 70-75 gsm", imageUrl: "images/ruled_register_8.webp" },
-    { id: 28, name: "Ruled Register No. 10", spec: "Good Quality- single line, hard cover 70-75 gsm", imageUrl: "images/ruled_register_10.webp" },
-    { id: 29, name: "Ruled Register No. 12", spec: "Good Quality- single line, hard cover 70-75 gsm", imageUrl: "images/ruled_register_12.webp" },
-    { id: 30, name: "Ruled Register No. 14", spec: "Good Quality- single line, hard cover 70-75 gsm", imageUrl: "images/ruled_register_14.webp" },
-    { id: 31, name: "Ruled Register No. 16", spec: "Good Quality- single line, hard cover 70-75 gsm", imageUrl: "images/ruled_register_16.webp" },
-    { id: 32, name: "Ruled Register No. 18", spec: "Good Quality- single line, hard cover 70-75 gsm", imageUrl: "images/ruled_register_18.webp" },
-    { id: 33, name: "Ruled Register No. 20", spec: "Good Quality- single line, hard cover 70-75 gsm", imageUrl: "images/ruled_register_20.webp" },
-    { id: 34, name: "Vehicle Log Book", spec: "(100 sheets) 12 columns spreading over 2 sheets (date, name of driver, name of party, journey (from & to) km. mtr (frm & to) km run, hrs (from & to) Purpose of visit, Remarks (8.5x6.5 inches) gd quality", imageUrl: "images/vehicle_log_book.webp" },
-    { id: 35, name: "Peon Book", spec: "80 sheets, 6 columns(Date, Name, Sub, Peon's Name, Time, Receiver's Sign) (8.5x6.5 inches)", imageUrl: "images/peon_book.webp" },
-    { id: 36, name: "Stock Book Register No. 10", spec: "size: 32X20 cm-gd qly paper (with Date, Item name, qty rate & amt, Remarks)column)", imageUrl: "images/stock_register_10.webp" },
-    { id: 37, name: "Stock Register No 16", spec: "- do-- No. 16", imageUrl: "images/stock_register_16.webp" },
-    { id: 38, name: "Stock Register No. 20", spec: "do --No. 20", imageUrl: "images/stock_register_20.webp" },
-    { id: 39, name: "Dak Receipt Register No. 30", spec: "", imageUrl: "images/dak_receipt_register.webp" },
-    { id: 40, name: "Dak Dispatch Register No. 30", spec: "", imageUrl: "images/dak_dispatch_register.webp" },
-    { id: 41, name: "Dak Pad", spec: "file binder with 4 flipper", imageUrl: "images/dak_pad.webp" },
-    { id: 42, name: "Plastic Folder", spec: "Envelope type- button filder", imageUrl: "images/plastic_folder.webp" },
-    { id: 43, name: "Cellotape Dispenser (Big)", spec: "1 inch tape dispenser", imageUrl: "images/cellotape_dispenser_big.webp" },
-    { id: 44, name: "Tape Transparent", spec: "1 inch-65 meter long-combo of 6 rolls", imageUrl: "images/tape_transparent_1_inch.webp" },
-    { id: 45, name: "Tape Transparent (1 inch) Gd Quality 100 mtr", spec: "2 inch- 65 meter long-combo of 6 rolls", imageUrl: "images/tape_transparent_2_inch.webp" },
-    { id: 46, name: "Colored Tape", spec: "2 inch- 65 meter long-combo of 6 rolls (Blue/Green)", imageUrl: "images/colored_tape_2_inch.webp" },
-    { id: 47, name: "Colored Tape", spec: "1 inch- 65 meter long-combo of 6 rolls (Blue/Green)", imageUrl: "images/colored_tape_1_inch.webp" },
-    { id: 48, name: "Tape - Tan", spec: "2 inch-65 meter long-combo of 6 rolls", imageUrl: "images/tape_tan_2_inch.webp" },
-    { id: 49, name: "Tape - Tan", spec: "1 inch-65 meter long-combo of 6 rolls", imageUrl: "images/tape_tan_1_inch.webp" },
-    { id: 50, name: "Envelope Brown", spec: "9.5x 4.5 inches- pack of 50", imageUrl: "images/envelope_brown.webp" },
-    { id: 51, name: "Envelope (White)", spec: "9.5x 4.5 inches- pack of 50", imageUrl: "images/envelope_white.webp" },
-    { id: 52, name: "Envelope Yellow", spec: "9.5x 4.5 inches- pack of 50", imageUrl: "images/envelope_yellow.webp" },
-    { id: 53, name: "Laminated Envelope", spec: "A4 size yellow pack of 50", imageUrl: "images/laminated_envelope_a4.webp" },
-    { id: 54, name: "Laminated Envelope- Legal Size Yellow", spec: "pack of 50", imageUrl: "images/laminated_envelope_legal.webp" },
-    { id: 55, name: "Laminated Envelope", spec: "A3 size yellow - pack of 50", imageUrl: "images/laminated_envelope_a3.webp" },
-    { id: 56, name: "Envelope", spec: "Legal size, cloth lined pack of 50", imageUrl: "images/envelope_cloth_lined.webp" },
-    { id: 57, name: "Highlighter Pen", spec: "Set of 5", imageUrl: "images/highlighter_pen_set.webp" },
-    { id: 58, name: "Paper Flag (Tri Color)", spec: "multi color sticky notes", imageUrl: "images/paper_flag_tri_color.webp" },
-    { id: 59, name: "Paper Flag (single color)", spec: "3M Post-it Sticky Note Cube, 200 Sheets (4 Colors x 50 Sheets) 3\"x3\" Size | For notes, reminders, study, school and organizing", imageUrl: "images/paper_flag_single_color.webp" },
-    { id: 60, name: "Glue Stick Gum", spec: "25 gms Fevistik / Deli or equivalent", imageUrl: "images/glue_stick.webp" },
-    { id: 61, name: "Fevi Gum/Fevicol", spec: "Pidilite 200ml / squeeze (105gm)", imageUrl: "images/fevi_gum_fevicol.webp" },
-    { id: 62, name: "Liquid Gum", spec: "(Camlin)700 ml", imageUrl: "images/liquid_gum.webp" },
-    { id: 63, name: "Gem Clip", spec: "Steel paper clip - 25 mm 100 piece pack", imageUrl: "images/gem_clip_25mm.webp" },
-    { id: 64, name: "Scissor Big", spec: "8.5\" long- GD quality", imageUrl: "images/scissor_big.webp" },
-    { id: 65, name: "Binder Clip", spec: "15mm pack of 12 pieces", imageUrl: "images/binder_clip_15mm.webp" },
-    { id: 66, name: "Binder Clip", spec: "19mm pack of 12 pieces", imageUrl: "images/binder_clip_19mm.webp" },
-    { id: 67, name: "Binder Clip", spec: "25mm pack of 12 pieces", imageUrl: "images/binder_clip_25mm.webp" },
-    { id: 68, name: "Binder Clip", spec: "32mm pack of 12 pieces", imageUrl: "images/binder_clip_32mm.webp" },
-    { id: 69, name: "Binder Clip", spec: "45mm pack of 12 pieces", imageUrl: "images/binder_clip_45mm.webp" },
-    { id: 70, name: "Binder Clip", spec: "51mm pack of 12 pieces", imageUrl: "images/binder_clip_51mm.webp" },
-    { id: 71, name: "Notesheet (yellow)", spec: "Size: 210 x 335mm, 90 gsm, book of 100 sheet, Margin Line at 1 left side and 1 at top side of the sheet (38-40 mm), file number provision at top one side of the sheet", imageUrl: "images/notesheet_yellow.webp" },
-    { id: 72, name: "ARCH Box File", spec: "Lever Arch Binder Box File best for keeping office documents with PVC 2\" lever arch clip-blue", imageUrl: "images/arch_box_file.webp" },
-    { id: 73, name: "Correction pen", spec: "Whitener, pack of 10, gd quality", imageUrl: "images/correction_pen.webp" },
-    { id: 74, name: "Note Pad", spec: "14 x 22 cm 40 sheets, ruled/plain, 70gsm", imageUrl: "images/note_pad_40_sheets.webp" },
-    { id: 75, name: "Spiral Note Pad", spec: "14 x 22 cm 80 sheets, ruled/plain, 70gsm", imageUrl: "images/spiral_note_pad_80_sheets.webp" },
-    { id: 76, name: "White Board Marker", spec: "Magnetic white board Dry Erase Marker- pack of 10", imageUrl: "images/white_board_marker.webp" },
-    { id: 77, name: "White Borad Marker Refill", spec: "Whiteboard Marker Refill Ink 15ml", imageUrl: "images/white_board_marker_refill.webp" },
-    { id: 78, name: "Pin Point Marker Pen", spec: "CD/DVD/OHP Marker pen", imageUrl: "images/pin_point_marker.webp" },
-    { id: 79, name: "Permanent Marker", spec: "Thick tip", imageUrl: "images/permanent_marker.webp" },
-    { id: 80, name: "Magnetic White Board Eraser", spec: "Magnetic White Board Eraser", imageUrl: "images/magnetic_white_board_eraser.webp" },
-    { id: 81, name: "Black Board Duster (Good Quality)", "spec": "Chalk Board Eraser", imageUrl: "images/black_board_duster.webp" },
-    { id: 82, name: "Black Board Chalk", "spec": "(Non dust) colored -gd quality-pack of 50", imageUrl: "images/black_board_chalk.webp" },
-    { id: 83, name: "Paper Tray", "spec": "Office Document Tray, Plastic", imageUrl: "images/paper_tray_plastic.webp" },
-    { id: 84, name: "Paper Tray", "spec": "Office Document Tray, Plastic-2 racks", imageUrl: "images/paper_tray_plastic_2_racks.webp" },
-    { id: 85, name: "Paper Tray", "spec": "office Document Metal - 3 racks, stackable", imageUrl: "images/paper_tray_metal_3_racks.webp" },
-    { id: 86, "name": "Attendance Register (Good Quality)", "spec": "Monthly Attendance Register, 50 sheets, Hard Bound, minimum 30 rows", "imageUrl": "images/attendance_register_50_sheets.webp" },
-    { id: 87, "name": "Attendance Register (Good Quality)", "spec": "Monthly Attendance Register, 100 sheets, Hard Bound, around 15 to 20 rows", "imageUrl": "images/attendance_register_100_sheets.webp" },
-    { id: 88, "name": "Pencil battery AA", "spec": "AA alkaline battery 400% long lasting 1.5 volt, highly durable and leak proof", "imageUrl": "images/battery_aa.webp" },
-    { id: 89, "name": "Pencil batery Ordinary AA", "spec": "AAA alkaline battery 400% long lasting 1.5 volt, highly durable and leak proof", "imageUrl": "images/battery_aaa.webp" },
-    { id: 90, "name": "9 volt Battery", "spec": "9v battery alkaline", "imageUrl": "images/battery_9v_alkaline.webp" },
-    { id: 91, "name": "Stamp pad", "spec": "110x69 mm, blue", "imageUrl": "images/stamp_pad.webp" },
-    { id: 92, "name": "Stamp Pad Ink", "spec": "PadInk15 ml, same brand as stamp pad", imageUrl: "images/stamp_pad_ink.webp" },
-    { id: 93, "name": "Hand Towel (Good Quality)", "spec": "Washbasin hanging hand kitchen towel, 44x24 cm, pack of 4", imageUrl: "images/hand_towel_small.webp" },
-    { id: 94, "name": "Hand Towel (Good Quality)", "spec": "12x 18 inches- ultrasoft and absorbent", imageUrl: "images/hand_towel_medium.webp" },
-    { id: 95, "name": "Towel Big", "spec": "Gd quality- 56x28. blue 400 gsm", imageUrl: "images/towel_big.webp" },
-    { id: 96, "name": "Towel Large", "spec": "Office Chair Towel- 36x72 inches white 600 gsm", "imageUrl": "images/towel_large.webp" },
-    { id: 97, "name": "Dusting Cloth", "spec": "Microfiber duster cloth- 40 x 40 cm-400 gsm", "imageUrl": "images/dusting_cloth_microfiber.webp" },
-    { id: 98, "name": "Dusting Cloth", "spec": "Cotton cleaning cloth/mop- 16x24 inches- pack of 12", "imageUrl": "images/dusting_cloth_cotton.webp" },
-    { id: 99, "name": "Dettol Soap", "spec": "Dettol original germ protection bathing soap bar- 400 gm", "imageUrl": "images/dettol_soap.webp" },
-    { id: 100, "name": "Dettol Liquid Hand Wash", "spec": "HandWash-200 ml", "imageUrl": "images/dettol_handwash.webp" },
-    { id: 101, "name": "Dettol Hand Wash Refill pack", "spec": "Refillpack 1.5 Ltr", "imageUrl": "images/dettol_handwash_refill.webp" },
-    { id: 102, "name": "Odonil", "spec": "Odonil Bathroom Air Freshyner Zipper, Floral Bliss/blissful citrus, 10g.", "imageUrl": "images/odonil.webp" },
-    { id: 103, "name": "Aier room freshner", "spec": "Room Air Freshner Spray- Floral Bliss", "imageUrl": "images/air_room_freshner.webp" },
-    { id: 104, "name": "Detergent Powder", "spec": "Surf Excel quick wash 1 kg/ 3kg", "imageUrl": "images/detergent_surf_excel.webp" },
-    { id: 105, "name": "Detergent Powder (Normal)", "spec": "other than surf excel- 500gm/1000gm", "imageUrl": "images/detergent_normal.webp" },
-    { id: 106, "name": "Broom Soft", "spec": "39\" Grass Broom traditional, non-dust, comfortable grip broom stick", "imageUrl": "images/broom_soft.webp" },
-    { id: 107, "name": "Broom Hard", "spec": "Bamboo/coconut hard floor jhadu, 2.5 to 3 ft long", "imageUrl": "images/broom_hard.webp" },
-    { id: 108, "name": "Dust Pan (Big)", "spec": "36x 23.9x 9.5 cm", "imageUrl": "images/dust_pan_big.webp" },
-    { id: 109, "name": "Dust Pan with long Handle", "spec": "long Handle upright- 54\" long handle", "imageUrl": "images/dust_pan_long_handle.webp" },
-    { id: 110, "name": "Bleaching Powder", "spec": "for Household purpose, 1 kg", "imageUrl": "images/bleaching_powder.webp" },
-    { id: 111, "name": "Phynyl", "spec": "White, 5 ltr", "imageUrl": "images/phynyl_white.webp" },
-    { id: 112, "name": "Phynyl", "spec": "Black, 5 ltr (extra strong)", "imageUrl": "images/phynyl_black.webp" },
-    { id: 113, "name": "Harpic", "spec": "Toilet cleaner 1 ltr/5 ltr", "imageUrl": "images/harpic.webp" },
-    { id: 114, "name": "Glass Cleaner spray", "spec": "Smooth Glass cleaner liquid spray, 500 ml", "imageUrl": "images/glass_cleaner_spray.webp" },
-    { id: 115, "name": "Lizol (500ml)", "spec": "floor surface disinfectant, 1 ltr/5 ltr", "imageUrl": "images/lizol.webp" },
-    { id: 116, "name": "MOP", "spec": "Flat Mop Wet and Dry Cleaning- Tshape-360 degree- 18\"", "imageUrl": "images/mop_flat.webp" },
-    { id: 117, "name": "Wet Mop", "spec": "Easy Twist Mop", "imageUrl": "images/wet_mop.webp" },
-    { id: 118, "name": "MOP (Pocha)", "spec": "Spin Mop with big wheels and bucket (Gala or equivalent)", "imageUrl": "images/mop_spin.webp" },
-    { id: 119, "name": "MOP Refill", "spec": "Microfiber refill for spin mop", "imageUrl": "images/mop_refill.webp" },
-    { id: 120, "name": "Wiper", "spec": "Bathroom wiper for floor cleaning", "imageUrl": "images/wiper_bathroom.webp" },
-    { id: 121, "name": "All insect killer spray", "spec": "600 ml, Mortein or equivalent", "imageUrl": "images/insect_killer_spray.webp" },
-    { id: 122, "name": "Hit spray", "spec": "Red-600 or 700 ml", "imageUrl": "images/hit_spray.webp" },
-    { id: 123, "name": "Plastic Mug", "spec": "2 ltr", "imageUrl": "images/plastic_mug.webp" },
-    { id: 124, "name": "Plastic Bucket", "spec": "25Ltrs Cello/Milton or equivalent", "imageUrl": "images/plastic_bucket.webp" },
-    { id: 125, "name": "Dustbin", "spec": "Open Mesh Dustbin- 12-15 ltrs", "imageUrl": "images/dustbin_mesh.webp" },
-    { id: 126, "name": "Dustbing with Lid", "spec": "(34.5x26.2x49.5 cm) 28 ltrs", "imageUrl": "images/dustbin_with_lid.webp" },
-    { id: 127, "name": "Dustbin (Large) with lid", "spec": "120 ltrs extra large dustbin with wheels", "imageUrl": "images/dustbin_large_wheels.webp" },
-    { id: 128, "name": "Dustbin (Large) with lid", "spec": "120 ltrs extra large dustbin with swing lid", "imageUrl": "images/dustbin_large_swing_lid.webp" },
-    { id: 129, "name": "Godrej Lock & Key", "spec": "7 Levers Navtal-4 keys Brass finish", "imageUrl": "images/godrej_lock.webp" },
-    { id: 130, "name": "Ordinary Lock & Key", "spec": "7 Levers, ordinary, minimum 6 keys", "imageUrl": "images/ordinary_lock.webp" },
-    { id: 131, "name": "Extension Board (electric)", "spec": "16amp)- 3 pin socket-2 nos, 2 pin socket-1 no.", "imageUrl": "images/extension_board_electric.webp" },
-    { id: 132, "name": "Three Pin Socket Extension Board (Computer)", "spec": "Multi Plug extension board with 6 power sockets, 6 amp- 2m cord length", "imageUrl": "images/extension_board_computer.webp" },
-    { id: 133, "name": "Electrical Board (Cube)", "spec": "Cube Extension Board with USB Port with Universal Sockets and USB (2.4 A) (QC 3.0) with Overload Protector, Indicator, 1.8 mtr Extension Cord, Safety Shutter-Multi Plug Socket", "imageUrl": "images/electrical_board_cube.webp" },
-    { id: 134, "name": "Rubber Gloves", "spec": "12 Inches Long Reusable Nitrile Chemical Resistant Rubber Hand Gloves For Industrial Purpose, Janitorial, Construction, Gardening Home Kitchen Cleaning Gloves/Dish Washing Gloves.", "imageUrl": "images/rubber_gloves.webp" },
-    { id: 135, "name": "Toilet Paper Roll-Gd Quality", "spec": "Toilet Paper/Tissue Roll, soft and highly absorbent - 12 Rolls pack (160 Pulls Per Roll, 1920 Sheets)", "imageUrl": "images/toilet_paper_roll.webp" },
-    { id: 136, "name": "Toilet Brush-Gd Quality", "spec": "Hard brush with Hard handle", "imageUrl": "images/toilet_brush.webp" },
-    { id: 137, "name": "Medimix Soap", "spec": "(smallsachet) 10-15 gms (ayurvedic soap with 18 herbs) pack of 30", "imageUrl": "images/medimix_soap.webp" },
-    { id: 138, "name": "Mosquito Repellent machine", "spec": "7 x 45 refill plus machine", "imageUrl": "images/mosquito_repellent_machine.webp" },
-    { id: 139, "name": "Mosquito Repellent Refill", "spec": "Refill pack", "imageUrl": "images/mosquito_repellent_refill.webp" },
-    { id: 140, "name": "Napthalene Balls (Kapur)", "spec": "BallsKapur)", "imageUrl": "images/napthalene_balls.webp" },
-    { id: 141, "name": "Dustbin bag / Trash Bag", "spec": "(big size)-strong gd quality 42 x 48 inches, Jumbo XL, Heavt Duty, HDPE material for maximum strength and tear resistnace, Biodegrable, Black", "imageUrl": "images/dustbin_bag.webp" },
-    { id: 142, "name": "Colin", "spec": "1 ltr", "imageUrl": "images/colin.webp" },
-    { id: 143, "name": "Paper A3 Size", "spec": "JK Copier, 75GSM", "imageUrl": "images/paper_a3.webp" },
-    { id: 144, "name": "Photo Paper A4 Size", "spec": "Water Proof 180 gsm, (pack of 50 sheet) High gloss- instant drying", "imageUrl": "images/photo_paper_a4.webp" },
-    { id: 145, "name": "Screw Driver set", "spec": "Taparia and equivalent (5 pieces set)", "imageUrl": "images/screwdriver_set.webp" },
-    { id: 146, "name": "Sealing Wax", "spec": "Wax Seal Sticks, Fire Manuscript Sealing Seal Wax Sticks For Postage Letter Retro Vintage Wax Seal Stamp (Flashing Red Wine), 5 pcs pack", "imageUrl": "images/sealing_wax.webp" },
-    { id: 147, "name": "Thread Roll", "spec": "Piping Thread Dori for Sewing Purpose Pack of 4 Rolls (25Mtr Each Roll)", "imageUrl": "images/thread_roll.webp" },
-    { id: 148, "name": "Counting Sponze", "spec": "Finger Wet Sponge, Finger Damper 2.7 Inch Diameter for Cash Counting Multicolor 3in1 Set", "imageUrl": "images/counting_sponge.webp" },
-    { id: 149, "name": "Remote Bell", "spec": "Wireless Office Door bell, with led light 50 mtr operating range", "imageUrl": "images/remote_bell.webp" },
-    { id: 150, "name": "Dista Paper (Plain)", "spec": "A4 Rough Paper Bundle (Recycled) for Practice, Calculations, Competitive Exam Preparation (120 Qty, Off White)", "imageUrl": "images/dista_paper.webp" },
-    { id: 151, "name": "Soap Case", "spec": "Plastic Self drainig soap holder -14x9 cm", "imageUrl": "images/soap_case.webp" },
-    { id: 152, "name": "Water Glass", "spec": "(Borosil) 350 ml (6 nos / box)", "imageUrl": "images/water_glass.webp" },
-    { id: 153, "name": "Room Freshner", "spec": "GD Quality- spray", "imageUrl": "images/room_freshner_spray.webp" },
-    { id: 154, "name": "Battery 23A", "spec": "23A alkaline battery 12 volt", "imageUrl": "images/battery_23a.webp" },
-    { id: 155, "name": "Sign Pen", "spec": "SignPen", "imageUrl": "images/sign_pen.webp" },
-    { id: 156, "name": "9 volt Battery", "spec": "9 volt battery lithium", "imageUrl": "images/battery_9v_lithium.webp" },
-    { id: 157, "name": "Pin Holder Box", "spec": "Pin clip magnetic holder dispenser", "imageUrl": "images/pin_holder_box.webp" },
-    { id: 158, "name": "T Alpin (coloured)", "spec": "Stainless Steel T shaped pins", "imageUrl": "images/t_alpin.webp" },
-    { id: 159, "name": "Electro Nickle Plated", "spec": "Multi color plastic head push pin for notice board", "imageUrl": "images/electro_nickle_plated_pin.webp" },
-    { id: 160, "name": "Board Pin", "spec": "Golden push pin, brass coated 50 pins pack", "imageUrl": "images/board_pin.webp" },
-    { id: 161, "name": "Gem Clip", "spec": "Steel paper clip 30 mm-120 piece pack", "imageUrl": "images/gem_clip_30mm.webp" },
-    { id: 162, "name": "Paper Weight for office table", "spec": "Acrylic", "imageUrl": "images/paper_weight_acrylic.webp" },
-    { id: 163, "name": "Desktop Calculator", "spec": "14 digits(large display) special keys with keyguard Dual Power - Solar & Battery(AA), Ergonomic Key Design Auto Replay, 99 steps check and correct", "imageUrl": "images/desktop_calculator.webp" },
-    { id: 164, "name": "Plastic Rope - Flat Face", "spec": "Sutli rope 500 mtrs", "imageUrl": "images/plastic_rope.webp" },
-    { id: 165, "name": "Poker", "spec": "paper piercing tool-taparia - 18 cm", "imageUrl": "images/poker.webp" },
-    { id: 166, "name": "Double sided Tape", "spec": "silicon tape, 1 inch 3-5 mtr long", "imageUrl": "images/double_sided_tape.webp" },
-    { id: 167, "name": "Stick Folder", "spec": "Plastic stick transparent file folder", "imageUrl": "images/stick_folder.webp" },
-    { id: 168, "name": "Cellotape Dispenser (small)", "spec": "1/2 inch tape dispenser", "imageUrl": "images/cellotape_dispenser_small.webp" },
-    { id: 169, "name": "Scale", "spec": "Metal (30 cm)", "imageUrl": "images/scale_metal.webp" },
-    { id: 170, "name": "Scale", "spec": "Plastic, (30 cm)", "imageUrl": "images/scale_plastic.webp" },
-    { id: 171, "name": "Stapler Pin", "spec": "No 23/17 Heavy Duty Kangaroo/Kores", "imageUrl": "images/stapler_pin_heavy_duty.webp" },
-    { id: 172, "name": "Stapler", "spec": "Large HD 23 S 24 (Heavy Duty)", "imageUrl": "images/stapler_heavy_duty.webp" },
-    { id: 173, "name": "Color Paper", "spec": "(75 gsm)(4 color) A4 Size pack of 100 sheets", "imageUrl": "images/color_paper_a4_75gsm.webp" },
-    { id: 174, "name": "Color Paper", "spec": "(100-120 gsm)(4 color) A4 Size pack of 100 sheets", "imageUrl": "images/color_paper_a4_100_120gsm.webp" },
-    { id: 175, "name": "Chart paper", "spec": "Normal-white", "imageUrl": "images/chart_paper_white.webp" },
-    { id: 176, name: "Plastic Spiral Binding ring/loop/coil", spec: "8mm dia", imageUrl: "images/spiral_binding_8mm.webp" },
-    { id: 177, name: "Plastic Spiral Binding ring/loop/coil (small)", spec: "10mm dia", imageUrl: "images/spiral_binding_10mm.webp" },
-    { id: 178, name: "Plastic Spiral Binding ring/loop/coil (Medium)", spec: "12mm", imageUrl: "images/spiral_binding_12mm.webp" },
-    { id: 179, name: "Plastic Spiral Binding ring/loop/coil (Big)", spec: "16mm", imageUrl: "images/spiral_binding_16mm.webp" },
-    { id: 180, name: "Plastic Spiral Binding ring/loop/coil (Big)", spec: "20mm", imageUrl: "images/spiral_binding_20mm.webp" },
-    { id: 181, name: "Graph Paper", spec: "(Big size) in cm- 22\"x29\"", imageUrl: "images/graph_paper.webp" }
-];
-        const productsContainer = document.getElementById('products-container');
-        const searchInput = document.getElementById('searchInput');
-        let selectedItems = [];
-
-        // Function to render products
-        function renderProducts(productsToRender) {
-            productsContainer.innerHTML = ''; // Clear existing products
-            if (productsToRender.length === 0) {
-                productsContainer.innerHTML = '<p class="text-center text-gray-600 col-span-full">No products found matching your search.</p>';
-                return;
+        const items = [
+            {
+                id: 1,
+                name: "5855 TWL SCOTT COMPACT WHT 110X16",
+                spec: "C Fold 110 Sheets Per Pkt, 1 Box = 16 PKT",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 2,
+                name: "12388 TWL SCOTT SLIMROLL 176MX6",
+                spec: "HRT 176 Meter Per Roll, 1 Box = 6 Roll",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 3,
+                name: "02410054 HRT White 200mm 165 Mtrs",
+                spec: "1 Case = 8 Roll - Greenlime Pudumjee",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 4,
+                name: "30896 HR/TWL KIMSOFT CSR 165M",
+                spec: "1 Case = 9 Roll",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 5,
+                name: "Scott Lux Foam Soap Refill - 30895",
+                spec: "For Hand Wash, 1 Box = 6 Btl of 1 Ltrs",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 6,
+                name: "30912 Kimberly Clark Scott Instant Hand Sanitizer",
+                spec: "5 Ltrs Can (1 Case = 4 Can)",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 7,
+                name: "Hand Sanitizer Buzil Rossari Liquid",
+                spec: "5 Ltrs Can, Ethanol Base",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 8,
+                name: "01267 KIMBERLY-CLARK PROF GENTLE CLEAN",
+                spec: "1 Box = 2 Can / 5 Ltr",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 9,
+                name: "04001 KIMSOFT BATHROOM TISSUE-375 S",
+                spec: "1 Case = 80 Roll & 1 Roll = 375 Sheets",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 10,
+                name: "Toilet Roll 100 GM",
+                spec: "PUDUMJEE",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 11,
+                name: "BTR 450 sheet, 10 x 11cm, 2 Ply, 18GSM",
+                spec: "Greenlime Pudumjee - Product Code : 04410087T",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 12,
+                name: "Green Lime Toilet Rolls 200 Grams",
+                spec: "With Core 10x11Cm, 2Ply 18GSM - 1 Box = 100 / 60 Roll",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 13,
+                name: "M-Fold White 21 x 22.5, 150 Sheets",
+                spec: "Greenlime Pudumjee - Product Code: 01410057, 1 Case = 60 Pkts x 150 Pulls",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 14,
+                name: "Greenlime / Jade Air Freshner Refill 10Ml",
+                spec: "Greenlime 70Grm/100 Ml",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 15,
+                name: "JRT Dispenser Roll Greenlime 250Mtr",
+                spec: "White 3.8’’(97Mm) 250Mtr",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 16,
+                name: "Greenlime Facial Tissue 100 Pulls",
+                spec: "Plain 20X20, Ply 100 Pulls",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 17,
+                name: "Cube Napkin, 1 Ply, CB001",
+                spec: "21cm x 27cm, 1 Box = 100 Pkts - Saraya Mystair",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 18,
+                name: "Micromist Refill 100ml",
+                spec: "Mystair",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 19,
+                name: "Hygiene Fresh Micromist Dispenser",
+                spec: "Hygiene Fresh",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 20,
+                name: "Hygiene Fresh Refill 200ml",
+                spec: "Hygiene Fresh",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 21,
+                name: "Godrej Aer Pocket Air Fragrance 10Gm",
+                spec: "Godrej",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 22,
+                name: "Check Duster Red/Blue/Green Medium",
+                spec: "Good Quality - 18 x 18",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 23,
+                name: "Glass Duster Red / Blue, 22\"X 22\"",
+                spec: "Good Quality - 22 x 22",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 24,
+                name: "Glass Duster Red / Blue, 18\"X 18\"",
+                spec: "Good Quality - 18 x 18",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 25,
+                name: "Check Duster Red/Blue/Green Big",
+                spec: "Good Quality - 16 x 24",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 26,
+                name: "Cotton Floor Dusters / Rough Duster",
+                spec: "Good Quality - 24 x 24",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 27,
+                name: "Cotton Floor Dusters / Rough Duster",
+                spec: "Good Quality - 20 x 20",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 28,
+                name: "Micro Wipe (40 Cm X 40 Cm) Light Duty",
+                spec: "China Brand",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 29,
+                name: "Micro Wipe (40 Cm X 40 Cm) 200 Light Duty",
+                spec: "Unger Brand",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 30,
+                name: "Micro Wipe (40 Cm X 40 Cm) 500 Medium Duty",
+                spec: "Unger Brand",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 31,
+                name: "Diversey Micro Fiber Duster (40 Cm X 40 Cm",
+                spec: "Diversey",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 32,
+                name: "Yellow Duster 12\"x18\"",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 33,
+                name: "Scotch Brite 10Cm X 15Cm",
+                spec: "3M",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 34,
+                name: "Nylon Scrubber",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 35,
+                name: "Face Mask",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 36,
+                name: "Nose Mask Yellow / N 95",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 37,
+                name: "Anti Pollution Hosiery Mask",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 38,
+                name: "Washable Face Mask (three Layer) Reusable",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 39,
+                name: "Wet Mop Set With Alluminium Stick",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 40,
+                name: "Wet Mop Set With M.S. Stick",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 41,
+                name: "Wet Mop Stick MS Heavy Duty",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 42,
+                name: "Wet Mop Refill 300 gm White, Red, Blue Spl Cut End",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 43,
+                name: "Wet Mop Refill 250gm, 6\"",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 44,
+                name: "Round Wet Mop Set With M.S. / Wooden Stick",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 45,
+                name: "Hard T Brush Set",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 46,
+                name: "Floor Scrubbing Brush 12\" Hard",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 47,
+                name: "Hard Brush Set 2X18\"",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 48,
+                name: "Mr. Tall Brush with Metal Stick",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 49,
+                name: "Comby Cpl. With Steel Channel And Rubber Hard, Handle Made Of Polypropylene Synthetic Fabric. It Is Machine Washable",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 50,
+                name: "Combi, 35 Cm with With Alluminium Channel And Rubber Hard, Handle Made Of Polypropylene Synthetic Fabric. It Is Machine Washable",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 51,
+                name: "Mini Scraper",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 52,
+                name: "Plastic Buckets 20 Ltrs. Virgin Plastic",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 53,
+                name: "Plastic Buckets 16 Ltrs. Virgin Plastic",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 54,
+                name: "Plastic Buckets 10 Ltrs. Recycle Plastic",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 55,
+                name: "Plastic Buckets 5 Ltrs. Virgin Plastic",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 56,
+                name: "Wheel Dust Bin 120 Ltr H.D. Brand-Aristo",
+                spec: "ARISTO",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 57,
+                name: "Wheel Dust Bin 260 Ltr H.D. Brand- Aristo",
+                spec: "ARISTO",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 58,
+                name: "Plastic Big Dust Bin / Drum 100 Ltr With Flat Flap/LID",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 59,
+                name: "Pawan/Milan Dust Bin With Flap Capacity 80 Ltr",
+                spec: "Pawan/Milan",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 60,
+                name: "Pawan/Milan Dust Bin / Drum With Flap / LID Capacity 50 Ltr",
+                spec: "Pawan/Milan",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 61,
+                name: "Pawan/Milan Dust Bin With Flap Capacity 30 Ltr",
+                spec: "Pawan/Milan",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 62,
+                name: "Nakoda Brand Rectangular Dust Bin Capacity 50 Ltr.",
+                spec: "Nakoda",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 63,
+                name: "Nakoda Brand Rectangular Dust Bin Capacity- 30 Ltr.",
+                spec: "Nakoda",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 64,
+                name: "Dust Bin With Lid Brand-Milan/Pawan -10 Ltr",
+                spec: "Milan/Pawan",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 65,
+                name: "Peddale Dust Bin 10 Ltr Brand Pawan/Milan",
+                spec: "Pawan/Milan",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 66,
+                name: "SS Swing Bin 10 X 24",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 67,
+                name: "Peddle Dust Bin 10 Ltr Brand Pawan/Milan",
+                spec: "Pawan/Milan",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 68,
+                name: "Mug Plastic",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 69,
+                name: "Dust Pan With Brush",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 70,
+                name: "Dust Pan Regular",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 71,
+                name: "Dust Pan Plastic",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 72,
+                name: "Carpet Brush Prince Hard / soft",
+                spec: "PRINCE",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 73,
+                name: "Cob Web Brush",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 74,
+                name: "Hand Gloves (Green/Blue/Orange)",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 75,
+                name: "Hand Gloves Cotton",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 76,
+                name: "Pink Sani Cube",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 77,
+                name: "Sainted Cubes",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 78,
+                name: "Odonil Room Freshner 50gm",
+                spec: "Dabur",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 79,
+                name: "Room Freshner Bottle 217ml",
+                spec: "Godrej",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 80,
+                name: "Room Freshener Ambi Pur 275Grm",
+                spec: "Godrej",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 81,
+                name: "Naphthalin Ball White",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 82,
+                name: "Shoe Polish Brush.",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 83,
+                name: "Shoe Polish Brown & Black 15gm",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 84,
+                name: "Spray Bottle 750 MI",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 85,
+                name: "Spray Bottle 2 Ltrs Capacity",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 86,
+                name: "Spray Gun",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 87,
+                name: "Glass Wiper Small Window Squeeze Plastic",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 88,
+                name: "S-SQUEGEE, 35 cm, SH35H",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 89,
+                name: "Soap 75gm",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 90,
+                name: "Dry Mop Compleate Set Blue",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 91,
+                name: "Dry Mop Frame 24\"",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 92,
+                name: "Dry Mop Frame 24\" /2Ft",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 93,
+                name: "Plastic Floor Wiper 12\"",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 94,
+                name: "Plastic Wiper 18\"",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 95,
+                name: "Floor Wiper Plastic 16\" Without Handle",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 96,
+                name: "Floor Wiper Plastic 21\" Without Handle",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 97,
+                name: "Floor Squeeze/ Floor Wiper Set 24\"",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 98,
+                name: "Floor Squeeze Wiper (Only Head)",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 99,
+                name: "Double Rubber Wiper 55cm W/O Handle",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 100,
+                name: "Floor Wiper without Stick",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 101,
+                name: "Floor Wiper Full Set",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 102,
+                name: "Floor Squeeze/ Floor Wiper Set Plastic 18\"",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 103,
+                name: "Telescopic Rods 6 Meter",
+                spec: "Roots",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 104,
+                name: "Telescopic Rods Local",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 105,
+                name: "Multi Purpose Brush",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 106,
+                name: "Window Washer 35 Cm",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 107,
+                name: "Window Washer Spare",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 108,
+                name: "Floor Scrapper M.S. With Handel",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 109,
+                name: "Dust Pan With Clip & Broom",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 110,
+                name: "Basket Caddy",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 111,
+                name: "Caution Board- Wet Floor",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 112,
+                name: "Caution Board- Cleaning In Progress",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 113,
+                name: "Office Area Cady Gray",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 114,
+                name: "Telescopic Rods Local",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 115,
+                name: "Telescopic Rods Local",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 116,
+                name: "Joint For Telescopic Poles",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 117,
+                name: "Cone For Telescopic Poles",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 118,
+                name: "Toilet Brush with Container",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 119,
+                name: "Hocky Brush / Round Toilet Brush",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 120,
+                name: "Corner Brush",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 121,
+                name: "Air Revialator Machine Reduce Indoor Air Polution, Deodorizing & Humidifying, Aroma Therapeutic, Safe & Simple To Use.",
+                spec: "Buzil Rossari",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 122,
+                name: "Air Room Freshner Machine Liquide- 1 Ltr",
+                spec: "Buzil Rossari",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 123,
+                name: "Hang Up 70 Cm, Tool Holder",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 124,
+                name: "Water Wand Standard 55 Cm",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 125,
+                name: "105Cm Replacement Rubber",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 126,
+                name: "105Cm Replacement Rubber",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 127,
+                name: "Uni Tech 2 Sections 6,5'/3.00M",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 128,
+                name: "Unitec T-Bar 35 Cm (Green)",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 129,
+                name: "Original Washer Sleeve 35 Cm",
+                spec: "UNGER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 130,
+                name: "Lobby Dust Pan With Broom",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 131,
+                name: "20 Ltr Moping Trolly",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 132,
+                name: "Wringer Bucket Trolly (34Ltr)",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 133,
+                name: "Garbage Bag Black 19 X 21, 1 Pkt=25 Pc",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 134,
+                name: "Garbage Bag Big 30 X 50 Back 1 Pkt= 10 Pc Virgine Bag",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 135,
+                name: "Garbage Bag Big 29 X 39 Green Biodegradable",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 136,
+                name: "50 Micron Biodegradable Green Garbage Bag Size: 19 X 21",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 137,
+                name: "50 Micron Biodegradable Green Garbage Bag Size: 30 X 50",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 138,
+                name: "Garbage Bag Bio Green print 40X50 51 Micron",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 139,
+                name: "Garbage Bag Bio Green print 25X30 51Micron",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 140,
+                name: "Garbage Bag Bio Green print 30X50 51 Micron",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 141,
+                name: "Oxo Bio Degradable Bags 19\"21\" (1 Pkt=30 Pcs)",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 142,
+                name: "Oxo Bio Degradable Bags 30\"50\" ( (1 Pkt=10 Pcs)",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 143,
+                name: "Hard Broom Jumbo Big",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 144,
+                name: "Soft Broom",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 145,
+                name: "Colour Phenyle Ozone 1 Ltr",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 146,
+                name: "Green Phenyle - Concentrated 1 Ltr",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 147,
+                name: "Green Phenyl - Concentrated 5 Ltrs Pack",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 148,
+                name: "Hand Wash 5 Ltr With Msds Certificate",
+                spec: "ORIGAMI",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 149,
+                name: "Hand Wash 5 Ltr",
+                spec: "PUDUMJEE",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 150,
+                name: "Hand Wash Liquid Fem 1 Ltr Pink",
+                spec: "FEM",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 151,
+                name: "Dettol Handwash 900 Ml Original Bottle",
+                spec: "RECKITT BENCKISER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 152,
+                name: "Dettol Handwash 5 Ltrs Can",
+                spec: "RECKITT BENCKISER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 153,
+                name: "R1 Taski (Batharoom Cleaner) 5 Ltr Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 154,
+                name: "Neronex Tc Mild (Nerokem Batharoom Cleaner) 5 Ltr Can",
+                spec: "NEROKEM",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 155,
+                name: "R2 Taski (Hard Surface Cleaner) 5 Ltr Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 156,
+                name: "Insteen Nfc Nerokem Hard Surface Cleaner/ Floor Cleaner 5 Ltr Can",
+                spec: "NEROKEM",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 157,
+                name: "Pot/Dish Wash-Nerofoam Multi (All Purpose Cleaner) 5 Ltr Can",
+                spec: "NEROKEM",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 158,
+                name: "Room Freshner Citrus/Lemon Nerokem",
+                spec: "NEROKEM",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 159,
+                name: "R4 Furniture Polish Taski 5 Ltr Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 160,
+                name: "R5 Room Freshner Taski 5 Ltr Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 161,
+                name: "Room Freshner Schevaran 5 Ltr Can",
+                spec: "SCHEERAN",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 162,
+                name: "R6 Taski (Toilet Cleaner) 5 Ltr Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 163,
+                name: "R3 Glass Cleaner Taski 5 Ltr Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 164,
+                name: "Glass Cleaner Nerokem With Msds Certificate",
+                spec: "NEROKEM",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 165,
+                name: "SUMA INOX D 7.1-5 Ltrs Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 166,
+                name: "Suma Drain - 5 Ltrs Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 167,
+                name: "Colin Glass Cleaner/ All Purpose Taski 500 MI",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 168,
+                name: "Colin Glass And Surface Cleaner 500 MI",
+                spec: "RECKITT BENCKISER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 169,
+                name: "R6 Taski (Toilet Cleaner - 500 MI Bottle)",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 170,
+                name: "Taski R7 Floor Cleaner Concentrate 5 Ltrs Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 171,
+                name: "Taski R9 Bathroom Cleaner Concentrate 5 Ltrs Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 172,
+                name: "Taski Spiral F11Y Concentrated Floor Cleaner 5 Ltrs Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 173,
+                name: "Taski Spiral Hd Floor Cleaner/Degreaser 5 Ltrs Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 174,
+                name: "Taski Tr 101 Carpet & Upholstery Cleaner 5 Ltrs Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 175,
+                name: "Taski Tr 103 Carpet Detergent 5 Ltrs Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 176,
+                name: "Taski Emeral Plus 200 Ml Bottle",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 177,
+                name: "Taski TERRANOVA 5 Ltr Can",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 178,
+                name: "TASKI NOBILE PLUS - 1 Kgs Pack",
+                spec: "DIVERSEY",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 179,
+                name: "Toilet Cleaner 500 MI Bottle",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 180,
+                name: "VIM LIQUID DISH WASH - 5 Ltrs Pack",
+                spec: "HINDUSTAN UNILEVER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 181,
+                name: "Prill Dish Wash 425ml",
+                spec: "HENKEL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 182,
+                name: "Wonder Fresh Dish Wash 500 ml",
+                spec: "LOCAL",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 183,
+                name: "Nbc- Nerokem Toilet Cleaner 500 MI",
+                spec: "NEROKEM",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 184,
+                name: "Nbc- Nerokem Toilet Cleaner",
+                spec: "NEROKEM",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 185,
+                name: "Lizol Disinfectant Surface Cleaner 500MI Bottle",
+                spec: "RECKITT BENCKISER",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 186,
+                name: "Single Disk Machine",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 187,
+                name: "Vacuum Machine (30 Ltr Capacity)",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 188,
+                name: "HARD BRUSH 12\" With Mild Steel Handle (Red Green / Yellow / Blue)",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 189,
+                name: "SWEEPER BRUSH 18\" BLACK WITH BLACK MS STICK",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 190,
+                name: "Carpet Brush / Hand Brush (Red/Green/Yellow/Blue/Dark Grey)",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 191,
+                name: "Hard Bristal Brush 18\" White With Blue Brister And Alluminium Stick (WHITE/BLUE)",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
+            },
+            {
+                id: 192,
+                name: "Carpet Brush",
+                spec: "Local",
+                imageUrl: "https://via.placeholder.com/150"
             }
+        ];
 
-            productsToRender.forEach(item => {
-                const sanitizedSpec = item.spec.replace(/'/g, "\\'");
-                const selectedItem = selectedItems.find(selected => selected.id === item.id);
-                const isSelected = !!selectedItem;
-                const buttonText = isSelected ? 'Remove from Inquire' : 'Add to Inquire';
-                const buttonClasses = isSelected ? 'bg-red-500 hover:bg-red-600' : 'bg-gold hover:bg-opacity-90';
-                const quantity = selectedItem ? selectedItem.quantity : 1;
+let cart = []; // Array to store selected items
 
-                const itemCard = `
-                    <div class="item-card bg-white rounded-xl overflow-hidden shadow-lg p-4 flex flex-col items-center text-center ">
-                        <img src="${item.imageUrl}" alt="${item.name}" class="item-image-placeholder rounded-lg mb-4">
-                        <h3 class="text-base font-semibold mb-2 text-black">${item.name}</h3>
-                        <p class="text-gray-700 text-xs mb-4 flex-grow">${item.spec}</p>
-                        ${isSelected ? `
-                            <div class="flex items-center justify-center mb-2">
-                                <label for="quantity-${item.id}" class="mr-2 text-sm">Qty:</label>
-                                <input type="number" id="quantity-${item.id}" value="${quantity}" min="1" 
-                                       onchange="updateItemQuantity(${item.id}, this.value)"
-                                       class="w-16 p-1 border border-gray-300 rounded text-center text-sm">
-                            </div>
-                        ` : ''}
-                        <button onclick="toggleInquiry(${item.id}, '${item.name}', '${sanitizedSpec}', this)"
-                                class="whatsapp-button ${buttonClasses} bg-green-600 text-white font-bold py-2 px-6 rounded-full shadow-md transform hover:scale-105 transition-all duration-300 ease-in-out text-sm">
-                            ${buttonText}
-                        </button>
-                    </div>
-                `;
-                productsContainer.innerHTML += itemCard;
-            });
-            updateInquiryButtons(); // Update buttons after rendering
+function renderProducts(productsToRender) {
+    const productsContainer = document.getElementById('products-container');
+    productsContainer.innerHTML = ''; // Clear existing products
+
+    if (productsToRender.length === 0) {
+        productsContainer.innerHTML = '<p class="text-gray-600 text-lg col-span-full">No products found matching your search.</p>';
+        return;
+    }
+
+    productsToRender.forEach(item => {
+        const productCard = document.createElement('div');
+        productCard.className = 'bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col justify-between';
+        productCard.innerHTML = `
+            <img src="${item.imageUrl}" alt="${item.name}" class="w-full h-48 object-cover">
+            <div class="p-6 flex-grow">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">${item.name}</h3>
+                <p class="text-gray-600 text-sm">${item.spec}</p>
+            </div>
+            <div class="p-6 bg-gray-50 border-t border-gray-100 flex justify-center">
+                <button onclick="toggleCart(${item.id})" id="add-to-cart-${item.id}"
+                        class="bg-teal-600 text-white font-bold py-2 px-4 rounded-full hover:bg-teal-700 transition duration-300 text-sm">
+                    Add to Cart
+                </button>
+            </div>
+        `;
+        productsContainer.appendChild(productCard);
+
+        // Update button text if item is already in cart
+        updateCartButton(item.id);
+    });
+}
+
+function updateCartButton(itemId) {
+    const button = document.getElementById(`add-to-cart-${itemId}`);
+    if (button) {
+        if (cart.includes(itemId)) {
+            button.textContent = 'Remove from Cart';
+            button.classList.remove('bg-teal-600');
+            button.classList.add('bg-red-500');
+            button.classList.remove('hover:bg-teal-700');
+            button.classList.add('hover:bg-red-600');
+        } else {
+            button.textContent = 'Add to Cart';
+            button.classList.remove('bg-red-500');
+            button.classList.add('bg-teal-600');
+            button.classList.remove('hover:bg-red-600');
+            button.classList.add('hover:bg-teal-700');
         }
+    }
+    updateInquiryButtonsVisibility();
+}
 
-        // Filter products based on search input
-        function filterResults() {
-            const query = searchInput.value.toLowerCase();
-            const filtered = items.filter(item =>
-                item.name.toLowerCase().includes(query) || item.spec.toLowerCase().includes(query)
-            );
-            renderProducts(filtered);
+function toggleCart(itemId) {
+    const index = cart.indexOf(itemId);
+    if (index > -1) {
+        // Item is in cart, remove it
+        cart.splice(index, 1);
+    } else {
+        // Item is not in cart, add it
+        cart.push(itemId);
+    }
+    updateCartButton(itemId); // Update the specific button
+    updateInquiryButtonCounts(); // Update counts
+}
+
+function updateInquiryButtonCounts() {
+    const whatsappButton = document.getElementById('main-whatsapp-inquire-button');
+    const emailButton = document.getElementById('main-email-inquire-button');
+    whatsappButton.textContent = `Inquire on WhatsApp (${cart.length} items)`;
+    emailButton.textContent = `Inquire on Email (${cart.length} items)`;
+}
+
+function updateInquiryButtonsVisibility() {
+    const whatsappButton = document.getElementById('main-whatsapp-inquire-button');
+    const emailButton = document.getElementById('main-email-inquire-button');
+    if (cart.length > 0) {
+        whatsappButton.classList.remove('hidden');
+        emailButton.classList.remove('hidden');
+    } else {
+        whatsappButton.classList.add('hidden');
+        emailButton.classList.add('hidden');
+    }
+}
+
+
+function filterResults() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const filteredItems = items.filter(item =>
+        item.name.toLowerCase().includes(searchInput) ||
+        item.spec.toLowerCase().includes(searchInput)
+    );
+    renderProducts(filteredItems);
+}
+
+function inquireAllOnWhatsApp() {
+    if (cart.length === 0) {
+        alert("Your cart is empty. Please add items to inquire.");
+        return;
+    }
+
+    const selectedItems = cart.map(id => items.find(item => item.id === id));
+    let message = "Hello, I would like to inquire about the following products:\n\n";
+    selectedItems.forEach((item, index) => {
+        message += `${index + 1}. ${item.name} - ${item.spec}\n`;
+    });
+    message += "\nThank you!";
+
+    const whatsappUrl = `https://wa.me/919867531298?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+function inquireAllOnEmail() {
+    if (cart.length === 0) {
+        alert("Your cart is empty. Please add items to inquire.");
+        return;
+    }
+
+    const selectedItems = cart.map(id => items.find(item => item.id === id));
+    let body = "Hello,\n\nI would like to inquire about the following products:\n\n";
+    selectedItems.forEach((item, index) => {
+        body += `${index + 1}. ${item.name} - ${item.spec}\n`;
+    });
+    body += "\nCould you please provide more details or a quote for these items?\n\nThank you!";
+
+    const subject = "Inquiry about Products from Aone Hospitality Services";
+    const emailUrl = `mailto:aonehospitalitys@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(emailUrl, '_blank');
+}
+
+// Modal functions
+const enquireModal = document.getElementById('enquireModal');
+const enquireNowButton = document.getElementById('enquireNowButton');
+
+function openModal() {
+    enquireModal.style.display = 'flex';
+}
+
+function closeModal() {
+    enquireModal.style.display = 'none';
+}
+
+// Event listener to close modal when clicking outside
+window.addEventListener('click', function(event) {
+    if (event.target === enquireModal) {
+        closeModal();
+    }
+});
+
+// Initial render of products when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts(items);
+    updateInquiryButtonCounts(); // Initialize counts
+    updateInquiryButtonsVisibility(); // Set initial visibility
+
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Back-to-top button functionality
+    const backToTopButton = document.getElementById('back-to-top');
+
+    window.onscroll = function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
         }
+    };
 
-        // Initial render of all products on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProducts(items);
-
-            // Add the main "Inquire on WhatsApp" and "Inquire on Email" buttons if they don't exist
-            const fixedButtonsContainer = document.querySelector('.fixed.bottom-6.right-6');
-            if (fixedButtonsContainer && !document.getElementById('main-whatsapp-inquire-button')) {
-                const mainInquiryButtonsHtml = `
-                    <button id="main-whatsapp-inquire-button" onclick="inquireAllOnWhatsApp()"
-                            class="hidden inline-flex items-center justify-center bg-teal-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-teal-700 hover:scale-105 transition duration-300 transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.6-3.822-1.6-5.877C.145 5.23 5.228.145 11.485.145c3.141 0 6.133 1.22 8.381 3.469 2.249 2.248 3.468 5.239 3.468 8.381 0 6.257-5.082 11.34-11.34 11.34-1.954 0-3.899-.488-5.637-1.488l-6.276 1.654zm6.598-5.592l-.547-.323c-.335-.197-.75-.306-1.18-.306h-.002c-.991 0-1.675 1.077-1.675 2.278 0 1.201.7 2.278 1.674 2.278h.001c.429 0 .843-.109 1.178-.306l.547-.323 5.419-2.029c1.07-1.07 1.657-2.493 1.657-3.992 0-3.141-2.55-5.692-5.692-5.692-3.142 0-5.692 2.551-5.692 5.692 0 .999.284 1.944.825 2.768zM17.585 12.01c0-3.08-2.502-5.582-5.583-5.582-3.081 0-5.583 2.502-5.583 5.582 0 3.08 2.502 5.582 5.583 5.582 3.081 0 5.583-2.502 5.583-5.582z"/>
-                        </svg>
-                        Inquire on WhatsApp (0 items)
-                    </button>
-                    <button id="main-email-inquire-button" onclick="inquireAllOnEmail()"
-                            class="hidden inline-flex items-center justify-center bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300 transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                        Inquire on Email (0 items)
-                    </button>
-                `;
-                fixedButtonsContainer.innerHTML = mainInquiryButtonsHtml;
-            }
-            updateInquiryButtons();
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
+    });
 
-        // Function to add/remove item from inquiry list and handle quantity
-        function toggleInquiry(itemId, itemName, itemSpec, buttonElement) {
-            const existingItemIndex = selectedItems.findIndex(item => item.id === itemId);
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
 
-            if (existingItemIndex > -1) {
-                // Remove item if already selected
-                selectedItems.splice(existingItemIndex, 1);
-            } else {
-                // Add item with default quantity 1
-                selectedItems.push({ id: itemId, name: itemName, spec: itemSpec, quantity: 1 });
-            }
-            // Re-render products to update button states and show/hide quantity input
-            renderProducts(items.filter(item => 
-                item.name.toLowerCase().includes(searchInput.value.toLowerCase()) || 
-                item.spec.toLowerCase().includes(searchInput.value.toLowerCase())
-            ));
-            updateInquiryButtons();
-        }
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
 
-        // Function to update quantity of an item
-        function updateItemQuantity(itemId, quantity) {
-            const itemToUpdate = selectedItems.find(item => item.id === itemId);
-            if (itemToUpdate) {
-                itemToUpdate.quantity = parseInt(quantity, 10);
-                if (itemToUpdate.quantity < 1) {
-                    itemToUpdate.quantity = 1; // Ensure quantity is at least 1
-                    document.getElementById(`quantity-${itemId}`).value = 1;
-                }
-            }
-            updateInquiryButtons(); // Update button text if needed
-        }
-
-        // Function to open WhatsApp chat with all selected items
-        function inquireAllOnWhatsApp() {
-            if (selectedItems.length === 0) {
-                alert("Please add items to your inquiry list first.");
-                return;
+            // Close mobile menu if open
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
             }
 
-            const phoneNumber = '919867531298';
-            let message = "Hello Aone Hospitality Services, I am interested in the following items:\n\n";
+            if (targetElement) {
+                // Adjust scroll position to account for fixed header
+                const headerOffset = 64; // Approximate height of the header
+                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - headerOffset;
 
-            selectedItems.forEach((item, index) => {
-                message += `${index + 1}. ${item.name} - ${item.spec} (Quantity: ${item.quantity || 1})\n`;
-            });
-
-            message += "\nPlease provide more details and pricing.";
-            
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-            
-            // Optionally clear the selection after sending
-            selectedItems = [];
-            // Re-render all products to update button states
-            renderProducts(items);
-            updateInquiryButtons();
-        }
-
-        // Function to open email client with all selected items
-        function inquireAllOnEmail() {
-            if (selectedItems.length === 0) {
-                alert("Please add items to your inquiry list first.");
-                return;
-            }
-
-            const recipientEmail = 'aonehospitalitys@gmail.com';
-            const subject = encodeURIComponent('Product Inquiry from Website');
-            let body = "Dear Aone Hospitality Services,\n\nI am interested in the following products:\n\n";
-
-            selectedItems.forEach((item, index) => {
-                body += `${index + 1}. ${item.name} - ${item.spec} (Quantity: ${item.quantity || 1})\n`;
-            });
-
-            body += "\nCould you please provide more information, availability, and pricing for these items?\n\nThank you.";
-            
-            const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailtoUrl;
-
-            // Optionally clear the selection after sending
-            selectedItems = [];
-            // Re-render all products to update button states
-            renderProducts(items);
-            updateInquiryButtons();
-        }
-
-        // Function to update the visibility and text of the main WhatsApp and Email inquiry buttons
-        function updateInquiryButtons() {
-            const mainWhatsAppButton = document.getElementById('main-whatsapp-inquire-button');
-            const mainEmailButton = document.getElementById('main-email-inquire-button');
-
-            if (selectedItems.length > 0) {
-                if (mainWhatsAppButton) {
-                    mainWhatsAppButton.style.display = 'inline-flex';
-                    mainWhatsAppButton.textContent = `Inquire on WhatsApp (${selectedItems.length} items)`;
-                }
-                if (mainEmailButton) {
-                    mainEmailButton.style.display = 'inline-flex';
-                    mainEmailButton.textContent = `Inquire on Email (${selectedItems.length} items)`;
-                }
-            } else {
-                if (mainWhatsAppButton) {
-                    mainWhatsAppButton.style.display = 'none';
-                }
-                if (mainEmailButton) {
-                    mainEmailButton.style.display = 'none';
-                }
-            }
-        }
-
-
-        // Modal functionality
-        const enquireModal = document.getElementById('enquireModal');
-        const enquireNowButton = document.getElementById('enquireNowButton');
-
-        if (enquireNowButton) {
-            enquireNowButton.addEventListener('click', () => {
-                enquireModal.style.display = 'flex'; // Use flex to center
-            });
-        }
-
-        function closeModal() {
-            enquireModal.style.display = 'none';
-        }
-
-        // Close the modal if clicked outside of the modal-content
-        window.addEventListener('click', (event) => {
-            if (event.target == enquireModal) {
-                closeModal();
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
             }
         });
+    });
 
-
-        // Toggle mobile menu visibility
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-
-        // Back to top button functionality
-        const backToTopButton = document.getElementById('back-to-top');
-
-        window.onscroll = function() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                backToTopButton.style.display = "block";
-            } else {
-                backToTopButton.style.display = "none";
-            }
-        };
-
-        // Smooth scroll for back to top button
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                // Close mobile menu if open
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-
-                if (targetElement) {
-                    // Adjust scroll position to account for fixed header
-                    const headerOffset = 64; // Approximate height of the header
-                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
-            });
-        });
+    // Event listener for "Enquire Now" button
+    enquireNowButton.addEventListener('click', openModal);
+});
     </script>
     
 </body>
