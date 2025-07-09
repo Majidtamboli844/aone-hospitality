@@ -4,27 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aone Hospitality Services</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-     <style>
-   .whatsapp_float{
-            position:fixed;
-            bottom:40px;
-            right:20px;
+    <style>
+        .whatsapp_float {
+            position: fixed;
+            bottom: 40px;
+            right: 20px;
+            z-index: 100; /* Ensure it's above other elements */
         }
-        .call_float{
-            position:fixed;
-            bottom:40px;          
-            left:20px;
-        </style>
-    <div class="whatsapp_float">
-        <a href="https://wa.me/919867531298" target="_blank"><img src='wp.png' width="60px"
-                                                                 class="whatsapp_float_btn"/></a>
-    </div>
-     <div class="call_float">
-        <a href="tel:+917387869062" target="_blank"><img src='call.png' width="60px"
-                                                                 class="call_float_btn"/></a>
-    </div>   
+        .call_float {
+            position: fixed;
+            bottom: 40px;
+            left: 20px;
+            z-index: 100; /* Ensure it's above other elements */
+        }
+        /* Styles for the modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
     <style>
         /* Custom font import for Inter */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -60,14 +94,18 @@
             transform: translateY(-2px);
         }
     </style>
+    <link rel="stylesheet" href="styles/slider.css">
+    <style>
+        /* Optional: Add some space between sliders for better visual separation */
+        .slider-wrapper {
+            margin-bottom: 50px; /* Space between each slider */
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Header Section -->
-    <!-- Header Section -->
     <header class="bg-white shadow-sm py-4 fixed top-0 w-full z-50">
         <nav class="container mx-auto px-4 flex justify-between items-center">
-            <!-- Logo -->
             <a href="#hero" class="text-2xl font-bold text-teal-600 flex items-center rounded-md p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
@@ -76,7 +114,6 @@
                 </svg>
                 Aone Hospitality Services
             </a>
-            <!-- Navigation Links -->
             <div class="hidden md:flex space-x-8">
                 <a href="index.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Home</a>
                 <a href="product.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Products</a>
@@ -85,14 +122,12 @@
                 <a href="contact.html" class="px-5 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition duration-300 shadow-md">Contact Us</a>
                 <a href="login.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Admin Login</a>
             </div>
-            <!-- Mobile Menu Button (Hamburger) -->
             <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-teal-600 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </nav>
-        <!-- Mobile Menu (initially hidden) -->
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 border-t border-gray-200">
             <a href="index.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Home</a>
             <a href="product.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition duration-300">Products</a>
@@ -103,10 +138,8 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="hero" class="relative bg-gradient-to-r from-blue-600 to-teal-600 text-white py-24 md:py-36 mt-16 overflow-hidden">
-        <div class="absolute inset-0 bg-pattern opacity-10"></div> <!-- Background pattern overlay -->
-        <div class="container mx-auto px-4 text-center relative z-10">
+        <div class="absolute inset-0 bg-pattern opacity-10"></div> <div class="container mx-auto px-4 text-center relative z-10">
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-up">
                 Experience Unmatched Cleanliness with <span class="text-yellow-300">Aone Hospitality Services</span>
             </h1>
@@ -116,56 +149,49 @@
             <a href="product.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
                 Explore Our Products
             </a>
+            <a href="about.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
+                About
+            </a>
+             <a href="contact.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
+                Contact
+            </a>
         </div>
     </section>
-      <section>
-          <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/slider.css">
-    <style>
-        /* Optional: Add some space between sliders for better visual separation */
-        .slider-wrapper {
-            margin-bottom: 50px; /* Space between each slider */
-        }
-    </style>
-</head>
-<body>
+    <section>
+        <header class="page-header">
 
-    <header class="page-header">
-        
-    </header>
+        </header>
 
-    <main class="main-content">
+        <main class="main-content">
 
-        <section class="slider-section">
-            <div id="natureSlider" class="slider-wrapper" aria-roledescription="carousel" aria-label="Nature Image Gallery">
-                <div class="slider-track">
-                    <img src="go3.jpeg" alt="A breathtaking mountain landscape." class="slider-image">
-                    <img src="go4.jpeg" alt="A calm forest lake reflecting trees." class="slider-image">
-                    <img src="go1.jpg" alt="Golden sunset over a field of flowers." class="slider-image">
-                    <img src="go2.jpg" alt="A majestic waterfall cascading down rocks." class="slider-image">
-                </div>
-
-                <div class="slider-controls">
-                    <button class="slider-btn prev-btn" aria-label="Previous image">&lt;</button>
-                    <button class="slider-btn next-btn" aria-label="Next image">&gt;</button>
-                </div>
-
-                <div class="slider-pagination">
+            <section class="slider-section">
+                <div id="natureSlider" class="slider-wrapper" aria-roledescription="carousel" aria-label="Nature Image Gallery">
+                    <div class="slider-track">
+                        <img src="go3.jpeg" alt="A breathtaking mountain landscape." class="slider-image">
+                        <img src="go4.jpeg" alt="A calm forest lake reflecting trees." class="slider-image">
+                        <img src="go1.jpg" alt="Golden sunset over a field of flowers." class="slider-image">
+                        <img src="go2.jpg" alt="A majestic waterfall cascading down rocks." class="slider-image">
                     </div>
 
-                <div class="slider-timer">
-                    <div class="slider-progress-bar"></div>
-                </div>
-            </div>
-        </section>
+                    <div class="slider-controls">
+                        <button class="slider-btn prev-btn" aria-label="Previous image">&lt;</button>
+                        <button class="slider-btn next-btn" aria-label="Next image">&gt;</button>
+                    </div>
 
-        
-    </main>
-</body>
-        </section>
-  <!-- Products Section -->
+                    <div class="slider-pagination">
+                    </div>
+
+                    <div class="slider-timer">
+                        <div class="slider-progress-bar"></div>
+                    </div>
+                </div>
+            </section>
+
+
+        </main>
+
+        <script src="scripts/slider.js"></script>
+    </section>
   <section id="products" class="py-16 bg-gray-50 px-6">
     <h3 class="text-3xl font-semibold text-center mb-12">Our Product Categories</h3>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -184,13 +210,10 @@
     </div>
   </section>
 
-
-    <!-- Why Choose Us Section -->
-    <section id="why-choose-us" class="py-16 md:py-24 bg-blue-600 text-white">
+   <section id="why-choose-us" class="py-16 md:py-24 bg-blue-600 text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-12">Why Choose <span class="text-yellow-300">Aone Hospitality Services</span>?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
                 <div class="flex flex-col items-center p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
                     <div class="text-yellow-300 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -201,7 +224,6 @@
                     <h3 class="text-xl font-semibold mb-3">Superior Quality</h3>
                     <p class="text-gray-200">Our products are rigorously tested to ensure the highest standards of cleaning efficacy and safety.</p>
                 </div>
-                <!-- Feature 2 -->
                 <div class="flex flex-col items-center p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
                     <div class="text-yellow-300 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -213,7 +235,6 @@
                     <h3 class="text-xl font-semibold mb-3">Comprehensive Product Range: </h3>
                     <p class="text-gray-200">We are your single source for all critical needs. From luxurious hospitality essentials that pamper your guests, to advanced cleanliness products that ensure impeccable hygiene, and reliable stationery supplies that keep your operations seamless – we've got you covered. This saves you time and simplifies procurement.</p>
                 </div>
-                <!-- Feature 3 -->
                 <div class="flex flex-col items-center p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
                     <div class="text-yellow-300 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -230,10 +251,7 @@
             </div>
         </div>
     </section>
-
- 
-   <!-- Call to Action / Contact Section -->
-    <section id="contact" class="bg-gradient-to-r from-teal-600 to-blue-600 text-white py-16 md:py-24 text-center">
+     <section id="contact" class="bg-gradient-to-r from-teal-600 to-blue-600 text-white py-16 md:py-24 text-center">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Experience the <span class="text-yellow-300">Aone Hospitality Services</span> Difference?</h2>
             <p class="text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-90">
@@ -263,11 +281,9 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
     <footer class="bg-gray-800 text-gray-300 py-10">
         <div class="container mx-auto px-4 text-center">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-                <!-- Logo -->
                 <a href="#hero" class="text-xl font-bold text-teal-400 flex items-center mb-4 md:mb-0">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
@@ -276,17 +292,15 @@
                     </svg>
                    Aone Hospitality Services
                 </a>
-                <!-- Footer Navigation -->
                 <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-4 md:mb-0">
                     <a href="about.html" class="hover:text-white transition duration-300">About</a>
                     <a href="product.html" class="hover:text-white transition duration-300">Products</a>
                     <a href="#contact" class="hover:text-white transition duration-300">Contact</a>
                 </div>
-                <!-- Social Media Icons (placeholders) -->
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-400 hover:text-white transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            <path d="M18 2h-3a5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                         </svg>
                     </a>
                     <a href="#" class="text-gray-400 hover:text-white transition duration-300">
@@ -297,7 +311,7 @@
                     <a href="#" class="text-gray-400 hover:text-white transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
                             <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 0 0 1 16 11.37z"></path>
                             <line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line>
                         </svg>
                     </a>
@@ -307,14 +321,37 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
     <button id="back-to-top" title="Go to top">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
     </button>
 
-    <script>
+    <div id="enquireModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 class="text-2xl font-bold mb-6 text-gray-900">How would you like to inquire?</h3>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://wa.me/919867531298" target="_blank" onclick="closeModal()"
+                   class="inline-flex items-center justify-center bg-green-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transition duration-300 transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.6-3.822-1.6-5.877C.145 5.23 5.228.145 11.485.145c3.141 0 6.133 1.22 8.381 3.469 2.249 2.248 3.468 5.239 3.468 8.381 0 6.257-5.082 11.34-11.34 11.34-1.954 0-3.899-.488-5.637-1.488l-6.276 1.654zm6.598-5.592l-.547-.323c-.335-.197-.75-.306-1.18-.306h-.002c-.991 0-1.675 1.077-1.675 2.278 0 1.201.7 2.278 1.674 2.278h.001c.429 0 .843-.109 1.178-.306l.547-.323 5.419-2.029c1.07-1.07 1.657-2.493 1.657-3.992 0-3.141-2.55-5.692-5.692-5.692-3.142 0-5.692 2.551-5.692 5.692 0 .999.284 1.944.825 2.768zM17.585 12.01c0-3.08-2.502-5.582-5.583-5.582-3.081 0-5.583 2.502-5.583 5.582 0 3.08 2.502 5.582 5.583 5.582 3.081 0 5.583-2.502 5.583-5.582z"/>
+                    </svg>
+                    WhatsApp
+                </a>
+                <a href="mailto:aonehospitalitys@gmail.com" onclick="closeModal()"
+                   class="inline-flex items-center justify-center bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300 transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Email
+                </a>
+            </div>
+        </div>
+    </div>
+
+ <script>
         // JavaScript for Mobile Menu Toggle
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
@@ -368,6 +405,6 @@
             });
         });
     </script>
-     <script src="scripts/slider.js"></script>
+
 </body>
 </html>
