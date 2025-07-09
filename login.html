@@ -3,793 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aone Hospitality Services</title>
+    <title>Login - Aone Hospitality</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-     <style>
-   .whatsapp_float{
-            position:fixed;
-            bottom:40px;
-            right:20px;
-            z-index: 100; /* Ensure it's above other elements */
-        }
-        .call_float{
-            position:fixed;
-            bottom:40px;          
-            left:20px;
-            z-index: 100; /* Ensure it's above other elements */
-        }
-        /* Styles for the modal */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            position: relative;
-        }
-        .close-button {
-            color: #aaa;
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom font import for Inter */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        /* Custom scroll-behavior for smooth scrolling on internal links */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Style for the back-to-top button - initially hidden */
-        #back-to-top {
-            display: none;
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: #0d9488; /* Teal-600 */
-            color: white;
-            cursor: pointer;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem; /* Rounded corners */
-            font-size: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-        }
-        #back-to-top:hover {
-            background-color: #0f766e; /* Darker Teal */
-            transform: translateY(-2px);
-        }
-        /* Styles for the slider.css content */
-        .slider-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 900px; /* Adjust as needed */
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 50px; /* Space between each slider */
-        }
-
-        .slider-track {
-            display: flex;
-            transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smooth transition */
-        }
-
-        .slider-image {
-            width: 100%;
-            flex-shrink: 0;
-            display: block;
-            height: 450px; /* Fixed height for images */
-            object-fit: cover; /* Cover the area, crop if necessary */
-        }
-
-        .slider-controls {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
-
-        .slider-btn {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            z-index: 10;
-            transition: background-color 0.3s ease;
-        }
-
-        .slider-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .slider-pagination {
-            position: absolute;
-            bottom: 15px;
-            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             justify-content: center;
-            gap: 8px;
-            z-index: 10;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
-
-        .pagination-dot {
-            background-color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            padding: 0; /* Remove default button padding */
-            font-size: 0; /* Hide text if any */
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .pagination-dot.active {
-            background-color: #4CAF50; /* Highlight active dot */
-            transform: scale(1.2);
-            border-color: #4CAF50;
-        }
-
-        .slider-timer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 40px;
             width: 100%;
-            height: 5px;
-            background-color: rgba(0, 0, 0, 0.2);
-            z-index: 9;
+            max-width: 450px;
+            text-align: center;
         }
-
-        .slider-progress-bar {
-            height: 100%;
-            width: 0%;
-            background-color: #4CAF50; /* Green progress bar */
-            transition: width linear; /* Smooth transition for progress */
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .error-message {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: none; /* Hidden by default */
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
+    <div class="login-container">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Welcome Back!</h2>
+        <p class="text-gray-600 mb-8">Please log in to your account.</p>
 
-    <header class="bg-white shadow-sm py-4 fixed top-0 w-full z-50">
-        <nav class="container mx-auto px-4 flex justify-between items-center">
-            <a href="#hero" class="text-2xl font-bold text-teal-600 flex items-center rounded-md p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                    <path d="M2 17l10 5 10-5"></path>
-                    <path d="M2 12l10 5 10-5"></path>
-                </svg>
-                Aone Hospitality Services
-            </a>
-            <div class="hidden md:flex space-x-8">
-                <a href="index.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Home</a>
-                <a href="product.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Products</a>
-                <a href="about.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">About</a>
-                <a href="about.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Testimonials</a>
-                <a href="contact.html" class="px-5 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition duration-300 shadow-md">Contact Us</a>
-                <a href="login.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Admin Login</a>
+        <form id="loginForm">
+            <div class="mb-4 text-left">
+                <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    class="input-field"
+                    value=""
+                    required
+                >
             </div>
-            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-teal-600 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
+            <div class="mb-6 text-left">
+                <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    class="input-field"
+                    value=""
+                    required
+                >
+            </div>
+            <button type="submit" class="login-button">
+                Log In
             </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 border-t border-gray-200">
-            <a href="index.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Home</a>
-            <a href="product.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition duration-300">Products</a>
-            <a href="about.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition duration-300">About</a>
-            <a href="about.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition duration-300">Testimonials</a>
-            <a href="contact.html" class="block px-4 py-2 text-teal-600 hover:bg-teal-50 rounded-md transition duration-300 font-medium">Contact Us</a>
-            <a href="login.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Admin Login</a>
-        </div>
-    </header>
-
-    <section id="hero" class="relative bg-gradient-to-r from-blue-600 to-teal-600 text-white py-24 md:py-36 mt-16 overflow-hidden">
-        <div class="absolute inset-0 bg-pattern opacity-10"></div> <div class="container mx-auto px-4 text-center relative z-10">
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-up">
-                Experience Unmatched Cleanliness with <span class="text-yellow-300">Aone Hospitality Services</span>
-            </h1>
-            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-90 animate-fade-in-up delay-200">
-                Premium cleaning solutions for a healthier, happier home and workplace.
-            </p>
-            <a href="product.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
-                Explore Our Products
-            </a>
-            <a href="about.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
-                About
-            </a>
-             <a href="contact.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
-                Contact
-            </a>
-        </div>
-    </section>
-  <section>
-        <section class="slider-section">
-            <div id="natureSlider" class="slider-wrapper" aria-roledescription="carousel" aria-label="Nature Image Gallery">
-                <div class="slider-track">
-                    <img src="go3.jpeg" alt="A breathtaking mountain landscape." class="slider-image">
-                    <img src="go4.jpeg" alt="A calm forest lake reflecting trees." class="slider-image">
-                    <img src="go1.jpg" alt="Golden sunset over a field of flowers." class="slider-image">
-                    <img src="go2.jpg" alt="A majestic waterfall cascading down rocks." class="slider-image">
-                </div>
-
-                <div class="slider-controls">
-                    <button class="slider-btn prev-btn" aria-label="Previous image">&lt;</button>
-                    <button class="slider-btn next-btn" aria-label="Next image">&gt;</button>
-                </div>
-
-                <div class="slider-pagination">
-                    </div>
-
-                <div class="slider-timer">
-                    <div class="slider-progress-bar"></div>
-                </div>
-            </div>
-        </section>
-  </section>
-  <section id="products" class="py-16 bg-gray-50 px-6">
-    <h3 class="text-3xl font-semibold text-center mb-12">Our Product Categories</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <div class="bg-white p-6 shadow rounded text-center">
-        <div class="image"><img src='all products.jpeg'></div>
-        <h4 class="text-xl font-semibold mb-2">Hospitality Essentials</h4>
-        <p class="text-gray-600">Cleaning material solutions </p>
-          <a href="hos.html" class="text-blue-600 font-semibold hover:underline">View Products →</a>
-      </div>
-      <div class="bg-white p-6 shadow rounded text-center">
-         <div class="image"><img src='allsta.jpeg'></div>
-        <h4 class="text-xl font-semibold mb-2">Stationery Products</h4>
-        <p class="text-gray-600">Full suite of stationery for offices, schools, and creative professionals.</p>
-         <a href="sta.html" class="text-blue-600 font-semibold hover:underline">View Products →</a>
-      </div>
-    </div>
-  </section>
-
-   <section id="why-choose-us" class="py-16 md:py-24 bg-blue-600 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12">Why Choose <span class="text-yellow-300">Aone Hospitality Services</span>?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="flex flex-col items-center p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
-                    <div class="text-yellow-300 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-8.1"></path>
-                            <path d="M22 4L12 14.01l-3-3"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Superior Quality</h3>
-                    <p class="text-gray-200">Our products are rigorously tested to ensure the highest standards of cleaning efficacy and safety.</p>
-                </div>
-                <div class="flex flex-col items-center p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
-                    <div class="text-yellow-300 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M12 8l-4 4 4 4"></path>
-                            <path d="M12 16l4-4-4-4"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Comprehensive Product Range: </h3>
-                    <p class="text-gray-200">We are your single source for all critical needs. From luxurious hospitality essentials that pamper your guests, to advanced cleanliness products that ensure impeccable hygiene, and reliable stationery supplies that keep your operations seamless – we've got you covered. This saves you time and simplifies procurement.</p>
-                </div>
-                <div class="flex flex-col items-center p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
-                    <div class="text-yellow-300 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 18a2 2 0 0 0 2-2V9.5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2V16a2 2 0 0 0 2 2h1"></path>
-                            <path d="M9 18v3"></path>
-                            <path d="M15 18v3"></path>
-                            <path d="M9 13h6"></path>
-                            <path d="M12 7l1.5-4h2.5L14 7"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Customer Satisfaction</h3>
-                    <p class="text-gray-200">Your happiness is our priority. We offer exceptional support and guaranteed results.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-     <section id="contact" class="bg-gradient-to-r from-teal-600 to-blue-600 text-white py-16 md:py-24 text-center">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Experience the <span class="text-yellow-300">Aone Hospitality Services</span> Difference?</h2>
-            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-90">
-                Get in touch with us today to learn more about our products or to place an order.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="mailto:aonehospitalitys@gmail.com" class="inline-flex items-center justify-center bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    Email Us
-                </a>
-                <a href="https://wa.me/919867531298" class="inline-flex items-center justify-center border-2 border-white text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-teal-700 hover:scale-105 transition duration-300 transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    WhatsApp Us
-                </a>
-                <a href="tel:+917387869062" class="inline-flex items-center justify-center border-2 border-white text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-teal-700 hover:scale-105 transition duration-300 transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.95-3.95A19.79 19.79 0 0 1 2.05 4.18 2 2 0 0 1 4.05 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                    Call Us
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-gray-800 text-gray-300 py-10">
-        <div class="container mx-auto px-4 text-center">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-                <a href="#hero" class="text-xl font-bold text-teal-400 flex items-center mb-4 md:mb-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                        <path d="M2 17l10 5 10-5"></path>
-                        <path d="M2 12l10 5 10-5"></path>
-                    </svg>
-                   Aone Hospitality Services
-                </a>
-                <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-4 md:mb-0">
-                    <a href="about.html" class="hover:text-white transition duration-300">About</a>
-                    <a href="product.html" class="hover:text-white transition duration-300">Products</a>
-                    <a href="#contact" class="hover:text-white transition duration-300">Contact</a>
-                </div>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18 2h-3a5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c17 0 21-12 21-15.5V3z"></path>
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <p class="text-sm text-gray-500">&copy; 2025 Aone Hospitality Services. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <button id="back-to-top" title="Go to top">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
-    </button>
-
-    <div id="enquireModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
-            <h3 class="text-2xl font-bold mb-6 text-gray-900">How would you like to inquire?</h3>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://wa.me/919867531298" target="_blank" onclick="closeModal()"
-                   class="inline-flex items-center justify-center bg-green-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transition duration-300 transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.6-3.822-1.6-5.877C.145 5.23 5.228.145 11.485.145c3.141 0 6.133 1.22 8.381 3.469 2.249 2.248 3.468 5.239 3.468 8.381 0 6.257-5.082 11.34-11.34 11.34-1.954 0-3.899-.488-5.637-1.488l-6.276 1.654zm6.598-5.592l-.547-.323c-.335-.197-.75-.306-1.18-.306h-.002c-.991 0-1.675 1.077-1.675 2.278 0 1.201.7 2.278 1.674 2.278h.001c.429 0 .843-.109 1.178-.306l.547-.323 5.419-2.029c1.07-1.07 1.657-2.493 1.657-3.992 0-3.141-2.55-5.692-5.692-5.692-3.142 0-5.692 2.551-5.692 5.692 0 .999.284 1.944.825 2.768zM17.585 12.01c0-3.08-2.502-5.582-5.583-5.582-3.081 0-5.583 2.502-5.583 5.582 0 3.08 2.502 5.582 5.583 5.582 3.081 0 5.583-2.502 5.583-5.582z"/>
-                    </svg>
-                    WhatsApp
-                </a>
-                <a href="mailto:aonehospitalitys@gmail.com" onclick="closeModal()"
-                   class="inline-flex items-center justify-center bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300 transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    Email
-                </a>
-            </div>
-        </div>
+            <p id="errorMessage" class="error-message">Invalid email or password. Please try again.</p>
+        </form>
     </div>
 
- <script>
-        // JavaScript for Mobile Menu Toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
+    <script>
+        // Get references to the form elements and error message
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('errorMessage');
 
-        // JavaScript for Back to Top Button visibility
-        const backToTopButton = document.getElementById('back-to-top');
+        // Add an event listener for the form submission
+        loginForm.addEventListener('submit', function(event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
 
-        window.onscroll = function() {
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                backToTopButton.style.display = "block";
+            // Get the values entered by the user
+            const enteredEmail = emailInput.value;
+            const enteredPassword = passwordInput.value;
+
+            // Define the correct credentials
+            const correctEmail = 'aonehositality@gmail.com';
+            const correctPassword = 'mansoor786';
+
+            // Check if the entered credentials match the correct ones
+            if (enteredEmail === correctEmail && enteredPassword === correctPassword) {
+                // If credentials match, hide any error message and redirect to dashboard.html
+                errorMessage.style.display = 'none';
+                window.location.href = 'dashboard.html'; // Redirect to dashboard.html
             } else {
-                backToTopButton.style.display = "none";
+                // If credentials do not match, display the error message
+                errorMessage.style.display = 'block';
             }
-        };
-
-        // Smooth scroll for back to top button
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                // Close mobile menu if open
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-
-                if (targetElement) {
-                    // Adjust scroll position to account for fixed header
-                    const headerOffset = 64; // Approximate height of the header
-                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
-            });
-        });
-
-        // Professional Image Slider Class
-        class ImageSlider {
-            constructor(wrapperElement, options = {}) {
-                // Validate wrapperElement
-                if (!(wrapperElement instanceof HTMLElement)) {
-                    console.error('ImageSlider: Invalid wrapper element provided. Must be an HTMLElement.', wrapperElement);
-                    return null; // Return null if initialization fails
-                }
-                this.sliderWrapper = wrapperElement;
-
-                // DOM Elements (scoped to this slider's wrapper)
-                this.sliderTrack = this.sliderWrapper.querySelector('.slider-track');
-                this.images = this.sliderTrack ? this.sliderTrack.querySelectorAll('.slider-image') : [];
-                this.prevBtn = this.sliderWrapper.querySelector('.prev-btn');
-                this.nextBtn = this.sliderWrapper.querySelector('.next-btn');
-                this.paginationContainer = this.sliderWrapper.querySelector('.slider-pagination');
-                this.progressBar = this.sliderWrapper.querySelector('.slider-progress-bar');
-
-                // Check if essential elements exist
-                if (this.images.length === 0 || !this.sliderTrack || !this.prevBtn || !this.nextBtn || !this.paginationContainer || !this.progressBar) {
-                    console.warn('ImageSlider: Missing essential elements within the slider wrapper. Skipping initialization for this slider.', this.sliderWrapper);
-                    return null;
-                }
-
-                // Configuration Options
-                this.config = {
-                    slideDuration: options.slideDuration || 4000, // Time in milliseconds for each slide
-                    transitionDuration: options.transitionDuration || 600, // CSS transition duration in ms (should match CSS)
-                    loop: options.loop !== false, // Whether to loop the slider
-                    pauseOnHover: options.pauseOnHover !== false,
-                    pauseOnFocus: options.pauseOnFocus !== false,
-                    // Validate initialSlide
-                    initialSlide: Math.max(0, Math.min(options.initialSlide || 0, this.images.length - 1))
-                };
-
-                // Internal State
-                this.currentIndex = this.config.initialSlide;
-                this.totalImages = this.images.length;
-                this.slideInterval = null;
-                this.animationFrameId = null; // For progress bar animation
-                this.startTime = null; // For tracking progress bar time
-
-                // Initialize the slider
-                this.init();
-            }
-
-            /**
-             * Initializes the slider:
-             * - Generates pagination dots.
-             * - Sets up event listeners.
-             * - Sets initial slide position and starts auto-slide.
-             */
-            init() {
-                this.generatePaginationDots();
-                this.addEventListeners();
-                this.updateSlider(false); // Update initial position without transition
-                this.startAutoSlide();
-            }
-
-            /**
-             * Creates and appends pagination dots for each image.
-             */
-            generatePaginationDots() {
-                this.paginationContainer.innerHTML = ''; // Clear existing dots
-                for (let i = 0; i < this.totalImages; i++) {
-                    const dot = document.createElement('button');
-                    dot.classList.add('pagination-dot');
-                    dot.dataset.index = i;
-                    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-                    dot.setAttribute('role', 'tab'); // For accessibility
-                    dot.addEventListener('click', () => this.goToSlide(i, true));
-                    this.paginationContainer.appendChild(dot);
-                }
-                this.dots = this.paginationContainer.querySelectorAll('.pagination-dot');
-            }
-
-            /**
-             * Adds all necessary event listeners for controls and user interaction.
-             */
-            addEventListeners() {
-                this.prevBtn.addEventListener('click', () => this.goToSlide(this.currentIndex - 1, true));
-                this.nextBtn.addEventListener('click', () => this.goToSlide(this.currentIndex + 1, true));
-
-                if (this.config.pauseOnHover) {
-                    this.sliderWrapper.addEventListener('mouseenter', () => this.pauseAutoSlide());
-                    this.sliderWrapper.addEventListener('mouseleave', () => this.startAutoSlide());
-                }
-                if (this.config.pauseOnFocus) {
-                    this.sliderWrapper.addEventListener('focusin', (event) => {
-                        if (this.sliderWrapper.contains(event.target)) {
-                            this.pauseAutoSlide();
-                        }
-                    });
-                    this.sliderWrapper.addEventListener('focusout', (event) => {
-                        if (!this.sliderWrapper.contains(event.relatedTarget)) {
-                            this.startAutoSlide();
-                        }
-                    });
-                }
-            }
-
-            /**
-             * Updates the slider's visual position and active pagination dot.
-             * @param {boolean} withTransition - Whether to apply CSS transition.
-             */
-            updateSlider(withTransition = true) {
-                this.sliderTrack.style.transition = withTransition ? `transform ${this.config.transitionDuration / 1000}s cubic-bezier(0.25, 0.1, 0.25, 1)` : 'none';
-                const offset = -this.currentIndex * 100;
-                this.sliderTrack.style.transform = `translateX(${offset}%)`;
-
-                // Update accessibility attributes for images
-                this.images.forEach((img, i) => {
-                    img.setAttribute('aria-hidden', i !== this.currentIndex);
-                    img.setAttribute('tabindex', i === this.currentIndex ? '0' : '-1');
-                });
-
-                // Update active dot class and accessibility attributes
-                this.dots.forEach((dot, i) => {
-                    if (i === this.currentIndex) {
-                        dot.classList.add('active');
-                        dot.setAttribute('aria-selected', 'true');
-                        dot.setAttribute('tabindex', '0');
-                    } else {
-                        dot.classList.remove('active');
-                        dot.setAttribute('aria-selected', 'false');
-                        dot.setAttribute('tabindex', '-1');
-                    }
-                });
-
-                // Update button states if not looping
-                if (!this.config.loop) {
-                    this.prevBtn.disabled = (this.currentIndex === 0);
-                    this.nextBtn.disabled = (this.currentIndex === this.totalImages - 1);
-                }
-            }
-
-            /**
-             * Navigates to a specific slide index.
-             * Handles looping if `this.config.loop` is true.
-             * @param {number} newIndex - The index of the slide to go to.
-             * @param {boolean} resetAutoSlide - Whether to reset the auto-slide timer.
-             */
-            goToSlide(newIndex, resetAutoSlide = false) {
-                if (newIndex === this.currentIndex && !resetAutoSlide) {
-                    return; // No change, and no need to reset timer if not explicitly requested
-                }
-
-                let targetIndex = newIndex;
-
-                if (this.config.loop) {
-                    if (newIndex >= this.totalImages) {
-                        targetIndex = 0;
-                    } else if (newIndex < 0) {
-                        targetIndex = this.totalImages - 1;
-                    }
-                } else {
-                    // Clamp index if not looping
-                    targetIndex = Math.max(0, Math.min(newIndex, this.totalImages - 1));
-                }
-
-                // Only update if index actually changed or resetAutoSlide is true (for timer restart)
-                if (this.currentIndex !== targetIndex || resetAutoSlide) {
-                    this.currentIndex = targetIndex;
-                    this.updateSlider();
-
-                    if (resetAutoSlide) {
-                        this.pauseAutoSlide();
-                        this.startAutoSlide();
-                    }
-                }
-            }
-
-            /**
-             * Moves to the next slide.
-             */
-            nextSlide() {
-                this.goToSlide(this.currentIndex + 1);
-            }
-
-            /**
-             * Starts the automatic slide transition and progress bar animation.
-             */
-            startAutoSlide() {
-                this.pauseAutoSlide(); // Clear any existing interval/animation first
-
-                this.startTime = performance.now(); // Record start time for progress bar
-                this.animateProgressBar();
-
-                this.slideInterval = setInterval(() => {
-                    this.nextSlide();
-                    this.startTime = performance.now(); // Reset start time for next slide
-                    this.animateProgressBar(); // Restart progress bar animation
-                }, this.config.slideDuration);
-            }
-
-            /**
-             * Pauses the automatic slide transition and progress bar animation.
-             */
-            pauseAutoSlide() {
-                if (this.slideInterval) {
-                    clearInterval(this.slideInterval);
-                    this.slideInterval = null;
-                }
-                if (this.animationFrameId) {
-                    cancelAnimationFrame(this.animationFrameId);
-                    this.animationFrameId = null;
-                }
-                if (this.progressBar) {
-                    // Store current progress state before pausing
-                    const elapsed = performance.now() - (this.startTime || performance.now());
-                    const currentProgress = Math.min(elapsed / this.config.slideDuration, 1);
-                    this.progressBar.style.width = `${currentProgress * 100}%`;
-                    this.progressBar.style.transition = 'none'; // Freeze the bar without transition
-                }
-            }
-
-            /**
-             * Animates the progress bar using requestAnimationFrame for smoothness.
-             * @param {DOMHighResTimeStamp} currentTime - The current time provided by requestAnimationFrame.
-             */
-            animateProgressBar(currentTime) {
-                if (!this.progressBar) return;
-
-                if (!this.startTime) {
-                    this.startTime = currentTime; // Initialize start time if not set (first call)
-                }
-
-                const elapsed = currentTime - this.startTime;
-                const progress = Math.min(elapsed / this.config.slideDuration, 1); // Clamp between 0 and 1
-                const width = progress * 100;
-
-                // Apply width and ensure no transition during rapid updates
-                this.progressBar.style.transition = 'none'; // Temporarily remove transition for instant update
-                this.progressBar.style.width = `${width}%`;
-
-                if (progress < 1) {
-                    this.animationFrameId = requestAnimationFrame((timestamp) => this.animateProgressBar(timestamp));
-                } else {
-                    // Animation finished for this cycle, reset for the next one (actual slide change handled by setInterval)
-                    this.progressBar.style.width = '0%';
-                    this.progressBar.style.transition = 'none'; // Ensure next animation starts from 0%
-                }
-            }
-
-            /**
-             * Cleans up event listeners and intervals when slider is no longer needed.
-             * (Useful if you're dynamically adding/removing sliders)
-             */
-            destroy() {
-                this.pauseAutoSlide();
-                if (this.prevBtn) this.prevBtn.removeEventListener('click', () => this.goToSlide(this.currentIndex - 1, true));
-                if (this.nextBtn) this.nextBtn.removeEventListener('click', () => this.goToSlide(this.currentIndex + 1, true));
-                if (this.config.pauseOnHover) {
-                    this.sliderWrapper.removeEventListener('mouseenter', () => this.pauseAutoSlide());
-                    this.sliderWrapper.removeEventListener('mouseleave', () => this.startAutoSlide());
-                }
-                if (this.config.pauseOnFocus) {
-                    this.sliderWrapper.removeEventListener('focusin', () => this.pauseAutoSlide());
-                    this.sliderWrapper.removeEventListener('focusout', () => this.startAutoSlide());
-                }
-                if (this.dots) {
-                    this.dots.forEach(dot => dot.removeEventListener('click', () => this.goToSlide(parseInt(dot.dataset.index), true)));
-                }
-                // Potentially remove the sliderWrapper from DOM if desired
-                // this.sliderWrapper.remove();
-                console.log('Slider destroyed:', this.sliderWrapper.id || this.sliderWrapper);
-            }
-        }
-
-
-        // --- Initialization for Multiple Sliders ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Select all slider wrappers on the page
-            const allSliderWrappers = document.querySelectorAll('.slider-wrapper');
-            const sliders = []; // To store references to all initialized slider instances
-
-            allSliderWrappers.forEach((wrapperElement, index) => {
-                // You can customize options for each slider here if needed
-                const sliderOptions = {
-                    slideDuration: 5000, // Default 5 seconds for all
-                    transitionDuration: 800, // Default 0.8 seconds for all
-                    loop: true,
-                    pauseOnHover: true,
-                    pauseOnFocus: true,
-                    initialSlide: 0 // Start all from first slide
-                };
-
-                // Example of custom options for a specific slider by ID
-                if (wrapperElement.id === 'urbanSlider') {
-                    sliderOptions.slideDuration = 4000; // Urban slider changes every 4 seconds
-                    sliderOptions.loop = false; // Urban slider does not loop
-                }
-                if (wrapperElement.id === 'abstractSlider') {
-                     sliderOptions.slideDuration = 3000; // Abstract slider is faster
-                     sliderOptions.initialSlide = 1; // Start on the second image for abstract
-                }
-
-                const sliderInstance = new ImageSlider(wrapperElement, sliderOptions);
-                if (sliderInstance) { // Only add if initialization was successful
-                    sliders.push(sliderInstance);
-                }
-            });
-
-            console.log(`Initialized ${sliders.length} slider(s).`);
-            // Now you have an array 'sliders' holding all your slider instances if you need to control them globally.
         });
     </script>
 </body>
 </html>
+
