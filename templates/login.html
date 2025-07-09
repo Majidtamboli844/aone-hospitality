@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Tailwind CSS CDN for styling -->
+    <title>Login - Aone Hospitality</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter for professional typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Custom body styling to apply the Inter font and a light background */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6; /* Light gray background for a clean look */
+        }
+        /* Style for error message */
+        .error-message {
+            color: #ef4444; /* Tailwind red-500 */
+            font-size: 0.875rem; /* text-sm */
+            margin-top: 0.5rem; /* mt-2 */
+            text-align: center;
         }
     </style>
 </head>
@@ -23,15 +28,7 @@
             <p class="text-gray-600">Please log in to your account.</p>
         </div>
 
-        <!--
-            The <form> element handles the submission of user input.
-            'action="dashboard.html"' specifies that when the form is submitted,
-            the browser will navigate to 'dashboard.html'.
-            'method="POST"' indicates that the form data will be sent as an HTTP POST request.
-            In a real application, 'action' would point to a server-side authentication endpoint.
-        -->
-        <form action="admin.html" method="POST">
-            <div class="mb-5">
+        <form id="loginForm" action="#" method="POST"> <div class="mb-5">
                 <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
                 <input
                     type="email"
@@ -39,8 +36,7 @@
                     name="email"
                     placeholder="you@example.com"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                    
-                >
+                    required>
             </div>
 
             <div class="mb-6">
@@ -51,36 +47,62 @@
                     name="password"
                     placeholder="••••••••"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                   
-                >
+                    required>
             </div>
 
             <div class="flex items-center justify-between mb-6">
                 <div class="flex items-center">
                     <input
                         type="checkbox"
-                        id="aonehospitlitys@gmail.com"
-                        name="mansoor786"
+                        id="remember_me"
+                        name="remember_me"
                         class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                         aria-label="Remember me"
                     >
                     <label for="remember_me" class="ml-2 block text-sm text-gray-900">Remember me</label>
                 </div>
-                <a href="#" class="text-sm text-blue-600 hover:text-blue-700 font-medium transition duration-200">Forgot password?</a>
+               
+            </div>
+
+            <div id="loginError" class="error-message hidden">
+                Invalid email or password.
             </div>
 
             <button
                 type="submit"
-                class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 font-semibold transition duration-200 shadow-md"
-            >
+                class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 font-semibold transition duration-200 shadow-md mt-4" >
                 Log In
             </button>
         </form>
 
-        <div class="mt-6 text-center text-gray-600 text-sm">
-            Don't have an account?
-            <a href="#" class="text-blue-600 hover:text-blue-700 font-medium transition duration-200">Sign up</a>
-        </div>
-    </div>
+
+    <script>
+        // Get the form and error message elements
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+
+        // Add an event listener for form submission
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get the values from the input fields
+            const emailInput = document.getElementById('email').value;
+            const passwordInput = document.getElementById('password').value;
+
+            // Define the hardcoded credentials
+            const correctEmail = 'aonehospitalitys@gmail.com';
+            const correctPassword = 'mansoor786';
+
+            // Check if the entered credentials match the hardcoded ones
+            if (emailInput === correctEmail && passwordInput === correctPassword) {
+                // If credentials are correct, hide error and redirect
+                loginError.classList.add('hidden');
+                window.location.href = 'templates/dashboard.html';
+            } else {
+                // If credentials are incorrect, show error message
+                loginError.classList.remove('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
