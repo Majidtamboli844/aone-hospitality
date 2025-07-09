@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aone Hospitality Services</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
      <style>
    .whatsapp_float{
@@ -16,6 +15,7 @@
             position:fixed;
             bottom:40px;          
             left:20px;
+        }
         </style>
     <div class="whatsapp_float">
         <a href="https://wa.me/919867531298" target="_blank"><img src='wp.png' width="60px"
@@ -59,14 +59,16 @@
             background-color: #0f766e; /* Darker Teal */
             transform: translateY(-2px);
         }
+        /* Optional: Add some space between sliders for better visual separation */
+        .slider-wrapper {
+            margin-bottom: 50px; /* Space between each slider */
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Header Section -->
     <header class="bg-white shadow-sm py-4 fixed top-0 w-full z-50">
         <nav class="container mx-auto px-4 flex justify-between items-center">
-            <!-- Logo -->
             <a href="#hero" class="text-2xl font-bold text-teal-600 flex items-center rounded-md p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
@@ -75,7 +77,6 @@
                 </svg>
                 Aone Hospitality Services
             </a>
-            <!-- Navigation Links -->
             <div class="hidden md:flex space-x-8">
                 <a href="index.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Home</a>
                 <a href="product.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Products</a>
@@ -84,119 +85,93 @@
                 <a href="contact.html" class="px-5 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition duration-300 shadow-md">Contact Us</a>
                 <a href="login.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Admin Login</a>
             </div>
-            <!-- Mobile Menu Button (Hamburger) -->
             <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-teal-600 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </nav>
-        <!-- Mobile Menu (initially hidden) -->
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 border-t border-gray-200">
-            <a href="index.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Home</a>
+            <a href="index.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition duration-300">Home</a>
             <a href="product.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition duration-300">Products</a>
             <a href="about.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition duration-300">About</a>
             <a href="about.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition duration-300">Testimonials</a>
             <a href="contact.html" class="block px-4 py-2 text-teal-600 hover:bg-teal-50 rounded-md transition duration-300 font-medium">Contact Us</a>
-            <a href="login.html" class="text-gray-600 hover:text-teal-600 font-medium transition duration-300 rounded-md p-2">Admin Login</a>
+            <a href="login.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition duration-300">Admin Login</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="hero" class="relative bg-gradient-to-r from-blue-600 to-teal-600 text-white py-24 md:py-36 mt-16 overflow-hidden">
-        <div class="absolute inset-0 bg-pattern opacity-10"></div> <!-- Background pattern overlay -->
-        <div class="container mx-auto px-4 text-center relative z-10">
+        <div class="absolute inset-0 bg-pattern opacity-10"></div> <div class="container mx-auto px-4 text-center relative z-10">
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-up">
                 Experience Unmatched Cleanliness with <span class="text-yellow-300">Aone Hospitality Services</span>
             </h1>
             <p class="text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-90 animate-fade-in-up delay-200">
                 Premium cleaning solutions for a healthier, happier home and workplace.
             </p>
-            <a href="product.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
-                Explore Our Products
-            </a>
-            <a href="about.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
-                About
-            </a>
-             <a href="contact.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
-                Contact
-            </a>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="product.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
+                    Explore Our Products
+                </a>
+                <a href="about.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
+                    About
+                </a>
+                <a href="contact.html" class="inline-block bg-white text-teal-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform animate-fade-in-up delay-400">
+                    Contact
+                </a>
+            </div>
         </div>
     </section>
-  <section>
-          <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/slider.css">
-    <style>
-        /* Optional: Add some space between sliders for better visual separation */
-        .slider-wrapper {
-            margin-bottom: 50px; /* Space between each slider */
-        }
-    </style>
-</head>
-<body>
 
-    <header class="page-header">
-        
-    </header>
-
-    <main class="main-content">
-
-        <section class="slider-section">
-            <div id="natureSlider" class="slider-wrapper" aria-roledescription="carousel" aria-label="Nature Image Gallery">
-                <div class="slider-track">
-                    <img src="go3.jpeg" alt="A breathtaking mountain landscape." class="slider-image">
-                    <img src="go4.jpeg" alt="A calm forest lake reflecting trees." class="slider-image">
-                    <img src="go1.jpg" alt="Golden sunset over a field of flowers." class="slider-image">
-                    <img src="go2.jpg" alt="A majestic waterfall cascading down rocks." class="slider-image">
-                </div>
-
-                <div class="slider-controls">
-                    <button class="slider-btn prev-btn" aria-label="Previous image">&lt;</button>
-                    <button class="slider-btn next-btn" aria-label="Next image">&gt;</button>
-                </div>
-
-                <div class="slider-pagination">
+    <section>
+        <header class="page-header"></header>
+        <main class="main-content">
+            <section class="slider-section">
+                <div id="natureSlider" class="slider-wrapper" aria-roledescription="carousel" aria-label="Nature Image Gallery">
+                    <div class="slider-track">
+                        <img src="go3.jpeg" alt="A breathtaking mountain landscape." class="slider-image">
+                        <img src="go4.jpeg" alt="A calm forest lake reflecting trees." class="slider-image">
+                        <img src="go1.jpg" alt="Golden sunset over a field of flowers." class="slider-image">
+                        <img src="go2.jpg" alt="A majestic waterfall cascading down rocks." class="slider-image">
                     </div>
 
-                <div class="slider-timer">
-                    <div class="slider-progress-bar"></div>
+                    <div class="slider-controls">
+                        <button class="slider-btn prev-btn" aria-label="Previous image">&lt;</button>
+                        <button class="slider-btn next-btn" aria-label="Next image">&gt;</button>
+                    </div>
+
+                    <div class="slider-pagination"></div>
+
+                    <div class="slider-timer">
+                        <div class="slider-progress-bar"></div>
+                    </div>
                 </div>
+            </section>
+        </main>
+    </section>
+
+    <section id="products" class="py-16 bg-gray-50 px-6">
+        <h3 class="text-3xl font-semibold text-center mb-12">Our Product Categories</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="bg-white p-6 shadow rounded text-center">
+                <div class="image"><img src='all products.jpeg' alt="Hospitality Essentials"></div>
+                <h4 class="text-xl font-semibold mb-2">Hospitality Essentials</h4>
+                <p class="text-gray-600">Cleaning material solutions</p>
+                <a href="hos.html" class="text-blue-600 font-semibold hover:underline">View Products →</a>
             </div>
-        </section>
+            <div class="bg-white p-6 shadow rounded text-center">
+                <div class="image"><img src='allsta.jpeg' alt="Stationery Products"></div>
+                <h4 class="text-xl font-semibold mb-2">Stationery Products</h4>
+                <p class="text-gray-600">Full suite of stationery for offices, schools, and creative professionals.</p>
+                <a href="sta.html" class="text-blue-600 font-semibold hover:underline">View Products →</a>
+            </div>
+            </div>
+    </section>
 
-        
-    </main>
-
-    <script src="scripts/slider.js"></script>
-</body>
-        </section>
-  <!-- Products Section -->
-  <section id="products" class="py-16 bg-gray-50 px-6">
-    <h3 class="text-3xl font-semibold text-center mb-12">Our Product Categories</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <div class="bg-white p-6 shadow rounded text-center">
-        <div class="image"><img src='all products.jpeg'></div>
-        <h4 class="text-xl font-semibold mb-2">Hospitality Essentials</h4>
-        <p class="text-gray-600">Cleaning material solutions </p>
-          <a href="hos.html" class="text-blue-600 font-semibold hover:underline">View Products →</a>
-      </div>
-      <div class="bg-white p-6 shadow rounded text-center">
-         <div class="image"><img src='allsta.jpeg'></div>
-        <h4 class="text-xl font-semibold mb-2">Stationery Products</h4>
-        <p class="text-gray-600">Full suite of stationery for offices, schools, and creative professionals.</p>
-         <a href="sta.html" class="text-blue-600 font-semibold hover:underline">View Products →</a>
-      </div>
-    </div>
-  </section>
-
-   <!-- Why Choose Us Section -->
     <section id="why-choose-us" class="py-16 md:py-24 bg-blue-600 text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-12">Why Choose <span class="text-yellow-300">Aone Hospitality Services</span>?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
                 <div class="flex flex-col items-center p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
                     <div class="text-yellow-300 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -207,7 +182,6 @@
                     <h3 class="text-xl font-semibold mb-3">Superior Quality</h3>
                     <p class="text-gray-200">Our products are rigorously tested to ensure the highest standards of cleaning efficacy and safety.</p>
                 </div>
-                <!-- Feature 2 -->
                 <div class="flex flex-col items-center p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
                     <div class="text-yellow-300 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -216,10 +190,9 @@
                             <path d="M12 16l4-4-4-4"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Comprehensive Product Range: </h3>
+                    <h3 class="text-xl font-semibold mb-3">Comprehensive Product Range</h3>
                     <p class="text-gray-200">We are your single source for all critical needs. From luxurious hospitality essentials that pamper your guests, to advanced cleanliness products that ensure impeccable hygiene, and reliable stationery supplies that keep your operations seamless – we've got you covered. This saves you time and simplifies procurement.</p>
                 </div>
-                <!-- Feature 3 -->
                 <div class="flex flex-col items-center p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
                     <div class="text-yellow-300 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -237,7 +210,6 @@
         </div>
     </section>
 
-  <!-- Call to Action / Contact Section -->
     <section id="contact" class="bg-gradient-to-r from-teal-600 to-blue-600 text-white py-16 md:py-24 text-center">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Experience the <span class="text-yellow-300">Aone Hospitality Services</span> Difference?</h2>
@@ -268,11 +240,9 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
     <footer class="bg-gray-800 text-gray-300 py-10">
         <div class="container mx-auto px-4 text-center">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-                <!-- Logo -->
                 <a href="#hero" class="text-xl font-bold text-teal-400 flex items-center mb-4 md:mb-0">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
@@ -281,13 +251,11 @@
                     </svg>
                    Aone Hospitality Services
                 </a>
-                <!-- Footer Navigation -->
                 <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-4 md:mb-0">
                     <a href="about.html" class="hover:text-white transition duration-300">About</a>
                     <a href="product.html" class="hover:text-white transition duration-300">Products</a>
                     <a href="#contact" class="hover:text-white transition duration-300">Contact</a>
                 </div>
-                <!-- Social Media Icons (placeholders) -->
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-400 hover:text-white transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
@@ -312,7 +280,6 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
     <button id="back-to-top" title="Go to top">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -370,6 +337,90 @@
                         behavior: "smooth"
                     });
                 }
+            });
+        });
+
+        // Slider functionality (assuming slider.js and slider.css are in place)
+        // This script would typically be loaded from scripts/slider.js
+        // For self-contained code, I'm including a basic slider logic here.
+        document.addEventListener('DOMContentLoaded', () => {
+            const sliders = document.querySelectorAll('.slider-wrapper');
+
+            sliders.forEach(sliderWrapper => {
+                const sliderTrack = sliderWrapper.querySelector('.slider-track');
+                const slides = sliderTrack.querySelectorAll('.slider-image');
+                const prevBtn = sliderWrapper.querySelector('.prev-btn');
+                const nextBtn = sliderWrapper.querySelector('.next-btn');
+                const paginationContainer = sliderWrapper.querySelector('.slider-pagination');
+                const progressBar = sliderWrapper.querySelector('.slider-progress-bar');
+
+                let currentIndex = 0;
+                let autoSlideInterval;
+                const slideDuration = 5000; // 5 seconds for each slide
+
+                // Create pagination dots
+                slides.forEach((_, index) => {
+                    const dot = document.createElement('span');
+                    dot.classList.add('slider-dot');
+                    if (index === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(index));
+                    paginationContainer.appendChild(dot);
+                });
+
+                const dots = paginationContainer.querySelectorAll('.slider-dot');
+
+                function updateSlider() {
+                    sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    dots.forEach((dot, index) => {
+                        if (index === currentIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                    resetProgressBar();
+                }
+
+                function goToSlide(index) {
+                    currentIndex = index;
+                    if (currentIndex < 0) {
+                        currentIndex = slides.length - 1;
+                    } else if (currentIndex >= slides.length) {
+                        currentIndex = 0;
+                    }
+                    updateSlider();
+                    startAutoSlide(); // Restart auto-slide after manual navigation
+                }
+
+                function nextSlide() {
+                    goToSlide(currentIndex + 1);
+                }
+
+                function prevSlide() {
+                    goToSlide(currentIndex - 1);
+                }
+
+                function startAutoSlide() {
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = setInterval(nextSlide, slideDuration);
+                }
+
+                function resetProgressBar() {
+                    progressBar.style.transition = 'none';
+                    progressBar.style.width = '0%';
+                    setTimeout(() => {
+                        progressBar.style.transition = `width ${slideDuration / 1000}s linear`;
+                        progressBar.style.width = '100%';
+                    }, 50); // Small delay to allow reset to apply
+                }
+
+                // Event Listeners
+                if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+                if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+                // Initial setup
+                updateSlider();
+                startAutoSlide(); // Start auto-sliding when the page loads
             });
         });
     </script>
