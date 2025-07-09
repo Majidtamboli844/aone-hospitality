@@ -4,27 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aone Hospitality Services</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
      <style>
    .whatsapp_float{
             position:fixed;
             bottom:40px;
             right:20px;
+            z-index: 100; /* Ensure it's above other elements */
         }
         .call_float{
             position:fixed;
             bottom:40px;          
             left:20px;
-        </style>
-    <div class="whatsapp_float">
-        <a href="https://wa.me/919867531298" target="_blank"><img src='wp.png' width="60px"
-                                                                 class="whatsapp_float_btn"/></a>
-    </div>
-     <div class="call_float">
-        <a href="tel:+917387869062" target="_blank"><img src='call.png' width="60px"
-                                                                 class="call_float_btn"/></a>
-    </div>   
+            z-index: 100; /* Ensure it's above other elements */
+        }
+        /* Styles for the modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
     <style>
         /* Custom font import for Inter */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -236,9 +270,7 @@
             </div>
         </div>
     </section>
-
-   <!-- Call to Action / Contact Section -->
-    <section id="contact" class="bg-gradient-to-r from-teal-600 to-blue-600 text-white py-16 md:py-24 text-center">
+     <section id="contact" class="bg-gradient-to-r from-teal-600 to-blue-600 text-white py-16 md:py-24 text-center">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Experience the <span class="text-yellow-300">Aone Hospitality Services</span> Difference?</h2>
             <p class="text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-90">
@@ -268,11 +300,9 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
     <footer class="bg-gray-800 text-gray-300 py-10">
         <div class="container mx-auto px-4 text-center">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-                <!-- Logo -->
                 <a href="#hero" class="text-xl font-bold text-teal-400 flex items-center mb-4 md:mb-0">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
@@ -281,13 +311,11 @@
                     </svg>
                    Aone Hospitality Services
                 </a>
-                <!-- Footer Navigation -->
                 <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-4 md:mb-0">
                     <a href="about.html" class="hover:text-white transition duration-300">About</a>
                     <a href="product.html" class="hover:text-white transition duration-300">Products</a>
-                    <a href="contact.html" class="hover:text-white transition duration-300">Contact</a>
+                    <a href="#contact" class="hover:text-white transition duration-300">Contact</a>
                 </div>
-                <!-- Social Media Icons (placeholders) -->
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-400 hover:text-white transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
@@ -302,7 +330,7 @@
                     <a href="#" class="text-gray-400 hover:text-white transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
                             <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 0 0 1 16 11.37z"></path>
                             <line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line>
                         </svg>
                     </a>
@@ -311,14 +339,38 @@
             <p class="text-sm text-gray-500">&copy; 2025 Aone Hospitality Services. All rights reserved.</p>
         </div>
     </footer>
-    <!-- Back to Top Button -->
+
     <button id="back-to-top" title="Go to top">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
     </button>
 
-    <script>
+    <div id="enquireModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 class="text-2xl font-bold mb-6 text-gray-900">How would you like to inquire?</h3>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://wa.me/919867531298" target="_blank" onclick="closeModal()"
+                   class="inline-flex items-center justify-center bg-green-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transition duration-300 transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.6-3.822-1.6-5.877C.145 5.23 5.228.145 11.485.145c3.141 0 6.133 1.22 8.381 3.469 2.249 2.248 3.468 5.239 3.468 8.381 0 6.257-5.082 11.34-11.34 11.34-1.954 0-3.899-.488-5.637-1.488l-6.276 1.654zm6.598-5.592l-.547-.323c-.335-.197-.75-.306-1.18-.306h-.002c-.991 0-1.675 1.077-1.675 2.278 0 1.201.7 2.278 1.674 2.278h.001c.429 0 .843-.109 1.178-.306l.547-.323 5.419-2.029c1.07-1.07 1.657-2.493 1.657-3.992 0-3.141-2.55-5.692-5.692-5.692-3.142 0-5.692 2.551-5.692 5.692 0 .999.284 1.944.825 2.768zM17.585 12.01c0-3.08-2.502-5.582-5.583-5.582-3.081 0-5.583 2.502-5.583 5.582 0 3.08 2.502 5.582 5.583 5.582 3.081 0 5.583-2.502 5.583-5.582z"/>
+                    </svg>
+                    WhatsApp
+                </a>
+                <a href="mailto:aonehospitalitys@gmail.com" onclick="closeModal()"
+                   class="inline-flex items-center justify-center bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition duration-300 transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Email
+                </a>
+            </div>
+        </div>
+    </div>
+
+ <script>
         // JavaScript for Mobile Menu Toggle
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
@@ -372,5 +424,6 @@
             });
         });
     </script>
+    
 </body>
 </html>
